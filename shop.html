@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FYN Store | All Expedition Drops, Apparel & Travel Gear (INR ₹)</title>
+  
+  <!-- Canonical & SEO Meta Tags -->
+  <link rel="canonical" href="https://fynstore.in/shop.html">
+  <meta name="description" content="Explore the full FYN (Find Your North) catalog: Heavyweight 480 GSM French Terry hoodies, 35L technical backpacks, thermal bottles, dad caps, stormproof umbrellas in INR (₹). Free Shipping over ₹1,999.">
+  <meta name="keywords" content="FYN shop, Find Your North catalog, buy hoodies INR, technical backpacks India, travel apparel">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fynstore.in/shop.html">
+  <meta property="og:title" content="FYN Store — Full Expedition Gear & Streetwear Catalog">
+  <meta property="og:description" content="Browse all official FYN drops. Filter by Category & Audience (Men, Women, Boys, Girls, Kids). Use code NORTH20 for 20% OFF.">
+  <meta property="og:image" content="https://fynstore.in/brand_assets/fyn_horizontal_lockup_forest_green.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="brand_assets/fyn_sparkle_symbol_forest_green.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            fyn: {
+              forest: '#1D3C34',
+              'forest-dark': '#142A24',
+              'forest-light': '#2A554A',
+              sand: '#F7F5F0',
+              'sand-dark': '#ECE7DC',
+              stone: '#8D9093',
+              charcoal: '#171918',
+              gold: '#D4AF37',
+              earth: '#C2A676',
+            }
+          },
+          fontFamily: {
+            brand: ['"Montserrat"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; width: 100%; max-width: 100%; margin: 0; padding: 0; }
+    img, svg, video { max-width: 100%; }
+    body { font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #171918; }
+    
+    .fyn-glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(236, 231, 220, 0.95);
+      box-shadow: 0 10px 25px -5px rgba(29, 60, 52, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fyn-glass-card:hover {
+      box-shadow: 0 18px 35px -8px rgba(29, 60, 52, 0.1);
+      transform: translateY(-2px);
+    }
+    .fyn-btn-primary {
+      background: #1D3C34;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 14px rgba(29, 60, 52, 0.25);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fyn-btn-primary:hover { background: #142A24; box-shadow: 0 8px 24px rgba(29, 60, 52, 0.35); transform: translateY(-1.5px); }
+    .fyn-btn-primary:active { transform: scale(0.98); }
+    .fyn-btn-secondary {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #1D3C34;
+      border: 1px solid rgba(29, 60, 52, 0.22);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fyn-btn-secondary:hover { background: #ffffff; border-color: #1D3C34; box-shadow: 0 6px 18px rgba(29, 60, 52, 0.12); transform: translateY(-1.5px); }
+  </style>
+</head>
+<body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5] overflow-x-hidden w-full relative">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="w-full bg-fyn-forest-dark text-fyn-sand text-xs py-2.5 px-3 sm:px-4 border-b border-fyn-forest/40 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+      <div class="flex items-center space-x-2 truncate">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-fyn-gold/20 text-fyn-gold border border-fyn-gold/40 uppercase tracking-wider flex-shrink-0">
+          OFFICIAL STORE
+        </span>
+        <span class="hidden md:inline font-medium truncate">✨ FREE Express Shipping on orders over ₹1,999 | Use Code: <strong class="text-white tracking-wider underline">NORTH20</strong> for 20% OFF</span>
+        <span class="md:hidden font-medium truncate">Use NORTH20 for 20% OFF (₹ Orders)</span>
+      </div>
+
+      <div class="hidden lg:flex items-center space-x-2 text-fyn-stone italic text-xs font-serif flex-shrink-0">
+        <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="FYN" class="w-3.5 h-3.5 invert brightness-200 opacity-70">
+        <span id="header-quote-text">"TRAVEL. LEARN. IMPROVE. Find your true north."</span>
+      </div>
+
+      <div class="flex items-center space-x-2 text-[11px] flex-shrink-0">
+        <span class="text-fyn-stone hidden sm:inline">Currency:</span>
+        <span class="text-white font-semibold">INR (₹)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="w-full sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-2 sm:gap-4">
+        
+        <!-- Brand Logo -->
+        <a href="index.html" class="flex-shrink-0 flex items-center group cursor-pointer mr-2 sm:mr-4 lg:mr-6" title="FYN - Find Your North">
+          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-7 sm:h-8 md:h-9 w-auto max-w-[160px] sm:max-w-[190px] object-contain transition-transform group-hover:scale-[1.02]">
+        </a>
+
+        <!-- Desktop Navigation with Shop For Dropdown -->
+        <nav class="hidden lg:flex items-center space-x-3.5 xl:space-x-6 text-xs font-semibold tracking-wide text-fyn-charcoal uppercase flex-shrink-0">
+          <a href="shop.html" class="nav-link text-fyn-forest font-bold hover:text-fyn-forest-light transition">All Drops</a>
+
+          <!-- Shop For Dropdown -->
+          <div class="relative group">
+            <button class="nav-link flex items-center space-x-1 hover:text-fyn-forest transition text-fyn-charcoal font-semibold py-2">
+              <span>Shop For</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-fyn-gold transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 mt-0 w-44 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-fyn-sand-dark py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <button onclick="filterAudience('men')" class="w-full text-left flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-forest"></i>
+                <span>Men</span>
+              </button>
+              <button onclick="filterAudience('women')" class="w-full text-left flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-fyn-gold"></i>
+                <span>Women</span>
+              </button>
+              <button onclick="filterAudience('boys')" class="w-full text-left flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="compass" class="w-3.5 h-3.5 text-blue-600"></i>
+                <span>Boys</span>
+              </button>
+              <button onclick="filterAudience('girls')" class="w-full text-left flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500"></i>
+                <span>Girls</span>
+              </button>
+              <button onclick="filterAudience('kids')" class="w-full text-left flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2 border-t border-gray-100">
+                <i data-lucide="smile" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Kids</span>
+              </button>
+            </div>
+          </div>
+
+          <button onclick="filterCategory('Apparel')" id="nav-btn-apparel" class="nav-link hover:text-fyn-forest transition">Apparel</button>
+          <button onclick="filterCategory('Travel Gear')" id="nav-btn-travel" class="nav-link hover:text-fyn-forest transition">Travel Gear</button>
+          <button onclick="filterCategory('Accessories')" id="nav-btn-acc" class="nav-link hover:text-fyn-forest transition">Accessories</button>
+          
+          <a href="community.html" class="hover:text-emerald-800 transition font-bold text-emerald-800 flex items-center space-x-1">
+            <span>Travel Community</span>
+            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full uppercase tracking-wider font-extrabold">Free</span>
+          </a>
+          <a href="manifesto.html" class="hover:text-fyn-forest transition font-medium text-fyn-stone">Manifesto</a>
+        </nav>
+
+        <!-- Right Action Icons -->
+        <div class="flex items-center space-x-1.5 sm:space-x-2.5 flex-shrink-0 ml-auto">
+          
+          <!-- Search Bar -->
+          <form class="relative hidden xl:block" role="search" onsubmit="event.preventDefault()">
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Search gear, drops & quotes..." 
+              oninput="handleSearch(this.value)"
+              class="w-36 lg:w-44 xl:w-52 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
+            >
+            <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"></i>
+          </form>
+
+          <!-- Wisdom Generator Icon -->
+          <button onclick="showRandomQuoteModal()" title="Draw Compass Wisdom" class="hidden sm:inline-flex p-2 text-fyn-forest hover:text-fyn-gold hover:bg-fyn-sand rounded-full transition">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+          </button>
+
+          <!-- Customer Account / Login Button -->
+          <button onclick="handleCustomerAccountClick()" id="nav-customer-btn" class="fyn-btn-secondary flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-full transition whitespace-nowrap max-w-[160px] truncate">
+            <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-gold flex-shrink-0"></i>
+            <span id="nav-customer-label" class="hidden sm:inline truncate">Sign In</span>
+          </button>
+
+          <!-- Cart Drawer Button -->
+          <button onclick="openCartDrawer()" class="relative p-2 text-fyn-forest hover:bg-fyn-sand rounded-full transition flex items-center">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span id="cart-counter" class="absolute -top-1 -right-1 bg-fyn-forest text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
+              0
+            </span>
+          </button>
+
+          <!-- Mobile Toggle -->
+          <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-fyn-forest hover:bg-fyn-sand rounded-lg" aria-label="Toggle Navigation">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Nav -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-200 bg-white px-4 py-4 space-y-3">
+      <input 
+        type="text" 
+        placeholder="Search gear & quotes..." 
+        oninput="handleSearch(this.value)"
+        class="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-fyn-sand focus:outline-none"
+      >
+      <div class="grid grid-cols-2 gap-2 pt-1 text-xs font-bold uppercase">
+        <a href="shop.html" class="text-left px-3 py-2 rounded hover:bg-fyn-sand block">All Drops</a>
+        <button onclick="filterCategory('Apparel'); toggleMobileMenu();" class="text-left px-3 py-2 rounded hover:bg-fyn-sand">Apparel</button>
+        <button onclick="filterCategory('Travel Gear'); toggleMobileMenu();" class="text-left px-3 py-2 rounded hover:bg-fyn-sand">Travel Gear</button>
+        <button onclick="filterCategory('Accessories'); toggleMobileMenu();" class="text-left px-3 py-2 rounded hover:bg-fyn-sand">Accessories</button>
+      </div>
+
+      <div class="pt-2 border-t border-gray-100">
+        <span class="text-[10px] font-extrabold uppercase text-gray-400 tracking-wider block mb-1">Shop For:</span>
+        <div class="grid grid-cols-3 gap-1.5 text-xs font-semibold">
+          <button onclick="filterAudience('men'); toggleMobileMenu();" class="px-2 py-1 rounded bg-fyn-sand text-center">Men</button>
+          <button onclick="filterAudience('women'); toggleMobileMenu();" class="px-2 py-1 rounded bg-fyn-sand text-center">Women</button>
+          <button onclick="filterAudience('boys'); toggleMobileMenu();" class="px-2 py-1 rounded bg-fyn-sand text-center">Boys</button>
+          <button onclick="filterAudience('girls'); toggleMobileMenu();" class="px-2 py-1 rounded bg-fyn-sand text-center">Girls</button>
+          <button onclick="filterAudience('kids'); toggleMobileMenu();" class="px-2 py-1 rounded bg-fyn-sand text-center">Kids</button>
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-gray-100 flex flex-col space-y-2 text-xs">
+        <a href="community.html" class="text-emerald-800 font-bold flex items-center space-x-2 py-1">
+          <i data-lucide="compass" class="w-4 h-4 text-emerald-600"></i>
+          <span>Join Free Travel Community</span>
+        </a>
+        <a href="manifesto.html" class="text-fyn-forest font-medium flex items-center space-x-2 py-1">
+          <i data-lucide="book-open" class="w-4 h-4 text-fyn-gold"></i>
+          <span>The FYN Manifesto & Creed</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- STORE CATALOG BANNER & CONTROLS -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    
+    <!-- Title & Intro -->
+    <div class="mb-8 pb-6 border-b border-gray-200">
+      <div class="flex items-center space-x-2 text-xs uppercase tracking-widest text-fyn-forest font-bold mb-2">
+        <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-3.5 h-3.5">
+        <span>FYN EXPEDITION CATALOG (INR ₹)</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-brand font-extrabold text-fyn-forest-dark">
+        Gear Stamped with Purpose
+      </h1>
+      <p class="text-xs sm:text-sm text-fyn-stone mt-2 max-w-2xl leading-relaxed">
+        Explore all original FYN drops. Engineered from heavyweight 480 GSM French Terry cotton, ripstop 1000D ballistic weaves, double-wall thermal steel, and alpine accessories. Each product is inscribed with a transformative life quote.
+      </p>
+    </div>
+
+    <!-- FILTER & AUDIENCE HUB -->
+    <div class="bg-white rounded-2xl border border-fyn-sand-dark p-4 sm:p-5 shadow-xs mb-8 space-y-4">
+      
+      <!-- Row 1: Categories -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-extrabold uppercase text-fyn-forest tracking-wider flex-shrink-0">Category:</span>
+          <div class="inline-flex flex-wrap p-1 rounded-full bg-fyn-sand border border-gray-200 text-xs font-semibold">
+            <button onclick="filterCategory('All')" id="cat-btn-All" class="cat-pill active px-3.5 py-1.5 rounded-full bg-fyn-forest text-white transition">All Drops</button>
+            <button onclick="filterCategory('Apparel')" id="cat-btn-Apparel" class="cat-pill px-3.5 py-1.5 rounded-full text-gray-600 hover:text-fyn-forest transition">Apparel</button>
+            <button onclick="filterCategory('Travel Gear')" id="cat-btn-Travel-Gear" class="cat-pill px-3.5 py-1.5 rounded-full text-gray-600 hover:text-fyn-forest transition">Travel Gear</button>
+            <button onclick="filterCategory('Accessories')" id="cat-btn-Accessories" class="cat-pill px-3.5 py-1.5 rounded-full text-gray-600 hover:text-fyn-forest transition">Accessories</button>
+          </div>
+        </div>
+
+        <!-- Sort Select -->
+        <div class="flex items-center space-x-2">
+          <span class="text-xs text-gray-500 font-semibold hidden md:inline">Sort by:</span>
+          <select onchange="handleSort(this.value)" class="text-xs py-1.5 px-3 rounded-full border border-gray-200 bg-white text-gray-700 focus:outline-none focus:border-fyn-forest">
+            <option value="featured">Featured First</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 2: "Shop For" Audience Selector -->
+      <div class="pt-3 border-t border-gray-100 flex flex-wrap items-center gap-2 text-xs">
+        <span class="font-extrabold uppercase text-fyn-forest tracking-wider mr-1 flex items-center space-x-1">
+          <i data-lucide="filter" class="w-3.5 h-3.5 text-fyn-gold"></i>
+          <span>Shop For:</span>
+        </span>
+        <button onclick="filterAudience('All')" id="aud-btn-all" class="aud-pill px-3 py-1 rounded-full bg-fyn-forest text-white font-semibold transition">Everyone (All)</button>
+        <button onclick="filterAudience('men')" id="aud-btn-men" class="aud-pill px-3 py-1 rounded-full text-gray-600 hover:text-fyn-forest font-semibold transition border border-gray-200 bg-gray-50">Men</button>
+        <button onclick="filterAudience('women')" id="aud-btn-women" class="aud-pill px-3 py-1 rounded-full text-gray-600 hover:text-fyn-forest font-semibold transition border border-gray-200 bg-gray-50">Women</button>
+        <button onclick="filterAudience('boys')" id="aud-btn-boys" class="aud-pill px-3 py-1 rounded-full text-gray-600 hover:text-fyn-forest font-semibold transition border border-gray-200 bg-gray-50">Boys</button>
+        <button onclick="filterAudience('girls')" id="aud-btn-girls" class="aud-pill px-3 py-1 rounded-full text-gray-600 hover:text-fyn-forest font-semibold transition border border-gray-200 bg-gray-50">Girls</button>
+        <button onclick="filterAudience('kids')" id="aud-btn-kids" class="aud-pill px-3 py-1 rounded-full text-gray-600 hover:text-fyn-forest font-semibold transition border border-gray-200 bg-gray-50">Kids</button>
+      </div>
+
+    </div>
+
+    <!-- Feedback Bar -->
+    <div id="filter-status" class="hidden mb-6 flex items-center justify-between bg-fyn-sand p-3 rounded-lg text-xs text-fyn-forest border border-fyn-sand-dark">
+      <span id="filter-text" class="font-medium">Showing drops...</span>
+      <button onclick="resetFilters()" class="text-fyn-gold font-bold hover:underline">Reset All Filters</button>
+    </div>
+
+    <!-- FULL PRODUCTS GRID -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+      <!-- Populated via app.js -->
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-fyn-forest-dark text-fyn-sand pt-16 pb-12 border-t border-fyn-forest/50 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        
+        <!-- Brand Info -->
+        <div class="space-y-4">
+          <img src="brand_assets/fyn_wordmark_white.png" alt="FYN" class="h-8 w-auto">
+          <p class="text-xs text-fyn-stone leading-relaxed">
+            FYN — Find Your North.<br>
+            Travel. Learn. Improve.<br>
+            Modern lifestyle apparel, travel accessories & mindware.
+          </p>
+          <div class="pt-2">
+            <span class="text-[11px] text-fyn-gold font-bold uppercase tracking-wider">All Payments in INR (₹)</span>
+          </div>
+        </div>
+
+        <!-- Quick Shop -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Drops & Catalog</h4>
+          <ul class="space-y-2 text-xs text-fyn-stone">
+            <li><button onclick="filterCategory('Apparel')" class="hover:text-white transition">Embroidered Hoodies & Tees</button></li>
+            <li><button onclick="filterCategory('Travel Gear')" class="hover:text-white transition">Expedition Backpacks & Duffels</button></li>
+            <li><button onclick="filterCategory('Accessories')" class="hover:text-white transition">Classic Caps & Thermal Flasks</button></li>
+            <li><button onclick="filterCategory('Accessories')" class="hover:text-white transition">Stormproof Umbrellas & Bags</button></li>
+          </ul>
+        </div>
+
+        <!-- Shop For -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Shop For</h4>
+          <ul class="space-y-2 text-xs text-fyn-stone">
+            <li><button onclick="filterAudience('men')" class="hover:text-white transition">Men's Expedition Collection</button></li>
+            <li><button onclick="filterAudience('women')" class="hover:text-white transition">Women's Streetwear & Travel</button></li>
+            <li><button onclick="filterAudience('boys')" class="hover:text-white transition">Boys' Adventure Drops</button></li>
+            <li><button onclick="filterAudience('girls')" class="hover:text-white transition">Girls' Outdoor Essentials</button></li>
+            <li><button onclick="filterAudience('kids')" class="hover:text-white transition">Kids' Summit Hoodies & Gear</button></li>
+          </ul>
+        </div>
+
+        <!-- Customer Care & Legal -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Customer Care & Support</h4>
+          <ul class="space-y-2 text-xs text-fyn-stone">
+            <li><button onclick="openHelpModal()" class="text-fyn-sand hover:underline flex items-center space-x-1">
+              <i data-lucide="life-buoy" class="w-3.5 h-3.5 text-fyn-gold"></i>
+              <span>FYN Concierge & Support Hub</span>
+            </button></li>
+            <li><a href="about.html" class="hover:text-white transition block">About FYN Philosophy</a></li>
+            <li><a href="contact.html" class="hover:text-white transition block">Contact & Help Desk</a></li>
+            <li><a href="privacy.html" class="hover:text-white transition block">Privacy Policy</a></li>
+            <li><a href="terms.html" class="hover:text-white transition block">Terms of Service & 7-Day Returns</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-fyn-stone">
+        <p>&copy; 2026 FYN Brand. Travel. Learn. Improve. All Rights Reserved.</p>
+        <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+          <span>Official Store: <strong class="text-white">fynstore.in</strong></span>
+          <span>•</span>
+          <span>100% Secure INR Gateways</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- MODALS & DRAWERS (Cart, QuickView, Checkout, Auth) -->
+  <!-- ======================================================== -->
+
+  <!-- 1. CART DRAWER -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeCartDrawer()"></div>
+  <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-5 border-b border-gray-200 flex items-center justify-between bg-fyn-sand">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-fyn-forest"></i>
+        <h3 class="font-brand text-lg font-bold text-fyn-forest-dark">Your Expedition Bag</h3>
+        <span id="drawer-item-count" class="text-xs bg-fyn-forest text-white px-2 py-0.5 rounded-full font-bold">0</span>
+      </div>
+      <button onclick="closeCartDrawer()" class="p-1.5 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-200 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Free Shipping Progress -->
+    <div class="px-5 py-3 bg-fyn-sand-dark/40 border-b border-gray-200 text-xs">
+      <div class="flex justify-between items-center mb-1.5 font-medium text-fyn-forest">
+        <span id="shipping-progress-text">Add ₹1,999 for FREE Express Shipping</span>
+        <i data-lucide="truck" class="w-4 h-4 text-fyn-gold"></i>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+        <div id="shipping-progress-bar" class="bg-fyn-forest h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+
+    <!-- Cart Footer & Promo Engine -->
+    <div class="p-5 border-t border-gray-200 bg-white space-y-3">
+      <div class="flex space-x-2">
+        <input type="text" id="promo-code-input" placeholder="Promo code (e.g. NORTH20)" class="flex-1 uppercase text-xs px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-fyn-forest font-mono">
+        <button onclick="applyDiscountCode()" class="px-4 py-2 bg-fyn-forest text-white text-xs font-bold rounded-lg hover:bg-fyn-forest-light transition">Apply</button>
+      </div>
+      <div id="discount-applied-msg" class="text-xs font-semibold text-green-700 hidden"></div>
+
+      <div class="space-y-1.5 text-xs text-gray-600 pt-2 border-t border-gray-100">
+        <div class="flex justify-between"><span>Subtotal</span><span id="cart-subtotal" class="font-semibold text-gray-900">₹0.00</span></div>
+        <div id="discount-row" class="hidden flex justify-between text-green-700 font-medium"><span id="discount-label">Discount</span><span id="cart-discount">-₹0.00</span></div>
+        <div class="flex justify-between"><span>Shipping (Express India)</span><span id="cart-shipping" class="font-semibold text-gray-900">₹149.00</span></div>
+        <div class="flex justify-between text-sm font-bold text-fyn-forest-dark pt-2 border-t border-gray-200"><span>Total Payable (INR)</span><span id="cart-total" class="text-base text-fyn-forest">₹0.00</span></div>
+      </div>
+
+      <button onclick="openCheckoutModal()" id="btn-proceed-checkout" disabled class="w-full py-3.5 rounded-xl bg-fyn-forest text-white font-bold text-xs uppercase tracking-wider hover:bg-fyn-forest-light transition flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md">
+        <i data-lucide="lock" class="w-4 h-4"></i>
+        <span>Proceed To Secure Checkout</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. QUICK VIEW MODAL -->
+  <div id="quickview-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-fade-in">
+      <button onclick="closeQuickViewModal()" class="absolute top-4 right-4 z-10 p-2 text-gray-400 hover:text-gray-700 bg-white/80 rounded-full">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="quickview-content" class="grid grid-cols-1 md:grid-cols-2"></div>
+    </div>
+  </div>
+
+  <!-- 3. CHECKOUT & PAYMENT MODAL -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl border border-gray-100 my-8">
+      <div class="bg-fyn-forest text-white px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-4 h-4 invert brightness-200">
+          <h3 class="font-brand text-lg font-bold">FYN Checkout & Payment Gateway (INR)</h3>
+        </div>
+        <button onclick="closeCheckoutModal()" class="text-white/70 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="p-6">
+        <form id="checkout-form" onsubmit="processPayment(event)" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Full Name *</label>
+              <input type="text" id="cust-name" required value="Aditya Sharma" class="w-full text-xs px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Customer Email *</label>
+              <input type="email" id="cust-email" required value="aditya.explorer@gmail.com" class="w-full text-xs px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Mobile Phone *</label>
+              <input type="tel" id="cust-phone" required value="+91 98765 43210" class="w-full text-xs px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">PIN / Postal Code *</label>
+              <input type="text" id="cust-zip" required value="560001" class="w-full text-xs px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Delivery Street Address *</label>
+              <input type="text" id="cust-address" required value="Flat 402, North Peak Residency, MG Road" class="w-full text-xs px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">City *</label>
+              <input type="text" id="cust-city" required value="Bengaluru" class="w-full text-xs px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">State & Country</label>
+              <input type="text" id="cust-state" readonly value="Karnataka, India" class="w-full text-xs px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-500">
+            </div>
+          </div>
+
+          <!-- Total Payable Summary in INR -->
+          <div class="bg-fyn-sand p-3.5 rounded-xl border border-fyn-sand-dark flex items-center justify-between text-xs">
+            <div>
+              <span class="text-gray-600 font-medium">Total Amount Payable:</span>
+              <p class="text-[11px] text-green-700 font-semibold" id="checkout-discount-note">Including Indian GST & Discounts</p>
+            </div>
+            <div class="text-right">
+              <span id="checkout-total-amount" class="text-xl font-extrabold text-fyn-forest">₹0.00</span>
+            </div>
+          </div>
+
+          <button type="submit" id="btn-pay-submit" class="w-full py-3.5 rounded-xl bg-fyn-forest text-white font-bold text-xs uppercase tracking-wider hover:bg-fyn-forest-light transition flex items-center justify-center space-x-2 shadow-lg">
+            <i data-lucide="shield-check" class="w-4 h-4 text-fyn-gold"></i>
+            <span id="pay-button-label">Authorize & Complete Payment (₹)</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. ORDER CONFIRMATION MODAL -->
+  <div id="order-success-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 text-center shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      <div class="w-16 h-16 bg-green-100 text-green-700 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="check-circle-2" class="w-10 h-10"></i>
+      </div>
+      <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN" class="h-8 mx-auto mb-3">
+      <h3 class="font-brand text-2xl font-extrabold text-fyn-forest-dark mb-1">Order Confirmed!</h3>
+      <p class="text-xs text-gray-500 mb-4">Thank you for choosing FYN. Your order has been registered in Supabase.</p>
+      <div class="bg-fyn-sand rounded-xl p-4 text-left text-xs space-y-2 mb-6 border border-gray-200">
+        <div class="flex justify-between border-b border-gray-200 pb-2"><span class="text-gray-500">Order Number:</span><span id="success-order-num" class="font-mono font-bold text-fyn-forest">FYN-IND-2026-9812</span></div>
+        <div class="flex justify-between border-b border-gray-200 pb-2"><span class="text-gray-500">Customer Name:</span><span id="success-cust-name" class="font-semibold text-gray-800">Aditya Sharma</span></div>
+        <div class="flex justify-between border-b border-gray-200 pb-2"><span class="text-gray-500">Amount Paid:</span><span id="success-total" class="font-extrabold text-fyn-forest text-sm">₹0.00</span></div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-2 justify-center">
+        <button onclick="printInvoice()" class="px-5 py-2.5 rounded-full border border-gray-300 text-gray-700 text-xs font-semibold hover:bg-gray-50 flex items-center justify-center space-x-1.5"><i data-lucide="printer" class="w-3.5 h-3.5"></i><span>Print Invoice</span></button>
+        <button onclick="closeSuccessModal()" class="px-5 py-2.5 rounded-full bg-fyn-forest text-white text-xs font-bold hover:bg-fyn-forest-light">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. COMPASS WISDOM MODAL -->
+  <div id="quote-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center shadow-2xl relative">
+      <button onclick="closeQuoteModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="Sparkle" class="w-10 h-10 mx-auto mb-3">
+      <h4 class="font-brand text-lg font-bold text-fyn-forest-dark mb-1">Compass Wisdom</h4>
+      <blockquote id="modal-quote-text" class="font-serif text-xl italic text-fyn-forest mb-3">"The compass is inside you. Follow your own trajectory."</blockquote>
+      <p id="modal-quote-author" class="text-xs font-bold text-fyn-gold mb-6">— FYN Manifesto</p>
+      <div class="flex gap-2">
+        <button onclick="drawNewQuote(true)" class="flex-1 py-2 rounded-lg bg-fyn-sand text-fyn-forest text-xs font-bold hover:bg-fyn-sand-dark">New Reflection</button>
+        <button onclick="closeQuoteModal()" class="flex-1 py-2 rounded-lg bg-fyn-forest text-white text-xs font-bold hover:bg-fyn-forest-light">Carry With Me</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. CUSTOMER AUTH MODAL -->
+  <div id="customer-auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-7 shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      <button onclick="closeCustomerAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="text-center mb-5">
+        <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN" class="h-8 mx-auto mb-2">
+        <p class="text-xs text-gray-500 font-sans">Find Your North • Member Portal</p>
+      </div>
+      <div class="flex border-b border-gray-200 mb-5 text-xs font-bold">
+        <button onclick="switchCustomerAuthTab('login')" id="cust-tab-login" class="flex-1 py-2.5 border-b-2 border-fyn-forest text-fyn-forest transition">Sign In</button>
+        <button onclick="switchCustomerAuthTab('register')" id="cust-tab-register" class="flex-1 py-2.5 border-b-2 border-transparent text-gray-400 hover:text-gray-700 transition">Create Account</button>
+      </div>
+      <form id="customer-login-form" onsubmit="handleCustomerLogin(event)" class="space-y-3.5 text-xs">
+        <div><label class="block font-semibold text-gray-700 mb-1">Email</label><input type="email" id="cust-login-email" required placeholder="aditya@example.com" class="w-full px-3 py-2 rounded-lg border border-gray-300"></div>
+        <div><label class="block font-semibold text-gray-700 mb-1">Password</label><input type="password" id="cust-login-password" required placeholder="••••••••" class="w-full px-3 py-2 rounded-lg border border-gray-300"></div>
+        <div id="cust-login-error" class="hidden text-xs text-red-600 bg-red-50 p-2 rounded">Invalid credentials.</div>
+        <button type="submit" id="cust-login-btn" class="w-full py-2.5 rounded-xl bg-fyn-forest text-white font-bold hover:bg-fyn-forest-light">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. CUSTOMER PROFILE & ORDER HISTORY MODAL -->
+  <div id="customer-profile-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-7 shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      <button onclick="closeCustomerProfileModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-200 mb-5 gap-3">
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-full bg-fyn-sand text-fyn-forest flex items-center justify-center font-bold text-lg"><i data-lucide="user" class="w-6 h-6"></i></div>
+          <div><h3 class="font-brand font-bold text-base text-fyn-forest-dark" id="profile-name">Customer</h3><p class="text-xs text-gray-500" id="profile-email">email@example.com</p></div>
+        </div>
+        <button onclick="handleCustomerLogout()" class="text-xs px-3 py-1.5 rounded-lg border border-gray-300 text-gray-600 font-semibold hover:bg-red-50">Sign Out</button>
+      </div>
+      <div>
+        <h4 class="font-brand font-bold text-sm text-fyn-forest mb-3">Your Expedition Orders</h4>
+        <div id="profile-orders-container" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. CONCIERGE HELP MODAL -->
+  <div id="help-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      <button onclick="closeHelpModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <h3 class="font-brand font-bold text-lg text-fyn-forest-dark mb-4">FYN Customer Concierge</h3>
+      <form id="help-ticket-form" onsubmit="handleHelpSubmit(event)" class="space-y-3 text-xs">
+        <div><label class="block font-semibold text-gray-700 mb-1">Name *</label><input type="text" id="help-name" required class="w-full px-3 py-2 rounded-lg border border-gray-300"></div>
+        <div><label class="block font-semibold text-gray-700 mb-1">Email *</label><input type="email" id="help-email" required class="w-full px-3 py-2 rounded-lg border border-gray-300"></div>
+        <div><label class="block font-semibold text-gray-700 mb-1">Subject *</label><input type="text" id="help-subject" required class="w-full px-3 py-2 rounded-lg border border-gray-300"></div>
+        <div><label class="block font-semibold text-gray-700 mb-1">Message *</label><textarea id="help-message" rows="3" required class="w-full px-3 py-2 rounded-lg border border-gray-300"></textarea></div>
+        <button type="submit" id="help-submit-btn" class="w-full py-2.5 rounded-xl bg-fyn-forest text-white font-bold hover:bg-fyn-forest-light">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

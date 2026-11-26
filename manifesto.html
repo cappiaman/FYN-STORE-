@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The FYN Manifesto | Find Your North — The Expedition Philosophy</title>
+  
+  <link rel="canonical" href="https://fynstore.in/manifesto.html">
+  <meta name="description" content="The FYN Creed: Travel to broaden. Learn to understand. Improve to elevate. Discover the philosophy, color palette, and principles driving Find Your North.">
+  <meta name="keywords" content="FYN manifesto, Find Your North philosophy, travel apparel India, Indian mountaineering streetwear">
+  
+  <link rel="icon" type="image/png" href="brand_assets/fyn_sparkle_symbol_forest_green.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            fyn: {
+              forest: '#1D3C34',
+              'forest-dark': '#142A24',
+              'forest-light': '#2A554A',
+              sand: '#F7F5F0',
+              'sand-dark': '#ECE7DC',
+              stone: '#8D9093',
+              charcoal: '#171918',
+              gold: '#D4AF37',
+              earth: '#C2A676',
+            }
+          },
+          fontFamily: {
+            brand: ['"Montserrat"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #171918; }
+    .fyn-glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(236, 231, 220, 0.95);
+      box-shadow: 0 10px 25px -5px rgba(29, 60, 52, 0.05);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5]">
+
+  <!-- TOP BAR -->
+  <div class="w-full bg-fyn-forest-dark text-fyn-sand text-xs py-2.5 px-4 border-b border-fyn-forest/40">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-fyn-gold/20 text-fyn-gold border border-fyn-gold/40 uppercase tracking-wider">
+          THE FYN CREED
+        </span>
+        <span class="font-medium hidden sm:inline">"TRAVEL. LEARN. IMPROVE. Find your true north."</span>
+      </div>
+      <div class="flex items-center space-x-3 text-xs">
+        <a href="shop.html" class="text-fyn-gold hover:underline font-bold">Shop Official Drops ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="w-full sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex-shrink-0 flex items-center" title="FYN - Find Your North">
+          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN" class="h-8 md:h-9 w-auto">
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-6 text-xs font-semibold tracking-wide text-fyn-charcoal uppercase">
+          <a href="shop.html" class="hover:text-fyn-forest transition">All Drops</a>
+
+          <!-- Shop For Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center space-x-1 hover:text-fyn-forest transition font-semibold py-2">
+              <span>Shop For</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-fyn-gold transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 mt-0 w-44 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-fyn-sand-dark py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="shop.html?audience=men" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-forest"></i><span>Men</span>
+              </a>
+              <a href="shop.html?audience=women" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-fyn-gold"></i><span>Women</span>
+              </a>
+              <a href="shop.html?audience=boys" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="compass" class="w-3.5 h-3.5 text-blue-600"></i><span>Boys</span>
+              </a>
+              <a href="shop.html?audience=girls" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500"></i><span>Girls</span>
+              </a>
+              <a href="shop.html?audience=kids" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2 border-t border-gray-100">
+                <i data-lucide="smile" class="w-3.5 h-3.5 text-emerald-600"></i><span>Kids</span>
+              </a>
+            </div>
+          </div>
+
+          <a href="shop.html?category=Apparel" class="hover:text-fyn-forest transition">Apparel</a>
+          <a href="shop.html?category=Travel+Gear" class="hover:text-fyn-forest transition">Travel Gear</a>
+          <a href="shop.html?category=Accessories" class="hover:text-fyn-forest transition">Accessories</a>
+          <a href="community.html" class="hover:text-emerald-800 transition font-bold text-emerald-800 flex items-center space-x-1">
+            <span>Travel Community</span>
+            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full uppercase tracking-wider font-extrabold">Free</span>
+          </a>
+          <a href="manifesto.html" class="text-fyn-forest font-bold border-b-2 border-fyn-forest pb-0.5">Manifesto</a>
+        </nav>
+
+        <div class="flex items-center space-x-3">
+          <a href="shop.html" class="px-5 py-2.5 rounded-full bg-fyn-forest text-white font-bold text-xs uppercase tracking-wider hover:bg-fyn-forest-light transition flex items-center space-x-2">
+            <span>Explore Drops</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH MOUNTAIN VECTOR WATERMARK -->
+  <section class="relative py-20 sm:py-28 bg-gradient-to-b from-[#F7F5F0] via-[#F4F1E8] to-[#FAF8F5] overflow-hidden border-b border-fyn-sand-dark">
+    <!-- Mountain Background Artwork -->
+    <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-20 flex justify-center items-end select-none">
+      <img src="brand_assets/fyn_mountain_artwork.png" alt="Mountain Skyline" class="w-full max-w-7xl h-auto object-cover object-bottom">
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <div class="inline-flex items-center space-x-2 px-4 py-1 rounded-full bg-white/80 border border-fyn-forest/20 text-fyn-forest text-xs font-bold uppercase tracking-wider mb-6">
+        <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-3.5 h-3.5">
+        <span>THE ARCHITECTURE OF ELEVATION</span>
+      </div>
+
+      <h1 class="font-brand text-4xl sm:text-6xl font-extrabold text-fyn-forest-dark tracking-tight leading-tight mb-6">
+        "Travel to broaden.<br>
+        Learn to understand.<br>
+        <span class="text-fyn-forest underline decoration-fyn-gold/60 decoration-wavy decoration-2">Improve to elevate.</span>"
+      </h1>
+
+      <p class="text-base sm:text-xl text-gray-700 leading-relaxed font-serif italic max-w-2xl mx-auto mb-8">
+        "We do not design gear simply to exist; we craft physical reminders of where you are going. When the road bends and the ascent steepens, check your compass. Find your North."
+      </p>
+
+      <div class="flex justify-center gap-3">
+        <a href="shop.html" class="px-8 py-3.5 rounded-full bg-fyn-forest text-white font-bold text-xs uppercase tracking-wider hover:bg-fyn-forest-light transition shadow-lg">
+          Explore The Official Gear
+        </a>
+        <a href="community.html" class="px-7 py-3.5 rounded-full bg-white border border-fyn-forest/30 text-fyn-forest font-bold text-xs uppercase tracking-wider hover:bg-fyn-sand transition">
+          Join Travel Circle
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE THREE PILLARS DEEP DIVE -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center mb-14">
+      <span class="text-xs font-bold uppercase tracking-widest text-fyn-stone block mb-2">CORE FOUNDATIONS</span>
+      <h2 class="font-brand text-3xl sm:text-4xl font-extrabold text-fyn-forest-dark">The Three Pillars of FYN</h2>
+      <p class="text-xs sm:text-sm text-gray-600 mt-2 max-w-lg mx-auto">Every stitch, coordinate, and silhouette we produce anchors directly back into these principles.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Pillar 1: Travel -->
+      <div class="fyn-glass-card rounded-3xl p-8 flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-fyn-forest/10 flex items-center justify-center text-fyn-forest mb-6">
+            <i data-lucide="mountain" class="w-8 h-8"></i>
+          </div>
+          <span class="text-[11px] font-extrabold uppercase tracking-widest text-fyn-gold block mb-1">PILLAR 01</span>
+          <h3 class="font-brand text-2xl font-bold text-fyn-forest-dark mb-3">TRAVEL</h3>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-sans">
+            Venturing into high altitudes, unfamiliar valleys, and rugged mountain passes. We believe physical discomfort on the trail strips away pretension, cultivating gratitude, self-reliance, and sheer resilience.
+          </p>
+        </div>
+        <div class="pt-6 border-t border-gray-100 mt-6 text-xs font-semibold text-fyn-forest italic font-serif">
+          "Chart new horizons across the Himalayas."
+        </div>
+      </div>
+
+      <!-- Pillar 2: Learn -->
+      <div class="fyn-glass-card rounded-3xl p-8 flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-fyn-forest/10 flex items-center justify-center text-fyn-forest mb-6">
+            <i data-lucide="book-open" class="w-8 h-8"></i>
+          </div>
+          <span class="text-[11px] font-extrabold uppercase tracking-widest text-fyn-gold block mb-1">PILLAR 02</span>
+          <h3 class="font-brand text-2xl font-bold text-fyn-forest-dark mb-3">LEARN</h3>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-sans">
+            Observation without understanding is merely sightseeing. We cultivate deep learning: reading historical chronicles, keeping trail logs, studying alpine ecosystems, and absorbing indigenous knowledge along every expedition.
+          </p>
+        </div>
+        <div class="pt-6 border-t border-gray-100 mt-6 text-xs font-semibold text-fyn-forest italic font-serif">
+          "Feed the mind as voraciously as the journey."
+        </div>
+      </div>
+
+      <!-- Pillar 3: Improve -->
+      <div class="fyn-glass-card rounded-3xl p-8 flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-fyn-forest/10 flex items-center justify-center text-fyn-forest mb-6">
+            <i data-lucide="trending-up" class="w-8 h-8"></i>
+          </div>
+          <span class="text-[11px] font-extrabold uppercase tracking-widest text-fyn-gold block mb-1">PILLAR 03</span>
+          <h3 class="font-brand text-2xl font-bold text-fyn-forest-dark mb-3">IMPROVE</h3>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-sans">
+            Elevation is a lifelong discipline. The ultimate summit is internal: 1% compounding daily elevation in physical fitness, mental clarity, professional ethics, and calm under high-pressure environments.
+          </p>
+        </div>
+        <div class="pt-6 border-t border-gray-100 mt-6 text-xs font-semibold text-fyn-forest italic font-serif">
+          "Conquer daily peaks with quiet deliberate strength."
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COLOR STORY & PALETTE -->
+  <section class="w-full py-16 bg-white border-y border-stone-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <span class="text-xs font-bold uppercase tracking-widest text-fyn-stone block mb-2">THE COLOR STORY</span>
+      <h2 class="font-brand text-2xl sm:text-3xl font-extrabold text-fyn-forest-dark mb-8">Earth, High Rock & Alpine Glaciers</h2>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 text-xs font-bold uppercase tracking-wider">
+        <div class="p-4 rounded-2xl bg-[#1D3C34] text-white shadow-sm">
+          <div class="text-[10px] opacity-75 font-mono mb-2">#1D3C34</div>
+          <span>Forest Green</span>
+          <p class="text-[10px] font-normal normal-case opacity-75 mt-1 font-serif">The Pine Canopy</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-[#FAF8F5] text-fyn-charcoal border border-stone-300 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-mono mb-2">#FAF8F5</div>
+          <span>Sand White</span>
+          <p class="text-[10px] font-normal normal-case text-gray-500 mt-1 font-serif">Glacial Mist</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-[#8D9093] text-white shadow-sm">
+          <div class="text-[10px] opacity-75 font-mono mb-2">#8D9093</div>
+          <span>Stone Grey</span>
+          <p class="text-[10px] font-normal normal-case opacity-75 mt-1 font-serif">Granite Peaks</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-[#171918] text-white shadow-sm">
+          <div class="text-[10px] opacity-75 font-mono mb-2">#171918</div>
+          <span>Charcoal Black</span>
+          <p class="text-[10px] font-normal normal-case opacity-75 mt-1 font-serif">Night Basecamp</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-[#D4AF37] text-fyn-forest shadow-sm col-span-2 sm:col-span-1">
+          <div class="text-[10px] opacity-80 font-mono mb-2">#D4AF37</div>
+          <span>FYN Gold</span>
+          <p class="text-[10px] font-normal normal-case opacity-80 mt-1 font-serif">Magnetic Needle</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-fyn-forest-dark text-fyn-sand py-12 border-t border-fyn-forest/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-fyn-stone gap-4">
+      <div class="flex items-center space-x-3">
+        <img src="brand_assets/fyn_wordmark_white.png" alt="FYN" class="h-6 w-auto">
+        <span>•</span>
+        <span>TRAVEL. LEARN. IMPROVE.</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="hover:text-white">Home</a>
+        <a href="shop.html" class="hover:text-white">Catalog</a>
+        <a href="community.html" class="hover:text-white">Community</a>
+        <a href="about.html" class="hover:text-white">About</a>
+        <a href="contact.html" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { lucide.createIcons(); });
+  </script>
+</body>
+</html>

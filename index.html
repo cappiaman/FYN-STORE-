@@ -407,45 +407,72 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20 gap-2 sm:gap-4">
         
-        <!-- Brand Logo (flex-shrink-0 guarantees it never gets compressed or overlapped) -->
+        <!-- Brand Logo -->
         <a href="index.html" onclick="handleLogoClick(event)" class="flex-shrink-0 flex items-center group cursor-pointer mr-2 sm:mr-4 lg:mr-6" title="FYN - Find Your North">
           <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-7 sm:h-8 md:h-9 w-auto max-w-[160px] sm:max-w-[190px] object-contain transition-transform group-hover:scale-[1.02]">
         </a>
 
-        <!-- Desktop Navigation (flex-shrink-0 with refined spacing) -->
+        <!-- Desktop Navigation with Shop For Dropdown -->
         <nav class="hidden lg:flex items-center space-x-3.5 xl:space-x-6 text-xs font-semibold tracking-wide text-fyn-charcoal uppercase flex-shrink-0">
-          <button onclick="filterCategory('All')" class="nav-link text-fyn-forest font-bold hover:text-fyn-forest-light transition">All Drops</button>
-          <button onclick="filterCategory('Apparel')" class="nav-link hover:text-fyn-forest transition">Apparel</button>
-          <button onclick="filterCategory('Travel Gear')" class="nav-link hover:text-fyn-forest transition">Travel Gear</button>
-          <button onclick="filterCategory('Accessories')" class="nav-link hover:text-fyn-forest transition">Accessories</button>
-          <a href="#brand-pillars" class="hover:text-fyn-forest transition flex items-center space-x-1 text-fyn-stone font-medium">
-            <span>Pillars</span>
-            <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-3 h-3">
-          </a>
-          <a href="#community-section" class="hover:text-emerald-800 transition font-bold text-emerald-800 flex items-center space-x-1">
+          <a href="shop.html" class="nav-link hover:text-fyn-forest transition">All Drops</a>
+
+          <!-- Shop For Dropdown Menu -->
+          <div class="relative group">
+            <button class="nav-link flex items-center space-x-1 hover:text-fyn-forest transition text-fyn-charcoal font-semibold py-2">
+              <span>Shop For</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-fyn-gold transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 mt-0 w-44 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-fyn-sand-dark py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="shop.html?audience=men" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-forest"></i>
+                <span>Men</span>
+              </a>
+              <a href="shop.html?audience=women" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-fyn-gold"></i>
+                <span>Women</span>
+              </a>
+              <a href="shop.html?audience=boys" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="compass" class="w-3.5 h-3.5 text-blue-600"></i>
+                <span>Boys</span>
+              </a>
+              <a href="shop.html?audience=girls" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500"></i>
+                <span>Girls</span>
+              </a>
+              <a href="shop.html?audience=kids" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2 border-t border-gray-100">
+                <i data-lucide="smile" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Kids</span>
+              </a>
+            </div>
+          </div>
+
+          <a href="shop.html?category=Apparel" class="nav-link hover:text-fyn-forest transition">Apparel</a>
+          <a href="shop.html?category=Travel+Gear" class="nav-link hover:text-fyn-forest transition">Travel Gear</a>
+          <a href="shop.html?category=Accessories" class="nav-link hover:text-fyn-forest transition">Accessories</a>
+          
+          <a href="community.html" class="hover:text-emerald-800 transition font-bold text-emerald-800 flex items-center space-x-1">
             <span>Travel Community</span>
             <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full uppercase tracking-wider font-extrabold">Free</span>
           </a>
-          <a href="#manifesto" class="hover:text-fyn-forest transition font-medium text-fyn-stone">Manifesto</a>
+          <a href="manifesto.html" class="hover:text-fyn-forest transition font-medium text-fyn-stone">Manifesto</a>
         </nav>
 
         <!-- Right Action Icons -->
         <div class="flex items-center space-x-1.5 sm:space-x-2.5 flex-shrink-0 ml-auto">
           
-          <!-- Search Bar: visible on xl to prevent crowding on laptops -->
-          <form class="relative hidden xl:block" role="search" toolname="searchProducts" tooldescription="Search FYN catalog for gear, apparel and drops" onsubmit="event.preventDefault()">
+          <!-- Search Bar -->
+          <form class="relative hidden xl:block" role="search" onsubmit="event.preventDefault(); window.location.href='shop.html?search=' + encodeURIComponent(document.getElementById('search-input').value);">
             <input 
               type="text" 
               id="search-input" 
               name="query"
               placeholder="Search drops, gear & quotes..." 
-              oninput="handleSearch(this.value)"
               class="w-36 lg:w-44 xl:w-52 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
             >
             <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"></i>
           </form>
 
-          <!-- Currency Indicator: visible on 2xl or xl -->
+          <!-- Currency Indicator -->
           <span class="hidden 2xl:inline-flex px-2.5 py-1 rounded-full bg-fyn-sand text-fyn-forest font-bold text-xs border border-gray-200 shadow-xs">
             ₹ INR
           </span>
@@ -479,43 +506,55 @@
 
     <!-- Mobile Drawer Nav -->
     <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-200 bg-white px-4 py-4 space-y-3">
-      <input 
-        type="text" 
-        placeholder="Search gear & quotes..." 
-        oninput="handleSearch(this.value)"
-        class="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-fyn-sand focus:outline-none"
-      >
+      <form onsubmit="event.preventDefault(); window.location.href='shop.html?search=' + encodeURIComponent(this.elements[0].value);">
+        <input 
+          type="text" 
+          placeholder="Search gear & quotes..." 
+          class="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-fyn-sand focus:outline-none"
+        >
+      </form>
       <div class="grid grid-cols-2 gap-2 pt-1 text-xs font-bold uppercase">
-        <button onclick="filterCategory('All'); toggleMobileMenu();" class="text-left px-3 py-2 rounded hover:bg-fyn-sand">All Drops</button>
-        <button onclick="filterCategory('Apparel'); toggleMobileMenu();" class="text-left px-3 py-2 rounded hover:bg-fyn-sand">Apparel</button>
-        <button onclick="filterCategory('Travel Gear'); toggleMobileMenu();" class="text-left px-3 py-2 rounded hover:bg-fyn-sand">Travel Gear</button>
-        <button onclick="filterCategory('Accessories'); toggleMobileMenu();" class="text-left px-3 py-2 rounded hover:bg-fyn-sand">Accessories</button>
+        <a href="shop.html" class="text-left px-3 py-2 rounded hover:bg-fyn-sand block">All Drops</a>
+        <a href="shop.html?category=Apparel" class="text-left px-3 py-2 rounded hover:bg-fyn-sand block">Apparel</a>
+        <a href="shop.html?category=Travel+Gear" class="text-left px-3 py-2 rounded hover:bg-fyn-sand block">Travel Gear</a>
+        <a href="shop.html?category=Accessories" class="text-left px-3 py-2 rounded hover:bg-fyn-sand block">Accessories</a>
       </div>
+
+      <!-- Mobile Shop For Links -->
+      <div class="pt-2 border-t border-gray-100">
+        <span class="text-[10px] font-extrabold uppercase text-gray-400 tracking-wider block mb-1">Shop For:</span>
+        <div class="grid grid-cols-3 gap-1.5 text-xs font-semibold">
+          <a href="shop.html?audience=men" class="px-2 py-1 rounded bg-fyn-sand text-center block">Men</a>
+          <a href="shop.html?audience=women" class="px-2 py-1 rounded bg-fyn-sand text-center block">Women</a>
+          <a href="shop.html?audience=boys" class="px-2 py-1 rounded bg-fyn-sand text-center block">Boys</a>
+          <a href="shop.html?audience=girls" class="px-2 py-1 rounded bg-fyn-sand text-center block">Girls</a>
+          <a href="shop.html?audience=kids" class="px-2 py-1 rounded bg-fyn-sand text-center block">Kids</a>
+        </div>
+      </div>
+
       <div class="pt-2 border-t border-gray-100 flex flex-col space-y-2 text-xs">
         <button onclick="handleCustomerAccountClick(); toggleMobileMenu();" class="text-fyn-forest font-bold flex items-center space-x-2 py-1">
           <i data-lucide="user" class="w-4 h-4 text-fyn-gold"></i>
           <span id="mobile-customer-label">Sign In / Member Account</span>
         </button>
-        <a href="#community-section" onclick="toggleMobileMenu();" class="text-emerald-800 font-bold flex items-center space-x-2 py-1">
+        <a href="community.html" class="text-emerald-800 font-bold flex items-center space-x-2 py-1">
           <i data-lucide="compass" class="w-4 h-4 text-emerald-600"></i>
           <span>Join Free Travel Community</span>
         </a>
-        <button onclick="openHelpModal(); toggleMobileMenu();" class="text-fyn-forest font-medium flex items-center space-x-2 py-1">
-          <i data-lucide="life-buoy" class="w-4 h-4 text-fyn-gold"></i>
-          <span>Support & Inquiries</span>
-        </button>
-        <button onclick="showRandomQuoteModal(); toggleMobileMenu();" class="text-fyn-forest font-medium flex items-center space-x-2 py-1">
-          <i data-lucide="compass" class="w-4 h-4"></i>
-          <span>Draw Wisdom</span>
-        </button>
+        <a href="manifesto.html" class="text-fyn-forest font-medium flex items-center space-x-2 py-1">
+          <i data-lucide="book-open" class="w-4 h-4 text-fyn-gold"></i>
+          <span>The FYN Manifesto & Creed</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION: CLASSY MOUNTAIN WATERMARK BANNER & GLASSMORPHISM -->
+  <!-- ======================================================== -->
+  <!-- 1. HERO SECTION: CURRENT SEASON SPOTLIGHT & OFFERS -->
+  <!-- ======================================================== -->
   <section class="w-full relative bg-gradient-to-b from-[#F7F5F0] via-[#F4F1E8] to-[#FAF8F5] overflow-hidden py-12 sm:py-20 border-b border-fyn-sand-dark">
     
-    <!-- Authentic Vector Mountain Skyline Artwork in Background (Flush to Bottom) -->
+    <!-- Authentic Vector Mountain Skyline Artwork in Background -->
     <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-20 sm:opacity-25 flex justify-center items-end overflow-hidden select-none">
       <img src="brand_assets/fyn_mountain_artwork.png" alt="FYN Himalayan Ridge" class="w-full max-w-7xl h-auto object-cover object-bottom translate-y-2">
     </div>
@@ -523,11 +562,12 @@
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
         
-        <!-- Left Hero Narrative -->
+        <!-- Left Hero Narrative & Current Season Offer -->
         <div class="lg:col-span-7">
-          <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/80 backdrop-blur-md border border-fyn-forest/20 text-fyn-forest text-xs font-bold uppercase tracking-wider mb-5 shadow-xs">
+          
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-md border border-fyn-forest/20 text-fyn-forest text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
             <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="Sparkle" class="w-3.5 h-3.5">
-            <span>TRAVEL. LEARN. IMPROVE.</span>
+            <span>CURRENT SEASON: ALPINE WINTER 2026</span>
           </div>
 
           <h1 class="font-brand text-4xl sm:text-5xl lg:text-6xl font-extrabold text-fyn-forest-dark tracking-tight leading-tight mb-4">
@@ -538,45 +578,45 @@
             Modern travel essentials, luxury heavyweight streetwear, and everyday gear designed to anchor your compass. Purpose-built for the journey of self-elevation.
           </p>
 
-          <!-- 3 Brand Pillars: Luxury Glass Cards -->
-          <div id="brand-pillars" class="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-2 mb-8 max-w-lg">
-            <div class="fyn-glass-card p-3 sm:p-4 rounded-2xl text-center group">
-              <div class="w-8 h-8 mx-auto mb-1.5 rounded-full bg-fyn-forest/10 flex items-center justify-center group-hover:bg-fyn-forest group-hover:text-white transition-colors duration-300">
-                <i data-lucide="mountain" class="w-4 h-4 text-fyn-forest group-hover:text-white transition-colors"></i>
-              </div>
-              <h4 class="text-[11px] sm:text-xs font-bold tracking-wider text-fyn-forest uppercase">TRAVEL</h4>
-              <p class="text-[10px] text-fyn-stone hidden xs:block">Chart New Horizons</p>
+          <!-- Current Season Promotional Offer Strip -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-8 max-w-2xl text-left">
+            <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 shadow-xs">
+              <span class="text-[10px] font-extrabold uppercase text-fyn-gold block">PROMO OFFER</span>
+              <p class="text-xs font-bold text-fyn-forest-dark">20% OFF Code</p>
+              <span class="text-[11px] font-mono font-bold text-fyn-forest">NORTH20</span>
             </div>
-            <div class="fyn-glass-card p-3 sm:p-4 rounded-2xl text-center group">
-              <div class="w-8 h-8 mx-auto mb-1.5 rounded-full bg-fyn-forest/10 flex items-center justify-center group-hover:bg-fyn-forest group-hover:text-white transition-colors duration-300">
-                <i data-lucide="book-open" class="w-4 h-4 text-fyn-forest group-hover:text-white transition-colors"></i>
-              </div>
-              <h4 class="text-[11px] sm:text-xs font-bold tracking-wider text-fyn-forest uppercase">LEARN</h4>
-              <p class="text-[10px] text-fyn-stone hidden xs:block">Feed Your Mind</p>
+            <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 shadow-xs">
+              <span class="text-[10px] font-extrabold uppercase text-emerald-700 block">SHIPPING</span>
+              <p class="text-xs font-bold text-fyn-forest-dark">Free Delivery</p>
+              <span class="text-[11px] text-gray-500">Orders ₹1,999+</span>
             </div>
-            <div class="fyn-glass-card p-3 sm:p-4 rounded-2xl text-center group">
-              <div class="w-8 h-8 mx-auto mb-1.5 rounded-full bg-fyn-forest/10 flex items-center justify-center group-hover:bg-fyn-forest group-hover:text-white transition-colors duration-300">
-                <i data-lucide="trending-up" class="w-4 h-4 text-fyn-forest group-hover:text-white transition-colors"></i>
-              </div>
-              <h4 class="text-[11px] sm:text-xs font-bold tracking-wider text-fyn-forest uppercase">IMPROVE</h4>
-              <p class="text-[10px] text-fyn-stone hidden xs:block">Conquer Daily Peaks</p>
+            <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 shadow-xs">
+              <span class="text-[10px] font-extrabold uppercase text-blue-700 block">SEASON DROP</span>
+              <p class="text-xs font-bold text-fyn-forest-dark">480 GSM Cotton</p>
+              <span class="text-[11px] text-gray-500">French Terry</span>
+            </div>
+            <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 shadow-xs">
+              <span class="text-[10px] font-extrabold uppercase text-purple-700 block">EXPEDITIONS</span>
+              <p class="text-xs font-bold text-fyn-forest-dark">Travel Circle</p>
+              <span class="text-[11px] text-emerald-700 font-bold">100% Free Join</span>
             </div>
           </div>
 
-          <!-- CTAs with Class Effect -->
+          <!-- CTAs -->
           <div class="flex flex-wrap gap-3 items-center">
-            <a href="#store-catalog" class="fyn-btn-primary px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center space-x-2">
-              <span>Explore Collection (INR ₹)</span>
-              <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            <a href="shop.html" class="fyn-btn-primary px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center space-x-2">
+              <span>Explore All Drops (INR ₹)</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
-            <button onclick="showRandomQuoteModal()" class="fyn-btn-secondary px-6 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center space-x-2">
-              <i data-lucide="compass" class="w-4 h-4 text-fyn-gold"></i>
-              <span>Draw Compass Wisdom</span>
-            </button>
+            <a href="shop.html?category=Apparel" class="fyn-btn-secondary px-6 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center space-x-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-fyn-gold"></i>
+              <span>Shop Current Season</span>
+            </a>
           </div>
+
         </div>
 
-        <!-- Right Hero Mockup Collage with Classy Shadow & Contained Badge -->
+        <!-- Right Hero Mockup Collage with Classy Shadow -->
         <div class="lg:col-span-5 relative mt-6 lg:mt-0">
           <div class="fyn-glass-card p-3 sm:p-3.5 rounded-3xl shadow-xl overflow-hidden relative">
             <img 
@@ -584,8 +624,6 @@
               alt="FYN Brand Mockup Kit" 
               class="w-full h-auto rounded-2xl object-cover hover:scale-[1.01] transition-transform duration-500"
             >
-            
-            <!-- Contained Official Store Badge (Never causes horizontal overflow) -->
             <div class="absolute bottom-5 left-5 bg-fyn-forest/95 backdrop-blur-md text-white px-4 py-2.5 rounded-xl shadow-lg border border-white/20 flex items-center space-x-3">
               <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-5 h-5 invert brightness-200">
               <div>
@@ -600,134 +638,307 @@
     </div>
   </section>
 
-  <!-- STORE CATALOG -->
-  <main id="store-catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
-    
-    <!-- Title & Filters -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-gray-200">
+  <!-- ======================================================== -->
+  <!-- 2. "SHOP FOR" AUDIENCE SECTION (Men, Women, Boys, Girls, Kids) -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-b border-gray-200/80">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
       <div>
-        <div class="flex items-center space-x-2 text-xs uppercase tracking-widest text-fyn-forest font-bold mb-2">
-          <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-3.5 h-3.5">
-          <span>THE OFFICIAL COLLECTION</span>
+        <div class="flex items-center space-x-2 text-xs uppercase tracking-widest text-fyn-forest font-bold mb-1">
+          <i data-lucide="compass" class="w-3.5 h-3.5 text-fyn-gold"></i>
+          <span>TAILORED EXPEDITIONS</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-brand font-extrabold text-fyn-forest-dark">
-          Gear Stamped with Purpose
+        <h2 class="text-2xl sm:text-3xl font-brand font-extrabold text-fyn-forest-dark">
+          Shop For
         </h2>
-        <p class="text-xs sm:text-sm text-fyn-stone mt-1 max-w-xl">
-          Prices in Indian Rupees (₹). Every item features high-density embroidery, premium combed weaves, and a signature life quote.
+        <p class="text-xs sm:text-sm text-fyn-stone mt-1">
+          Find purposeful silhouettes and travel gear curated for every explorer.
         </p>
       </div>
-
-      <!-- Categories & Sort -->
-      <div class="flex flex-wrap items-center gap-3 mt-6 md:mt-0">
-        <!-- Category Buttons -->
-        <div class="inline-flex p-1 rounded-full bg-fyn-sand border border-gray-200 text-xs font-semibold">
-          <button onclick="filterCategory('All')" id="cat-btn-All" class="cat-pill active px-4 py-1.5 rounded-full bg-fyn-forest text-white transition">All Drops</button>
-          <button onclick="filterCategory('Apparel')" id="cat-btn-Apparel" class="cat-pill px-4 py-1.5 rounded-full text-gray-600 hover:text-fyn-forest transition">Apparel</button>
-          <button onclick="filterCategory('Travel Gear')" id="cat-btn-Travel-Gear" class="cat-pill px-4 py-1.5 rounded-full text-gray-600 hover:text-fyn-forest transition">Travel Gear</button>
-          <button onclick="filterCategory('Accessories')" id="cat-btn-Accessories" class="cat-pill px-4 py-1.5 rounded-full text-gray-600 hover:text-fyn-forest transition">Accessories</button>
-        </div>
-
-        <!-- Sort Select -->
-        <select onchange="handleSort(this.value)" class="text-xs py-1.5 px-3 rounded-full border border-gray-200 bg-white text-gray-700 focus:outline-none focus:border-fyn-forest">
-          <option value="featured">Featured First</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
-          <option value="rating">Top Rated</option>
-        </select>
-      </div>
+      <a href="shop.html" class="mt-3 sm:mt-0 text-xs font-bold text-fyn-forest hover:text-fyn-gold flex items-center space-x-1 uppercase tracking-wider">
+        <span>View Full Catalog</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
     </div>
 
-    <!-- Feedback Bar -->
-    <div id="filter-status" class="hidden mb-6 flex items-center justify-between bg-fyn-sand p-3 rounded-lg text-xs text-fyn-forest">
-      <span id="filter-text">Showing all products</span>
-      <button onclick="resetFilters()" class="text-fyn-gold font-bold hover:underline">Reset</button>
-    </div>
-
-    <!-- PRODUCTS GRID -->
-    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
-      <!-- Populated via app.js -->
-    </div>
-
-  </main>
-
-  <!-- MANIFESTO & AUTHENTIC MOUNTAIN WATERMARK SECTION -->
-  <section id="manifesto" class="w-full py-20 bg-white border-y border-stone-200/80 relative overflow-hidden">
-    <!-- Mountain Vector Watermark in Background (No Dots) -->
-    <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-10 flex justify-center items-end overflow-hidden select-none">
-      <img src="brand_assets/fyn_mountain_artwork.png" alt="Mountain Ridge" class="w-full max-w-5xl h-auto object-cover object-bottom">
-    </div>
-
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="Sparkle" class="w-10 h-10 mx-auto mb-4">
+    <!-- 5 Clean Audience Tiles -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
       
-      <span class="text-xs font-bold uppercase tracking-widest text-fyn-stone block mb-2">THE FYN CREED</span>
-      <h3 class="text-3xl sm:text-4xl font-brand font-extrabold text-fyn-forest-dark mb-4">
-        "Travel to broaden. Learn to understand. Improve to elevate."
-      </h3>
-      <p class="text-base sm:text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto mb-8 font-serif italic">
-        "We do not design gear simply to exist; we craft physical reminders of where you are going. When the road bends and the ascent steepens, check your compass. Find your North."
-      </p>
+      <!-- Men -->
+      <a href="shop.html?audience=men" class="fyn-glass-card rounded-2xl p-5 text-center group flex flex-col items-center justify-between hover:border-fyn-forest transition transform hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-full bg-fyn-forest/10 flex items-center justify-center text-fyn-forest mb-3 group-hover:bg-fyn-forest group-hover:text-white transition duration-300">
+          <i data-lucide="user" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="font-brand font-bold text-sm text-fyn-forest-dark group-hover:text-fyn-forest">MEN</h3>
+          <p class="text-[11px] text-gray-500 mt-0.5">Heavyweight Hoodies, Tees & 35L Packs</p>
+        </div>
+        <span class="mt-3 text-[11px] font-bold text-fyn-forest flex items-center space-x-1">
+          <span>Explore</span>
+          <i data-lucide="arrow-right" class="w-3 h-3"></i>
+        </span>
+      </a>
 
-      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs font-bold text-fyn-forest uppercase tracking-wider">
-        <span class="inline-flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#1D3C34]"></span><span>Forest Green</span></span>
-        <span class="inline-flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FAF8F5] border border-stone-300"></span><span>Sand White</span></span>
-        <span class="inline-flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#8D9093]"></span><span>Stone Grey</span></span>
-        <span class="inline-flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#171918]"></span><span>Charcoal Black</span></span>
-      </div>
+      <!-- Women -->
+      <a href="shop.html?audience=women" class="fyn-glass-card rounded-2xl p-5 text-center group flex flex-col items-center justify-between hover:border-fyn-forest transition transform hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 mb-3 group-hover:bg-amber-600 group-hover:text-white transition duration-300">
+          <i data-lucide="sparkles" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="font-brand font-bold text-sm text-fyn-forest-dark group-hover:text-fyn-forest">WOMEN</h3>
+          <p class="text-[11px] text-gray-500 mt-0.5">Streetwear, Daypacks & Travel Gear</p>
+        </div>
+        <span class="mt-3 text-[11px] font-bold text-fyn-forest flex items-center space-x-1">
+          <span>Explore</span>
+          <i data-lucide="arrow-right" class="w-3 h-3"></i>
+        </span>
+      </a>
+
+      <!-- Boys -->
+      <a href="shop.html?audience=boys" class="fyn-glass-card rounded-2xl p-5 text-center group flex flex-col items-center justify-between hover:border-fyn-forest transition transform hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 mb-3 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+          <i data-lucide="compass" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="font-brand font-bold text-sm text-fyn-forest-dark group-hover:text-fyn-forest">BOYS</h3>
+          <p class="text-[11px] text-gray-500 mt-0.5">Trek Hoodies, Caps & Graphic Tees</p>
+        </div>
+        <span class="mt-3 text-[11px] font-bold text-fyn-forest flex items-center space-x-1">
+          <span>Explore</span>
+          <i data-lucide="arrow-right" class="w-3 h-3"></i>
+        </span>
+      </a>
+
+      <!-- Girls -->
+      <a href="shop.html?audience=girls" class="fyn-glass-card rounded-2xl p-5 text-center group flex flex-col items-center justify-between hover:border-fyn-forest transition transform hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-600 mb-3 group-hover:bg-pink-600 group-hover:text-white transition duration-300">
+          <i data-lucide="sun" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="font-brand font-bold text-sm text-fyn-forest-dark group-hover:text-fyn-forest">GIRLS</h3>
+          <p class="text-[11px] text-gray-500 mt-0.5">Cozy Knits, Flasks & Outdoor Fits</p>
+        </div>
+        <span class="mt-3 text-[11px] font-bold text-fyn-forest flex items-center space-x-1">
+          <span>Explore</span>
+          <i data-lucide="arrow-right" class="w-3 h-3"></i>
+        </span>
+      </a>
+
+      <!-- Kids -->
+      <a href="shop.html?audience=kids" class="fyn-glass-card rounded-2xl p-5 text-center group flex flex-col items-center justify-between hover:border-fyn-forest transition transform hover:-translate-y-1 col-span-2 sm:col-span-1">
+        <div class="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 mb-3 group-hover:bg-emerald-600 group-hover:text-white transition duration-300">
+          <i data-lucide="smile" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="font-brand font-bold text-sm text-fyn-forest-dark group-hover:text-fyn-forest">KIDS</h3>
+          <p class="text-[11px] text-gray-500 mt-0.5">Junior Summit Explorer Hoodies & Caps</p>
+        </div>
+        <span class="mt-3 text-[11px] font-bold text-fyn-forest flex items-center space-x-1">
+          <span>Explore</span>
+          <i data-lucide="arrow-right" class="w-3 h-3"></i>
+        </span>
+      </a>
+
     </div>
   </section>
 
   <!-- ======================================================== -->
-  <!-- FYN GLOBAL TRAVEL COMMUNITY & EXPEDITION CIRCLE -->
+  <!-- 3. BEST SELLING DROPS (EXACTLY 4 PRODUCTS) -->
   <!-- ======================================================== -->
-  <section id="community-section" class="w-full py-20 bg-gradient-to-br from-fyn-forest-dark via-fyn-forest to-fyn-forest-dark text-white relative overflow-hidden border-b border-fyn-forest/40">
-    <!-- Mountain Vector Watermark in Background -->
-    <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-15 flex justify-center items-end overflow-hidden select-none">
-      <img src="brand_assets/fyn_mountain_artwork.png" alt="Peaks" class="w-full max-w-6xl h-auto object-cover object-bottom invert brightness-200">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 border-b border-gray-200/80">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
+      <div>
+        <div class="flex items-center space-x-2 text-xs uppercase tracking-widest text-fyn-forest font-bold mb-1">
+          <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-500"></i>
+          <span>HIGH ALTITUDE TESTED</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-brand font-extrabold text-fyn-forest-dark">
+          Curated Best Sellers
+        </h2>
+        <p class="text-xs sm:text-sm text-fyn-stone mt-1">
+          The most loved pieces in Indian Rupees (₹), tested from the streets of Bengaluru to the high trails of Ladakh.
+        </p>
+      </div>
+      <a href="shop.html?sort=rating" class="mt-3 sm:mt-0 px-4 py-2 rounded-full bg-fyn-sand text-fyn-forest font-bold text-xs hover:bg-fyn-forest hover:text-white transition flex items-center space-x-1.5 border border-gray-200">
+        <span>View All Best Sellers</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
     </div>
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      
-      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30 uppercase tracking-widest mb-4">
-        <i data-lucide="compass" class="w-4 h-4 text-fyn-gold"></i>
-        <span>100% Free Explorer Circle</span>
+    <!-- Exactly 4 Best Sellers Container -->
+    <div id="best-selling-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+      <!-- Populated via renderHomepageSections() -->
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 4. CATEGORY 1: APPAREL (EXACTLY 4 PRODUCTS + SHOW MORE) -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 border-b border-gray-200/80">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
+      <div>
+        <div class="flex items-center space-x-2 text-xs uppercase tracking-widest text-fyn-forest font-bold mb-1">
+          <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-3.5 h-3.5">
+          <span>SIGNATURE WEAVES</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-brand font-extrabold text-fyn-forest-dark">
+          Apparel Collection
+        </h2>
+        <p class="text-xs sm:text-sm text-fyn-stone mt-1">
+          480 GSM French Terry cotton hoodies, 240 GSM combed cotton tees, and windbreaker layers.
+        </p>
       </div>
 
-      <h2 class="font-brand text-2xl sm:text-4xl font-extrabold mb-4 tracking-tight">
-        Join the FYN Global Travel & Explorer Community
-      </h2>
-      
-      <p class="text-xs sm:text-sm text-fyn-sand/80 max-w-2xl mx-auto mb-8 leading-relaxed font-sans">
-        Travel together. Learn on the road. Improve continuously. Join thousands of summit seekers across India for organized high-altitude treks, secret technical gear drops, and private travel planning circles. Once your application is reviewed and approved by our team, you will receive an invitation to the official <strong class="text-white">FYN WhatsApp & Telegram Explorer Group</strong>.
-      </p>
+      <!-- Show More Apparel Button (Navigates to shop.html?category=Apparel) -->
+      <a href="shop.html?category=Apparel" class="mt-3 sm:mt-0 fyn-btn-primary px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-sm">
+        <span>Show More Apparel (View All)</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button onclick="openCommunityModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-fyn-gold text-fyn-forest font-extrabold text-xs uppercase tracking-wider hover:bg-white hover:shadow-2xl transition-all shadow-xl flex items-center justify-center space-x-2 transform hover:-translate-y-0.5">
-          <i data-lucide="compass" class="w-4 h-4"></i>
-          <span>Apply to Join Free Travel Group</span>
-        </button>
-        <button onclick="handleCustomerAccountClick()" class="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/30 text-white font-bold text-xs hover:bg-white/10 transition backdrop-blur-sm">
-          Member Sign In & Orders
-        </button>
+    <!-- Exactly 4 Apparel Products Container -->
+    <div id="apparel-home-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+      <!-- Populated via renderHomepageSections() -->
+    </div>
+
+    <!-- Bottom Show More Banner for Mobile & Quick Access -->
+    <div class="mt-8 text-center pt-4">
+      <a href="shop.html?category=Apparel" class="inline-flex items-center space-x-2 text-xs font-extrabold text-fyn-forest hover:text-fyn-gold uppercase tracking-wider">
+        <span>Browse All Apparel Drops in Store</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 5. CATEGORY 2: TRAVEL GEAR (EXACTLY 4 PRODUCTS + SHOW MORE) -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 border-b border-gray-200/80">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
+      <div>
+        <div class="flex items-center space-x-2 text-xs uppercase tracking-widest text-fyn-forest font-bold mb-1">
+          <i data-lucide="mountain" class="w-3.5 h-3.5 text-fyn-forest"></i>
+          <span>EQUIPMENT & PACKS</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-brand font-extrabold text-fyn-forest-dark">
+          Travel Gear & Expedition Equipment
+        </h2>
+        <p class="text-xs sm:text-sm text-fyn-stone mt-1">
+          Technical 35L Cordura backpacks, 42L duffels with shoe chambers, and double-wall vacuum steel bottles.
+        </p>
       </div>
 
-      <!-- Community Benefits Grid with Frosted Glass -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 text-left pt-8 border-t border-white/10">
-        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 hover:border-white/30 transition shadow-sm">
-          <i data-lucide="users" class="w-6 h-6 text-fyn-gold mb-3"></i>
-          <h4 class="font-brand font-bold text-sm text-white mb-1">Group Expeditions</h4>
-          <p class="text-[11px] text-fyn-sand/70 leading-relaxed">Co-ordinate high-altitude treks to Spiti, Ladakh, Kedarkantha & Western Ghats with verified FYN explorers.</p>
+      <!-- Show More Travel Gear Button (Navigates to shop.html?category=Travel+Gear) -->
+      <a href="shop.html?category=Travel+Gear" class="mt-3 sm:mt-0 fyn-btn-primary px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-sm">
+        <span>Show More Travel Gear (View All)</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+
+    <!-- Exactly 4 Travel Gear Products Container -->
+    <div id="travel-gear-home-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+      <!-- Populated via renderHomepageSections() -->
+    </div>
+
+    <!-- Bottom Show More Banner -->
+    <div class="mt-8 text-center pt-4">
+      <a href="shop.html?category=Travel+Gear" class="inline-flex items-center space-x-2 text-xs font-extrabold text-fyn-forest hover:text-fyn-gold uppercase tracking-wider">
+        <span>Browse All Travel Gear Drops in Store</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 6. CATEGORY 3: ACCESSORIES (EXACTLY 4 PRODUCTS + SHOW MORE) -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 border-b border-gray-200/80">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
+      <div>
+        <div class="flex items-center space-x-2 text-xs uppercase tracking-widest text-fyn-forest font-bold mb-1">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-fyn-gold"></i>
+          <span>EVERYDAY ESSENTIALS</span>
         </div>
-        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 hover:border-white/30 transition shadow-sm">
-          <i data-lucide="tag" class="w-6 h-6 text-emerald-400 mb-3"></i>
-          <h4 class="font-brand font-bold text-sm text-white mb-1">Exclusive Member Drops</h4>
-          <p class="text-[11px] text-fyn-sand/70 leading-relaxed">Early access to limited technical drops, tester opportunities & secret member discount codes.</p>
+        <h2 class="text-2xl sm:text-3xl font-brand font-extrabold text-fyn-forest-dark">
+          Accessories & Artifacts
+        </h2>
+        <p class="text-xs sm:text-sm text-fyn-stone mt-1">
+          Structured 6-panel chino caps, 12-rib stormproof umbrellas, merino beanies, and solid brass tools.
+        </p>
+      </div>
+
+      <!-- Show More Accessories Button (Navigates to shop.html?category=Accessories) -->
+      <a href="shop.html?category=Accessories" class="mt-3 sm:mt-0 fyn-btn-primary px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-sm">
+        <span>Show More Accessories (View All)</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+
+    <!-- Exactly 4 Accessories Products Container -->
+    <div id="accessories-home-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+      <!-- Populated via renderHomepageSections() -->
+    </div>
+
+    <!-- Bottom Show More Banner -->
+    <div class="mt-8 text-center pt-4">
+      <a href="shop.html?category=Accessories" class="inline-flex items-center space-x-2 text-xs font-extrabold text-fyn-forest hover:text-fyn-gold uppercase tracking-wider">
+        <span>Browse All Accessories Drops in Store</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 7. MANIFESTO & COMMUNITY TEASERS (DEDICATED PAGES) -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <!-- The FYN Creed Card -->
+      <div class="fyn-glass-card rounded-3xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden">
+        <div class="relative z-10">
+          <div class="w-12 h-12 rounded-2xl bg-fyn-forest/10 flex items-center justify-center text-fyn-forest mb-5">
+            <i data-lucide="book-open" class="w-6 h-6"></i>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-widest text-fyn-gold block mb-1">THE FYN CREED</span>
+          <h3 class="font-brand text-2xl font-extrabold text-fyn-forest-dark mb-3">
+            "Travel to broaden. Learn to understand. Improve to elevate."
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-serif italic mb-6">
+            "We do not design gear simply to exist; we craft physical reminders of where you are going. When the road bends and the ascent steepens, check your compass."
+          </p>
         </div>
-        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 hover:border-white/30 transition shadow-sm">
-          <i data-lucide="message-circle" class="w-6 h-6 text-blue-400 mb-3"></i>
-          <h4 class="font-brand font-bold text-sm text-white mb-1">WhatsApp & Telegram Network</h4>
-          <p class="text-[11px] text-fyn-sand/70 leading-relaxed">Direct connection with expedition leads, route advice, gear recommendations, and city meetup invites.</p>
+        <div class="relative z-10 pt-4 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-fyn-stone">Brand Philosophy & Colors</span>
+          <a href="manifesto.html" class="px-5 py-2.5 rounded-full bg-fyn-forest text-white font-bold text-xs hover:bg-fyn-forest-light transition flex items-center space-x-1.5">
+            <span>Read Manifesto</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Free Travel Community Card -->
+      <div class="bg-gradient-to-br from-fyn-forest-dark via-fyn-forest to-fyn-forest-dark text-white rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl relative overflow-hidden">
+        <div class="relative z-10">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center mb-5 border border-emerald-400/30">
+            <i data-lucide="compass" class="w-6 h-6 text-fyn-gold"></i>
+          </div>
+          <div class="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider mb-2">
+            <span>100% FREE EXPLORER CIRCLE</span>
+          </div>
+          <h3 class="font-brand text-2xl font-extrabold mb-3">
+            Join 4,800+ Himalayan Explorers
+          </h3>
+          <p class="text-xs sm:text-sm text-fyn-sand/80 leading-relaxed mb-6 font-sans">
+            Connect for high-altitude treks to Spiti Valley, Ladakh & Kedarkantha. Get private WhatsApp group invites, route advice, and secret member drops.
+          </p>
+        </div>
+        <div class="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between">
+          <span class="text-xs text-fyn-sand font-medium">Free Application</span>
+          <a href="community.html" class="px-5 py-2.5 rounded-full bg-fyn-gold text-fyn-forest font-extrabold text-xs uppercase tracking-wider hover:bg-white transition flex items-center space-x-1.5 shadow">
+            <span>Apply To Join</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
       </div>
 
@@ -754,23 +965,26 @@
 
         <!-- Quick Shop -->
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Drops</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Drops & Catalog</h4>
           <ul class="space-y-2 text-xs text-fyn-stone">
-            <li><button onclick="filterCategory('Apparel')" class="hover:text-white transition">Embroidered Hoodies & Tees</button></li>
-            <li><button onclick="filterCategory('Travel Gear')" class="hover:text-white transition">Expedition Backpacks & Duffels</button></li>
-            <li><button onclick="filterCategory('Accessories')" class="hover:text-white transition">Classic Caps & Thermal Flasks</button></li>
-            <li><button onclick="filterCategory('Accessories')" class="hover:text-white transition">Stormproof Umbrellas & Bags</button></li>
+            <li><a href="shop.html" class="hover:text-white transition block">All Official Drops</a></li>
+            <li><a href="shop.html?category=Apparel" class="hover:text-white transition block">Embroidered Hoodies & Tees</a></li>
+            <li><a href="shop.html?category=Travel+Gear" class="hover:text-white transition block">Expedition Backpacks & Duffels</a></li>
+            <li><a href="shop.html?category=Accessories" class="hover:text-white transition block">Classic Caps & Thermal Flasks</a></li>
+            <li><a href="shop.html?category=Accessories" class="hover:text-white transition block">Stormproof Umbrellas & Bags</a></li>
           </ul>
         </div>
 
-        <!-- Pillars -->
+        <!-- Shop For & Pillars -->
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">The Pillars</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Shop For</h4>
           <ul class="space-y-2 text-xs text-fyn-stone">
-            <li><span>Mountain: Travel & Broaden</span></li>
-            <li><span>Book: Learn & Deepen</span></li>
-            <li><span>Metric: Improve & Ascend</span></li>
-            <li><span class="text-fyn-gold">Code: NORTH20 (20% OFF)</span></li>
+            <li><a href="shop.html?audience=men" class="hover:text-white transition block">Men's Expedition Collection</a></li>
+            <li><a href="shop.html?audience=women" class="hover:text-white transition block">Women's Streetwear & Travel</a></li>
+            <li><a href="shop.html?audience=boys" class="hover:text-white transition block">Boys' Adventure Drops</a></li>
+            <li><a href="shop.html?audience=girls" class="hover:text-white transition block">Girls' Outdoor Essentials</a></li>
+            <li><a href="shop.html?audience=kids" class="hover:text-white transition block">Kids' Summit Hoodies & Gear</a></li>
+            <li class="pt-2"><a href="manifesto.html" class="text-fyn-gold font-bold hover:underline block">Read The FYN Creed & Pillars ↗</a></li>
           </ul>
         </div>
 

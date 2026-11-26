@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FYN Global Travel Community | 100% Free Explorer Circle</title>
+  
+  <link rel="canonical" href="https://fynstore.in/community.html">
+  <meta name="description" content="Apply to join the FYN Global Travel Community. Group treks to Spiti Valley, Ladakh & Kedarkantha, WhatsApp & Telegram explorer network, and secret member drops.">
+  <meta name="keywords" content="FYN travel community, Indian trek group, Spiti expedition, Ladakh travel group, explorer circle">
+  
+  <link rel="icon" type="image/png" href="brand_assets/fyn_sparkle_symbol_forest_green.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            fyn: {
+              forest: '#1D3C34',
+              'forest-dark': '#142A24',
+              'forest-light': '#2A554A',
+              sand: '#F7F5F0',
+              'sand-dark': '#ECE7DC',
+              stone: '#8D9093',
+              charcoal: '#171918',
+              gold: '#D4AF37',
+              earth: '#C2A676',
+            }
+          },
+          fontFamily: {
+            brand: ['"Montserrat"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #171918; }
+    .fyn-glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(236, 231, 220, 0.95);
+      box-shadow: 0 10px 25px -5px rgba(29, 60, 52, 0.05);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5]">
+
+  <!-- TOP BAR -->
+  <div class="w-full bg-fyn-forest-dark text-fyn-sand text-xs py-2.5 px-4 border-b border-fyn-forest/40">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 uppercase tracking-wider">
+          100% FREE COMMUNITY
+        </span>
+        <span class="font-medium hidden sm:inline">Join 4,800+ Verified Indian Explorers & High-Altitude Trekkers</span>
+      </div>
+      <div class="flex items-center space-x-3 text-xs">
+        <a href="shop.html" class="text-fyn-gold hover:underline font-bold">Shop FYN Drops ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="w-full sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex-shrink-0 flex items-center" title="FYN - Find Your North">
+          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN" class="h-8 md:h-9 w-auto">
+        </a>
+
+        <!-- Desktop Navigation with Shop For Dropdown -->
+        <nav class="hidden lg:flex items-center space-x-6 text-xs font-semibold tracking-wide text-fyn-charcoal uppercase">
+          <a href="shop.html" class="hover:text-fyn-forest transition">All Drops</a>
+
+          <div class="relative group">
+            <button class="flex items-center space-x-1 hover:text-fyn-forest transition font-semibold py-2">
+              <span>Shop For</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-fyn-gold transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 mt-0 w-44 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-fyn-sand-dark py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="shop.html?audience=men" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-forest"></i><span>Men</span>
+              </a>
+              <a href="shop.html?audience=women" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-fyn-gold"></i><span>Women</span>
+              </a>
+              <a href="shop.html?audience=boys" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="compass" class="w-3.5 h-3.5 text-blue-600"></i><span>Boys</span>
+              </a>
+              <a href="shop.html?audience=girls" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
+                <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500"></i><span>Girls</span>
+              </a>
+              <a href="shop.html?audience=kids" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2 border-t border-gray-100">
+                <i data-lucide="smile" class="w-3.5 h-3.5 text-emerald-600"></i><span>Kids</span>
+              </a>
+            </div>
+          </div>
+
+          <a href="shop.html?category=Apparel" class="hover:text-fyn-forest transition">Apparel</a>
+          <a href="shop.html?category=Travel+Gear" class="hover:text-fyn-forest transition">Travel Gear</a>
+          <a href="shop.html?category=Accessories" class="hover:text-fyn-forest transition">Accessories</a>
+          <a href="community.html" class="text-emerald-800 font-bold border-b-2 border-emerald-700 pb-0.5 flex items-center space-x-1">
+            <span>Travel Community</span>
+            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full uppercase tracking-wider font-extrabold">Free</span>
+          </a>
+          <a href="manifesto.html" class="hover:text-fyn-forest transition font-medium text-fyn-stone">Manifesto</a>
+        </nav>
+
+        <div class="flex items-center space-x-3">
+          <a href="#apply-section" class="px-5 py-2.5 rounded-full bg-emerald-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-emerald-900 transition flex items-center space-x-2 shadow">
+            <span>Apply Now</span>
+            <i data-lucide="compass" class="w-3.5 h-3.5 text-fyn-gold"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- COMMUNITY HERO -->
+  <section class="relative py-16 sm:py-24 bg-gradient-to-br from-fyn-forest-dark via-fyn-forest to-fyn-forest-dark text-white overflow-hidden border-b border-fyn-forest/40">
+    <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-15 flex justify-center items-end select-none">
+      <img src="brand_assets/fyn_mountain_artwork.png" alt="Himalayan Skyline" class="w-full max-w-7xl h-auto object-cover object-bottom invert brightness-200">
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <div class="inline-flex items-center space-x-2 px-4 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30 uppercase tracking-widest mb-6">
+        <i data-lucide="compass" class="w-4 h-4 text-fyn-gold"></i>
+        <span>100% Free Explorer Circle</span>
+      </div>
+
+      <h1 class="font-brand text-3xl sm:text-5xl font-extrabold mb-5 tracking-tight leading-tight">
+        Join the FYN Global Travel & Explorer Community
+      </h1>
+
+      <p class="text-sm sm:text-base text-fyn-sand/80 max-w-2xl mx-auto mb-8 leading-relaxed font-sans">
+        Travel together. Learn on the road. Improve continuously. Join summit seekers across India for organized high-altitude treks, secret technical gear drops, and private travel planning circles. Once your application is reviewed and approved by our team, you will receive an invitation to the official <strong class="text-white">FYN WhatsApp & Telegram Explorer Group</strong>.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="#apply-section" class="px-8 py-3.5 rounded-full bg-fyn-gold text-fyn-forest font-extrabold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-xl flex items-center space-x-2">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Fill Free Application Below</span>
+        </a>
+        <a href="shop.html" class="px-7 py-3.5 rounded-full border border-white/30 text-white font-bold text-xs uppercase tracking-wider hover:bg-white/10 transition">
+          Browse Gear Drops
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 COMMUNITY PERKS -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="fyn-glass-card p-6 rounded-2xl">
+        <div class="w-12 h-12 rounded-xl bg-fyn-forest/10 flex items-center justify-center text-fyn-forest mb-4">
+          <i data-lucide="users" class="w-6 h-6"></i>
+        </div>
+        <h3 class="font-brand font-bold text-base text-fyn-forest-dark mb-2">Curated Group Expeditions</h3>
+        <p class="text-xs text-gray-600 leading-relaxed font-sans">
+          Coordinate seasonal high-altitude treks to Spiti Valley, Ladakh, Kedarkantha, and the Western Ghats with verified FYN adventurers.
+        </p>
+      </div>
+
+      <div class="fyn-glass-card p-6 rounded-2xl">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center mb-4">
+          <i data-lucide="tag" class="w-6 h-6 text-emerald-700"></i>
+        </div>
+        <h3 class="font-brand font-bold text-base text-fyn-forest-dark mb-2">Member-Only Drops & Discounts</h3>
+        <p class="text-xs text-gray-600 leading-relaxed font-sans">
+          Get secret access codes, prototype gear trials, and 20% off all drops (Code <strong class="text-fyn-forest">NORTH20</strong>) for community members.
+        </p>
+      </div>
+
+      <div class="fyn-glass-card p-6 rounded-2xl">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-800 flex items-center justify-center mb-4">
+          <i data-lucide="message-circle" class="w-6 h-6 text-blue-700"></i>
+        </div>
+        <h3 class="font-brand font-bold text-base text-fyn-forest-dark mb-2">VIP WhatsApp & Telegram Hub</h3>
+        <p class="text-xs text-gray-600 leading-relaxed font-sans">
+          Connect directly with expedition leads, exchange route GPS files, get gear advice, and join local weekend explorer meetups.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM SECTION -->
+  <section id="apply-section" class="max-w-2xl mx-auto px-4 sm:px-6 pb-20">
+    <div class="fyn-glass-card rounded-3xl p-6 sm:p-10 shadow-xl border-t-8 border-emerald-800">
+      
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="compass" class="w-6 h-6"></i>
+        </div>
+        <h2 class="font-brand text-2xl font-extrabold text-fyn-forest-dark">Community Explorer Application</h2>
+        <p class="text-xs text-gray-500 mt-1">Takes 60 seconds • Completely Free • WhatsApp invite sent upon approval</p>
+      </div>
+
+      <form id="community-app-form" onsubmit="handleCommunityApply(event)" class="space-y-4 text-xs">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Full Name *</label>
+            <input type="text" id="comm-name" required placeholder="e.g. Rohan Deshmukh" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-700 bg-white">
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Email Address *</label>
+            <input type="email" id="comm-email" required placeholder="rohan@example.com" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-700 bg-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">WhatsApp Mobile Number *</label>
+            <input type="tel" id="comm-phone" required placeholder="+91 98201 12345" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-700 bg-white">
+            <span class="text-[10px] text-gray-400">Invite link sent via WhatsApp</span>
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Your City / State *</label>
+            <input type="text" id="comm-city" required placeholder="Pune, Maharashtra" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-700 bg-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Primary Travel Style *</label>
+            <select id="comm-style" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-700 bg-white font-medium">
+              <option value="High-Altitude Trekking">High-Altitude Trekking</option>
+              <option value="Solo Travel & Exploring">Solo Travel & Exploring</option>
+              <option value="Backpacking & Hostels">Backpacking & Hostels</option>
+              <option value="Overland Roadtrips & Biking">Overland Roadtrips & Biking</option>
+              <option value="Adventure Photography">Adventure Photography</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Instagram Handle (Optional)</label>
+            <input type="text" id="comm-insta" placeholder="@explorer_fyn" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-700 bg-white font-mono">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Dream Summit or Favorite Destination *</label>
+          <input type="text" id="comm-destination" required placeholder="e.g. Spiti Valley, Kedarkantha, Annapurna Circuit" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-700 bg-white">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Why do you want to join the FYN Circle? *</label>
+          <textarea id="comm-motivation" rows="3" required placeholder="Tell us about your love for travel and mountains..." class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-emerald-700 bg-white"></textarea>
+        </div>
+
+        <button type="submit" id="comm-submit-btn" class="w-full py-3.5 rounded-xl bg-emerald-800 text-white font-extrabold text-xs uppercase tracking-wider hover:bg-emerald-900 transition-all shadow-lg flex items-center justify-center space-x-2">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Submit Free Application</span>
+        </button>
+
+      </form>
+
+      <!-- Success State -->
+      <div id="community-success-state" class="hidden text-center py-6">
+        <div class="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="check-circle" class="w-8 h-8"></i>
+        </div>
+        <h4 class="font-brand font-bold text-xl text-fyn-forest-dark mb-1">Application Submitted!</h4>
+        <p class="text-xs text-gray-600 mb-4 max-w-sm mx-auto">
+          Thank you for applying to the FYN Global Travel Community. Our expedition leads will review your application.
+        </p>
+        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 text-xs text-emerald-900 mb-5 leading-relaxed">
+          <div class="font-bold mb-1 flex items-center justify-center space-x-1">
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-700"></i>
+            <span>What happens next?</span>
+          </div>
+          Once your application is approved, you will automatically receive an invitation email containing the private link to the official <strong>FYN WhatsApp Community Group</strong>!
+        </div>
+        <a href="shop.html" class="inline-block px-6 py-2.5 rounded-xl bg-fyn-forest text-white font-bold text-xs hover:bg-fyn-forest-light">
+          Continue to FYN Store
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-fyn-forest-dark text-fyn-sand py-12 border-t border-fyn-forest/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-fyn-stone gap-4">
+      <div class="flex items-center space-x-3">
+        <img src="brand_assets/fyn_wordmark_white.png" alt="FYN" class="h-6 w-auto">
+        <span>•</span>
+        <span>TRAVEL. LEARN. IMPROVE.</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="hover:text-white">Home</a>
+        <a href="shop.html" class="hover:text-white">Catalog</a>
+        <a href="manifesto.html" class="hover:text-white">Manifesto</a>
+        <a href="about.html" class="hover:text-white">About</a>
+        <a href="contact.html" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { lucide.createIcons(); });
+  </script>
+</body>
+</html>

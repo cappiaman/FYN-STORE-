@@ -27,6 +27,7 @@ const COMPASS_QUOTES = [
 
 // Fallback Authentic Brand Kit Products in INR (₹)
 const BRAND_PRODUCTS_INR = [
+  // APPAREL
   {
     id: "prod-hoodie-1",
     name: "FYN Forest Green Embroidered Hoodie",
@@ -36,6 +37,7 @@ const BRAND_PRODUCTS_INR = [
     price: 3499.00,
     original_price: 4299.00,
     category: "Apparel",
+    audiences: ["men", "women", "boys", "girls"],
     image_url: "brand_assets/products/fyn_forest_hoodie.jpg",
     stock: 45,
     rating: 4.9,
@@ -52,6 +54,7 @@ const BRAND_PRODUCTS_INR = [
     price: 1499.00,
     original_price: 1999.00,
     category: "Apparel",
+    audiences: ["men", "women", "boys", "girls"],
     image_url: "brand_assets/products/fyn_sand_tee.jpg",
     stock: 60,
     rating: 4.8,
@@ -60,36 +63,91 @@ const BRAND_PRODUCTS_INR = [
     description: "Tailored in contemporary relaxed drop-shoulder silhouette using Sand White organic combed cotton. Features the bold FYN FIND YOUR NORTH branding and breathable weave."
   },
   {
-    id: "prod-cap-1",
-    name: "FYN Classic Cap Duo (Forest Green & Sand White)",
-    slug: "fyn-classic-cap-duo",
-    tagline: "Structured 6-Panel Cotton Twill with Brass Buckle",
-    quote: "Keep your vision clear on every journey.",
-    price: 1199.00,
-    original_price: 1599.00,
-    category: "Accessories",
-    image_url: "brand_assets/products/fyn_classic_caps.jpg",
-    stock: 35,
+    id: "prod-jacket-1",
+    name: "FYN Alpine Windbreaker Expedition Jacket",
+    slug: "fyn-alpine-windbreaker",
+    tagline: "3-Layer Ripstop Shell with Water-Repellent DWR Finish",
+    quote: "Stand steady when the elements test your resolve.",
+    price: 4299.00,
+    original_price: 5499.00,
+    category: "Apparel",
+    audiences: ["men", "women"],
+    image_url: "brand_assets/products/fyn_hoodie_detail.jpg",
+    stock: 28,
     rating: 4.9,
-    reviews_count: 76,
-    badge: "Essential",
-    description: "Low-profile 6-panel unstructured dad cap crafted from durable washed chino twill. Features 3D embroidered FYN branding, curved visor, and embossed brass clasp."
+    reviews_count: 57,
+    badge: "Winter Drop",
+    description: "Technical weatherproof shell built to conquer high-altitude gusts in Spiti and Kedarkantha. Features seam-sealed zippers, articulated storm hood, and cinch hem."
   },
   {
-    id: "prod-bottle-1",
-    name: "FYN Matte Forest Green Thermal Bottle & Luggage Tag",
-    slug: "fyn-matte-bottle-luggage-tag",
-    tagline: "Double-Wall Vacuum Steel 750ml with Genuine Vegan Leather Tag",
-    quote: "Hydrate the mind. Chart the journey.",
-    price: 1899.00,
-    original_price: 2499.00,
-    category: "Travel Gear",
-    image_url: "brand_assets/products/fyn_bottle_tag.jpg",
+    id: "prod-tee-model-1",
+    name: "FYN Minimalist Compass Graphic Tee",
+    slug: "fyn-minimalist-compass-tee",
+    tagline: "220 GSM Bio-Washed Cotton with High-Density Chest Logo",
+    quote: "Every summit begins with a single deliberate step.",
+    price: 1399.00,
+    original_price: 1799.00,
+    category: "Apparel",
+    audiences: ["men", "women", "boys", "girls"],
+    image_url: "brand_assets/products/fyn_model_tee.jpg",
     stock: 50,
+    rating: 4.8,
+    reviews_count: 73,
+    badge: "Essential",
+    description: "Everyday luxury travel t-shirt engineered from soft combed bio-washed cotton. Features subtle FYN chest embroidery and mountain silhouette collar tag."
+  },
+  {
+    id: "prod-crewneck-1",
+    name: "FYN Summit Sunset Heavy Crewneck",
+    slug: "fyn-summit-sunset-crewneck",
+    tagline: "400 GSM Loopback Fleece with Ribbed Cuffs and Hem",
+    quote: "Small conscious choices create massive elevation.",
+    price: 2999.00,
+    original_price: 3699.00,
+    category: "Apparel",
+    audiences: ["men", "women", "boys"],
+    image_url: "brand_assets/products/fyn_crew_sunset.jpg",
+    stock: 32,
+    rating: 4.9,
+    reviews_count: 64,
+    badge: "Trending",
+    description: "Heritage crewneck designed for twilight basecamp warmth. Pre-shrunk cotton terry with reinforced stitching and embossed FYN mountain coordinates."
+  },
+  {
+    id: "prod-junior-hoodie-1",
+    name: "FYN Junior Summit Explorer Hoodie",
+    slug: "fyn-junior-summit-explorer-hoodie",
+    tagline: "360 GSM Ultra-Soft Fleece for Young Explorers",
+    quote: "The adventure starts young. Find your north.",
+    price: 2199.00,
+    original_price: 2799.00,
+    category: "Apparel",
+    audiences: ["kids", "boys", "girls"],
+    image_url: "brand_assets/products/fyn_forest_hoodie.jpg",
+    stock: 40,
+    rating: 4.9,
+    reviews_count: 38,
+    badge: "Kids & Youth",
+    description: "Specially tailored for youth, boys, girls and kids. Ultra-soft hypoallergenic combed fleece with child-safe drawstrings and iconic reflective FYN mountain patch."
+  },
+
+  // TRAVEL GEAR
+  {
+    id: "prod-backpack-1",
+    name: "FYN Expedition Technical Backpack 35L",
+    slug: "fyn-expedition-technical-backpack",
+    tagline: "Ergonomic Alpine Suspension with Padded Laptop & Camera Sleeve",
+    quote: "Every summit begins with a single deliberate step.",
+    price: 4499.00,
+    original_price: 5999.00,
+    category: "Travel Gear",
+    audiences: ["men", "women", "boys"],
+    image_url: "brand_assets/products/fyn_expedition_backpack.jpg",
+    stock: 20,
     rating: 5.0,
-    reviews_count: 114,
-    badge: "Gift Choice",
-    description: "Sleek pro-grade stainless steel flask finished in matte Forest Green powder coating. Keeps hot 24h, cold 48h. Includes a matching FYN embossed luggage tag for world travel."
+    reviews_count: 89,
+    badge: "Flagship",
+    description: "Heavy-duty tactical and commute backpack built from 1000D Cordura in Forest Green. Features ergonomic chest straps, load lifters, YKK water-guard zippers, and modular compartments."
   },
   {
     id: "prod-duffel-1",
@@ -100,12 +158,83 @@ const BRAND_PRODUCTS_INR = [
     price: 3899.00,
     original_price: 4999.00,
     category: "Travel Gear",
+    audiences: ["men", "women"],
     image_url: "brand_assets/products/fyn_travel_duffel.jpg",
     stock: 25,
     rating: 4.9,
     reviews_count: 63,
     badge: "High Performance",
     description: "Engineered for weekend escapes and international expeditions. 42L capacity with dedicated ventilated sneaker compartment, tech organizer, and matching toiletry dop-kit."
+  },
+  {
+    id: "prod-bottle-1",
+    name: "FYN Matte Forest Green Thermal Bottle & Luggage Tag",
+    slug: "fyn-matte-bottle-luggage-tag",
+    tagline: "Double-Wall Vacuum Steel 750ml with Genuine Vegan Leather Tag",
+    quote: "Hydrate the mind. Chart the journey.",
+    price: 1899.00,
+    original_price: 2499.00,
+    category: "Travel Gear",
+    audiences: ["men", "women", "boys", "girls", "kids"],
+    image_url: "brand_assets/products/fyn_bottle_tag.jpg",
+    stock: 50,
+    rating: 5.0,
+    reviews_count: 114,
+    badge: "Gift Choice",
+    description: "Sleek pro-grade stainless steel flask finished in matte Forest Green powder coating. Keeps hot 24h, cold 48h. Includes a matching FYN embossed luggage tag for world travel."
+  },
+  {
+    id: "prod-daypack-1",
+    name: "FYN Compact 18L Alpine Daypack",
+    slug: "fyn-compact-alpine-daypack",
+    tagline: "Ultra-Light Packable Ripstop with Hydration Bladder Port",
+    quote: "Move swift, travel far, pack with intention.",
+    price: 2499.00,
+    original_price: 3299.00,
+    category: "Travel Gear",
+    audiences: ["men", "women", "boys", "girls", "kids"],
+    image_url: "brand_assets/products/fyn_expedition_backpack.jpg",
+    stock: 35,
+    rating: 4.8,
+    reviews_count: 49,
+    badge: "Popular",
+    description: "Featherweight 18L daypack packs down into its own internal pocket. Ideal for day hikes, city exploration, and youth day trips."
+  },
+  {
+    id: "prod-pouch-1",
+    name: "FYN Modular Tech & Passport Travel Organizer",
+    slug: "fyn-modular-tech-organizer",
+    tagline: "RFID-Blocking Weatherproof Cordura with Cable Bands",
+    quote: "Order in your gear creates clarity on the path.",
+    price: 1299.00,
+    original_price: 1699.00,
+    category: "Travel Gear",
+    audiences: ["men", "women"],
+    image_url: "brand_assets/products/fyn_travel_duffel.jpg",
+    stock: 45,
+    rating: 4.9,
+    reviews_count: 67,
+    badge: "Staff Pick",
+    description: "Keep boarding passes, chargers, SSDs, and passport organized in high-density compartmentalized pockets with water-resistant zips."
+  },
+
+  // ACCESSORIES
+  {
+    id: "prod-cap-1",
+    name: "FYN Classic Cap Duo (Forest Green & Sand White)",
+    slug: "fyn-classic-cap-duo",
+    tagline: "Structured 6-Panel Cotton Twill with Brass Buckle",
+    quote: "Keep your vision clear on every journey.",
+    price: 1199.00,
+    original_price: 1599.00,
+    category: "Accessories",
+    audiences: ["men", "women", "boys", "girls", "kids"],
+    image_url: "brand_assets/products/fyn_classic_caps.jpg",
+    stock: 35,
+    rating: 4.9,
+    reviews_count: 76,
+    badge: "Essential",
+    description: "Low-profile 6-panel unstructured dad cap crafted from durable washed chino twill. Features 3D embroidered FYN branding, curved visor, and embossed brass clasp."
   },
   {
     id: "prod-umbrella-1",
@@ -116,28 +245,13 @@ const BRAND_PRODUCTS_INR = [
     price: 1699.00,
     original_price: 2199.00,
     category: "Accessories",
+    audiences: ["men", "women", "boys", "girls", "kids"],
     image_url: "brand_assets/products/fyn_travel_umbrella.jpg",
     stock: 40,
     rating: 4.7,
     reviews_count: 52,
     badge: "New",
     description: "Compact, aerodynamic travel umbrella engineered to withstand 60 km/h winds without inverting. Features auto open/close mechanism and subtle FYN wordmark print."
-  },
-  {
-    id: "prod-backpack-1",
-    name: "FYN Expedition Technical Backpack 35L",
-    slug: "fyn-expedition-technical-backpack",
-    tagline: "Ergonomic Alpine Suspension with Padded Laptop & Camera Sleeve",
-    quote: "Every summit begins with a single deliberate step.",
-    price: 4499.00,
-    original_price: 5999.00,
-    category: "Travel Gear",
-    image_url: "brand_assets/products/fyn_expedition_backpack.jpg",
-    stock: 20,
-    rating: 5.0,
-    reviews_count: 89,
-    badge: "Flagship",
-    description: "Heavy-duty tactical and commute backpack built from 1000D Cordura in Forest Green. Features ergonomic chest straps, load lifters, YKK water-guard zippers, and modular compartments."
   },
   {
     id: "prod-bag-1",
@@ -148,18 +262,54 @@ const BRAND_PRODUCTS_INR = [
     price: 899.00,
     original_price: 1299.00,
     category: "Accessories",
+    audiences: ["men", "women", "kids"],
     image_url: "brand_assets/products/fyn_kraft_bag.jpg",
     stock: 80,
     rating: 4.8,
     reviews_count: 41,
     badge: "Eco Friendly",
     description: "Set of 3 reusable, high-durability craft travel bags with twisted forest green cotton cords and distinctive mountain contour print."
+  },
+  {
+    id: "prod-beanie-1",
+    name: "FYN Alpine Merino Ribbed Knit Beanie",
+    slug: "fyn-alpine-merino-beanie",
+    tagline: "100% Merino Wool with Foldover FYN Woven Crest",
+    quote: "Warmth for the ascent. Focus for the summit.",
+    price: 999.00,
+    original_price: 1399.00,
+    category: "Accessories",
+    audiences: ["men", "women", "boys", "girls", "kids"],
+    image_url: "brand_assets/products/fyn_classic_caps.jpg",
+    stock: 55,
+    rating: 4.9,
+    reviews_count: 58,
+    badge: "Winter Warmth",
+    description: "Non-scratchy pure merino wool knit beanie engineered to trap radiant body heat while breathing freely during strenuous climbs."
+  },
+  {
+    id: "prod-compass-tool-1",
+    name: "FYN Solid Brass Compass & Carabiner Multitool",
+    slug: "fyn-solid-brass-compass-tool",
+    tagline: "Heavy Antiqued Brass Working Compass with Locking Carabiner",
+    quote: "Find your north, no matter the storm.",
+    price: 799.00,
+    original_price: 1099.00,
+    category: "Accessories",
+    audiences: ["men", "women", "boys", "girls", "kids"],
+    image_url: "brand_assets/products/fyn_bottle_tag.jpg",
+    stock: 65,
+    rating: 5.0,
+    reviews_count: 91,
+    badge: "Collector",
+    description: "Solid milled brass functional magnetic compass paired with a quick-release climbing grade accessory carabiner. Precision etched with the FYN creed."
   }
 ];
 
 // App State
 let productsList = [];
 let currentCategory = 'All';
+let currentAudience = 'All';
 let currentSearch = '';
 let currentSort = 'featured';
 let cart = JSON.parse(sessionStorage.getItem('fyn_cart_inr') || localStorage.getItem('fyn_cart_inr') || '[]');
@@ -173,6 +323,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   checkSecretAdminAccess();
   initCustomerUI();
   initQuotes();
+  parseUrlFilters();
   await loadProducts();
   updateCartUI();
 });
@@ -248,17 +399,20 @@ async function loadProducts() {
     productsList = BRAND_PRODUCTS_INR;
   }
 
+  parseUrlFilters();
   applyFilters();
 }
 
 function renderProducts(items) {
   const container = document.getElementById('products-grid');
+  if (!container) return;
+
   if (!items || items.length === 0) {
     container.innerHTML = `
       <div class="col-span-full py-16 text-center bg-white rounded-2xl border border-dashed border-gray-300">
         <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-10 h-10 mx-auto mb-3 opacity-40">
         <h3 class="font-brand text-lg font-bold text-gray-700">No Drops Found</h3>
-        <p class="text-xs text-gray-500 mt-1 mb-4">Try clearing your filters to view all FYN gear.</p>
+        <p class="text-xs text-gray-500 mt-1 mb-4">Try clearing your filters or changing categories to view all FYN gear.</p>
         <button onclick="resetFilters()" class="px-5 py-2 rounded-full bg-fyn-forest text-white text-xs font-bold hover:bg-fyn-forest-light">
           Show All Drops
         </button>
@@ -267,116 +421,192 @@ function renderProducts(items) {
     return;
   }
 
-  container.innerHTML = items.map(product => {
-    const discountPercent = product.original_price && product.original_price > product.price 
-      ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
-      : null;
+  container.innerHTML = items.map(product => generateProductCardHTML(product)).join('');
+  if (window.lucide) lucide.createIcons();
+}
 
-    return `
-      <div class="group fyn-glass-card rounded-2xl hover:border-fyn-forest/50 transition-all duration-300 flex flex-col overflow-hidden transform hover:-translate-y-1.5">
+function generateProductCardHTML(product) {
+  const discountPercent = product.original_price && product.original_price > product.price 
+    ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
+    : null;
+
+  return `
+    <div class="group fyn-glass-card rounded-2xl hover:border-fyn-forest/50 transition-all duration-300 flex flex-col overflow-hidden transform hover:-translate-y-1.5">
+      
+      <!-- Image & Badges -->
+      <div class="relative overflow-hidden bg-fyn-sand/80 aspect-[4/3] flex items-center justify-center p-2">
+        <img 
+          src="${product.image_url}" 
+          alt="${product.name}" 
+          class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        >
         
-        <!-- Image & Badges -->
-        <div class="relative overflow-hidden bg-fyn-sand/80 aspect-[4/3] flex items-center justify-center p-2">
-          <img 
-            src="${product.image_url}" 
-            alt="${product.name}" 
-            class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-          >
-          
-          <!-- Badges -->
-          <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-            ${product.badge ? `
-              <span class="inline-block px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase rounded-full bg-fyn-forest text-white shadow-sm border border-white/20">
-                ${product.badge}
-              </span>
-            ` : ''}
-            ${discountPercent ? `
-              <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-600 text-white shadow-sm border border-white/20">
-                -${discountPercent}%
-              </span>
+        <!-- Badges -->
+        <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+          ${product.badge ? `
+            <span class="inline-block px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase rounded-full bg-fyn-forest text-white shadow-sm border border-white/20">
+              ${product.badge}
+            </span>
+          ` : ''}
+          ${discountPercent ? `
+            <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-600 text-white shadow-sm border border-white/20">
+              -${discountPercent}%
+            </span>
+          ` : ''}
+        </div>
+
+        <!-- Quick View Trigger -->
+        <button 
+          onclick="openQuickView('${product.id}')"
+          class="absolute bottom-3 right-3 p-2 bg-white/95 backdrop-blur-md rounded-full text-fyn-forest border border-fyn-sand-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:bg-fyn-forest hover:text-white"
+          title="Inspect"
+        >
+          <i data-lucide="eye" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Details -->
+      <div class="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[11px] text-gray-500 mb-1.5 font-bold uppercase tracking-wider">
+            <span class="text-fyn-forest/90 font-extrabold">${product.category}</span>
+            <div class="flex items-center space-x-1 text-amber-500">
+              <span>★</span>
+              <span>${product.rating || '4.9'}</span>
+              <span class="text-gray-400 font-normal">(${product.reviews_count || 42})</span>
+            </div>
+          </div>
+
+          <h3 class="font-brand text-base font-bold text-fyn-forest-dark group-hover:text-fyn-forest transition leading-snug">
+            ${product.name}
+          </h3>
+
+          <!-- Inscribed Quote -->
+          <div class="mt-2.5 mb-3 p-2 rounded-lg bg-fyn-sand/80 border border-fyn-sand-dark text-[11px] text-fyn-forest font-serif italic flex items-start space-x-1.5">
+            <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-3 h-3 flex-shrink-0 mt-0.5">
+            <span class="line-clamp-2">"${product.quote || 'Find your true north.'}"</span>
+          </div>
+        </div>
+
+        <!-- Price & Action in INR -->
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between mt-auto">
+          <div>
+            <div class="text-base font-extrabold text-fyn-forest-dark">
+              ${formatINR(product.price)}
+            </div>
+            ${product.original_price ? `
+              <div class="text-[11px] text-gray-400 line-through">
+                ${formatINR(product.original_price)}
+              </div>
             ` : ''}
           </div>
 
-          <!-- Quick View Trigger -->
           <button 
-            onclick="openQuickView('${product.id}')"
-            class="absolute bottom-3 right-3 p-2 bg-white/95 backdrop-blur-md rounded-full text-fyn-forest border border-fyn-sand-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:bg-fyn-forest hover:text-white"
-            title="Inspect"
+            onclick="addToCart('${product.id}')"
+            class="fyn-btn-primary px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 uppercase tracking-wider"
           >
-            <i data-lucide="eye" class="w-4 h-4"></i>
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Add</span>
           </button>
         </div>
 
-        <!-- Details -->
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between text-[11px] text-gray-500 mb-1.5 font-bold uppercase tracking-wider">
-              <span class="text-fyn-forest/90 font-extrabold">${product.category}</span>
-              <div class="flex items-center space-x-1 text-amber-500">
-                <span>★</span>
-                <span>${product.rating || '4.9'}</span>
-                <span class="text-gray-400 font-normal">(${product.reviews_count || 42})</span>
-              </div>
-            </div>
-
-            <h3 class="font-brand text-base font-bold text-fyn-forest-dark group-hover:text-fyn-forest transition leading-snug">
-              ${product.name}
-            </h3>
-
-            <!-- Inscribed Quote -->
-            <div class="mt-2.5 mb-3 p-2 rounded-lg bg-fyn-sand/80 border border-fyn-sand-dark text-[11px] text-fyn-forest font-serif italic flex items-start space-x-1.5">
-              <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-3 h-3 flex-shrink-0 mt-0.5">
-              <span class="line-clamp-2">"${product.quote || 'Find your true north.'}"</span>
-            </div>
-          </div>
-
-          <!-- Price & Action in INR -->
-          <div class="pt-3 border-t border-gray-100 flex items-center justify-between mt-auto">
-            <div>
-              <div class="text-base font-extrabold text-fyn-forest-dark">
-                ${formatINR(product.price)}
-              </div>
-              ${product.original_price ? `
-                <div class="text-[11px] text-gray-400 line-through">
-                  ${formatINR(product.original_price)}
-                </div>
-              ` : ''}
-            </div>
-
-            <button 
-              onclick="addToCart('${product.id}')"
-              class="fyn-btn-primary px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 uppercase tracking-wider"
-            >
-              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-              <span>Add</span>
-            </button>
-          </div>
-
-        </div>
-
       </div>
-    `;
-  }).join('');
+
+    </div>
+  `;
+}
+
+// Renders exactly 4 products for each category section on homepage
+function renderHomepageSections() {
+  const bestSellingContainer = document.getElementById('best-selling-grid');
+  const apparelContainer = document.getElementById('apparel-home-grid');
+  const travelContainer = document.getElementById('travel-gear-home-grid');
+  const accessoriesContainer = document.getElementById('accessories-home-grid');
+
+  if (bestSellingContainer) {
+    const bestSellers = [...productsList]
+      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+      .slice(0, 4);
+    bestSellingContainer.innerHTML = bestSellers.map(p => generateProductCardHTML(p)).join('');
+  }
+
+  if (apparelContainer) {
+    const apparelItems = productsList.filter(p => p.category === 'Apparel').slice(0, 4);
+    apparelContainer.innerHTML = apparelItems.map(p => generateProductCardHTML(p)).join('');
+  }
+
+  if (travelContainer) {
+    const travelItems = productsList.filter(p => p.category === 'Travel Gear').slice(0, 4);
+    travelContainer.innerHTML = travelItems.map(p => generateProductCardHTML(p)).join('');
+  }
+
+  if (accessoriesContainer) {
+    const accessItems = productsList.filter(p => p.category === 'Accessories').slice(0, 4);
+    accessoriesContainer.innerHTML = accessItems.map(p => generateProductCardHTML(p)).join('');
+  }
 
   if (window.lucide) lucide.createIcons();
+}
+
+// Parse URL Parameters (category, audience, q, sort)
+function parseUrlFilters() {
+  const params = new URLSearchParams(window.location.search);
+  const cat = params.get('category');
+  const aud = params.get('audience');
+  const q = params.get('q') || params.get('search');
+  const sort = params.get('sort');
+
+  if (cat) currentCategory = cat;
+  if (aud) currentAudience = aud;
+  if (q) currentSearch = q.toLowerCase().trim();
+  if (sort) currentSort = sort;
+
+  updateFilterUI();
+}
+
+function updateFilterUI() {
+  // Update Category buttons
+  document.querySelectorAll('.cat-pill').forEach(btn => {
+    btn.classList.remove('bg-fyn-forest', 'text-white');
+    btn.classList.add('text-gray-600');
+  });
+  const catBtnId = `cat-btn-${currentCategory.replace(/\s+/g, '-')}`;
+  const activeCatBtn = document.getElementById(catBtnId);
+  if (activeCatBtn) {
+    activeCatBtn.classList.add('bg-fyn-forest', 'text-white');
+    activeCatBtn.classList.remove('text-gray-600');
+  }
+
+  // Update Audience buttons
+  document.querySelectorAll('.aud-pill').forEach(btn => {
+    btn.classList.remove('bg-fyn-forest', 'text-white');
+    btn.classList.add('text-gray-600');
+  });
+  const audBtnId = `aud-btn-${currentAudience.toLowerCase()}`;
+  const activeAudBtn = document.getElementById(audBtnId);
+  if (activeAudBtn) {
+    activeAudBtn.classList.add('bg-fyn-forest', 'text-white');
+    activeAudBtn.classList.remove('text-gray-600');
+  }
+
+  // Update Search input
+  const searchInput = document.getElementById('search-input');
+  if (searchInput && currentSearch) {
+    searchInput.value = currentSearch;
+  }
 }
 
 // Category and Filter logic
 function filterCategory(cat) {
   currentCategory = cat;
-  document.querySelectorAll('.cat-pill').forEach(btn => {
-    btn.classList.remove('bg-fyn-forest', 'text-white');
-    btn.classList.add('text-gray-600');
-  });
+  updateFilterUI();
+  applyFilters();
+}
 
-  const btnId = `cat-btn-${cat.replace(/\s+/g, '-')}`;
-  const activeBtn = document.getElementById(btnId);
-  if (activeBtn) {
-    activeBtn.classList.add('bg-fyn-forest', 'text-white');
-    activeBtn.classList.remove('text-gray-600');
-  }
-
+function filterAudience(aud) {
+  currentAudience = aud;
+  updateFilterUI();
   applyFilters();
 }
 
@@ -397,6 +627,10 @@ function applyFilters() {
     list = list.filter(p => p.category.toLowerCase() === currentCategory.toLowerCase());
   }
 
+  if (currentAudience !== 'All') {
+    list = list.filter(p => p.audiences && p.audiences.map(a => a.toLowerCase()).includes(currentAudience.toLowerCase()));
+  }
+
   if (currentSearch) {
     list = list.filter(p => 
       p.name.toLowerCase().includes(currentSearch) ||
@@ -415,23 +649,31 @@ function applyFilters() {
 
   const feedback = document.getElementById('filter-status');
   const feedbackText = document.getElementById('filter-text');
-  if (currentCategory !== 'All' || currentSearch) {
-    feedback.classList.remove('hidden');
-    feedbackText.innerText = `Showing ${list.length} drops ${currentCategory !== 'All' ? `in ${currentCategory}` : ''} ${currentSearch ? `matching "${currentSearch}"` : ''}`;
-  } else {
-    feedback.classList.add('hidden');
+  if (feedback && feedbackText) {
+    if (currentCategory !== 'All' || currentAudience !== 'All' || currentSearch) {
+      feedback.classList.remove('hidden');
+      const catText = currentCategory !== 'All' ? `in ${currentCategory}` : '';
+      const audText = currentAudience !== 'All' ? `for ${currentAudience.toUpperCase()}` : '';
+      const searchTxt = currentSearch ? `matching "${currentSearch}"` : '';
+      feedbackText.innerText = `Showing ${list.length} drops ${catText} ${audText} ${searchTxt}`.trim();
+    } else {
+      feedback.classList.add('hidden');
+    }
   }
 
   renderProducts(list);
+  renderHomepageSections();
 }
 
 function resetFilters() {
   currentCategory = 'All';
+  currentAudience = 'All';
   currentSearch = '';
   currentSort = 'featured';
   const input = document.getElementById('search-input');
   if (input) input.value = '';
-  filterCategory('All');
+  updateFilterUI();
+  applyFilters();
 }
 
 // ==========================================
