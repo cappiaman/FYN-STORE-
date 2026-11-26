@@ -377,28 +377,47 @@ function formatINR(amount) {
 }
 
 // Load Products from Supabase
+// Load Products with Master Brand Catalog & Supabase Live Data
 async function loadProducts() {
+  const catalogMap = new Map();
+  BRAND_PRODUCTS_INR.forEach(p => {
+    catalogMap.set(p.id, { 
+      ...p, 
+      audiences: p.audiences || ["men", "women", "boys", "girls", "kids"] 
+    });
+  });
+
   try {
     if (supabaseClient) {
       const { data, error } = await supabaseClient
         .from('fyn_products')
         .select('*')
-        .gt('price', 500) // Filter out old USD demo rows
+        .gt('price', 500)
         .order('price', { ascending: false });
 
       if (!error && data && data.length > 0) {
-        productsList = data;
-      } else {
-        productsList = BRAND_PRODUCTS_INR;
+        data.forEach(dbProd => {
+          if (catalogMap.has(dbProd.id)) {
+            const existing = catalogMap.get(dbProd.id);
+            catalogMap.set(dbProd.id, {
+              ...existing,
+              ...dbProd,
+              audiences: dbProd.audiences || existing.audiences || ["men", "women", "boys", "girls", "kids"]
+            });
+          } else {
+            catalogMap.set(dbProd.id, {
+              ...dbProd,
+              audiences: dbProd.audiences || ["men", "women", "boys", "girls", "kids"]
+            });
+          }
+        });
       }
-    } else {
-      productsList = BRAND_PRODUCTS_INR;
     }
   } catch (e) {
     console.warn("Product loading fallback:", e);
-    productsList = BRAND_PRODUCTS_INR;
   }
 
+  productsList = Array.from(catalogMap.values());
   parseUrlFilters();
   applyFilters();
 }
@@ -568,26 +587,26 @@ function parseUrlFilters() {
 function updateFilterUI() {
   // Update Category buttons
   document.querySelectorAll('.cat-pill').forEach(btn => {
-    btn.classList.remove('bg-fyn-forest', 'text-white');
+    btn.classList.remove('bg-fyn-forest', 'text-white', '!bg-fyn-forest', '!text-white');
     btn.classList.add('text-gray-600');
   });
   const catBtnId = `cat-btn-${currentCategory.replace(/\s+/g, '-')}`;
   const activeCatBtn = document.getElementById(catBtnId);
   if (activeCatBtn) {
-    activeCatBtn.classList.add('bg-fyn-forest', 'text-white');
     activeCatBtn.classList.remove('text-gray-600');
+    activeCatBtn.classList.add('!bg-fyn-forest', '!text-white', 'shadow-xs');
   }
 
   // Update Audience buttons
   document.querySelectorAll('.aud-pill').forEach(btn => {
-    btn.classList.remove('bg-fyn-forest', 'text-white');
-    btn.classList.add('text-gray-600');
+    btn.classList.remove('bg-fyn-forest', 'text-white', '!bg-fyn-forest', '!text-white');
+    btn.classList.add('text-gray-600', 'bg-gray-50');
   });
   const audBtnId = `aud-btn-${currentAudience.toLowerCase()}`;
   const activeAudBtn = document.getElementById(audBtnId);
   if (activeAudBtn) {
-    activeAudBtn.classList.add('bg-fyn-forest', 'text-white');
-    activeAudBtn.classList.remove('text-gray-600');
+    activeAudBtn.classList.remove('text-gray-600', 'bg-gray-50');
+    activeAudBtn.classList.add('!bg-fyn-forest', '!text-white', 'shadow-xs');
   }
 
   // Update Search input
@@ -765,6 +784,8 @@ function updateCartUI() {
   if (drawerItemCount) drawerItemCount.innerText = totalItems;
 
   const itemsContainer = document.getElementById('cart-items-container');
+  if (!itemsContainer) return;
+
   const checkoutBtn = document.getElementById('btn-proceed-checkout');
 
   if (cart.length === 0) {
@@ -1206,15 +1227,22 @@ async function processPayment(e) {
     updateCartUI();
 
     closeCheckoutModal();
-    payBtn.disabled = false;
-    payLabel.innerText = "Authorize & Complete Payment (₹)";
+    if (payBtn) payBtn.disabled = false;
+    if (payLabel) payLabel.innerText = "Authorize & Complete Payment (₹)";
 
-    document.getElementById('success-order-num').innerText = orderNumber;
-    document.getElementById('success-cust-name').innerText = custName;
-    document.getElementById('success-cust-email').innerText = custEmail;
-    document.getElementById('success-total').innerText = formatINR(totalAmount);
-    document.getElementById('success-quote').innerText = `"${randomQuote}"`;
-    document.getElementById('order-success-modal').classList.remove('hidden');
+    const elSuccessOrderNum = document.getElementById('success-order-num');
+    const elSuccessCustName = document.getElementById('success-cust-name');
+    const elSuccessCustEmail = document.getElementById('success-cust-email');
+    const elSuccessTotal = document.getElementById('success-total');
+    const elSuccessQuote = document.getElementById('success-quote');
+    const elSuccessModal = document.getElementById('order-success-modal');
+
+    if (elSuccessOrderNum) elSuccessOrderNum.innerText = orderNumber;
+    if (elSuccessCustName) elSuccessCustName.innerText = custName;
+    if (elSuccessCustEmail) elSuccessCustEmail.innerText = custEmail;
+    if (elSuccessTotal) elSuccessTotal.innerText = formatINR(totalAmount);
+    if (elSuccessQuote) elSuccessQuote.innerText = `"${randomQuote}"`;
+    if (elSuccessModal) elSuccessModal.classList.remove('hidden');
 
     if (window.lucide) lucide.createIcons();
 

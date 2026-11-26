@@ -250,9 +250,9 @@
       box-sizing: border-box;
     }
     html, body {
-      overflow-x: hidden;
+      overflow-x: clip;
       width: 100%;
-      max-width: 100%;
+      max-width: 100vw;
       margin: 0;
       padding: 0;
     }
@@ -403,17 +403,17 @@
   </div>
 
   <!-- NAVIGATION HEADER -->
-  <header class="w-full sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm transition-all duration-300">
+  <header class="w-full sticky top-0 z-[100] bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm transition-all duration-300">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20 gap-2 sm:gap-4">
         
         <!-- Brand Logo -->
-        <a href="index.html" onclick="handleLogoClick(event)" class="flex-shrink-0 flex items-center group cursor-pointer mr-2 sm:mr-4 lg:mr-6" title="FYN - Find Your North">
-          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-7 sm:h-8 md:h-9 w-auto max-w-[160px] sm:max-w-[190px] object-contain transition-transform group-hover:scale-[1.02]">
+        <a href="index.html" onclick="handleLogoClick(event)" class="flex-shrink-0 flex items-center group cursor-pointer mr-2 sm:mr-3 lg:mr-4" title="FYN - Find Your North">
+          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-7 sm:h-8 md:h-9 w-auto max-w-[150px] sm:max-w-[170px] object-contain transition-transform group-hover:scale-[1.02]">
         </a>
 
         <!-- Desktop Navigation with Shop For Dropdown -->
-        <nav class="hidden lg:flex items-center space-x-3.5 xl:space-x-6 text-xs font-semibold tracking-wide text-fyn-charcoal uppercase flex-shrink-0">
+        <nav class="hidden lg:flex items-center space-x-2.5 xl:space-x-4 2xl:space-x-5 text-[11px] xl:text-xs font-semibold tracking-wide text-fyn-charcoal uppercase flex-shrink-0">
           <a href="shop.html" class="nav-link hover:text-fyn-forest transition">All Drops</a>
 
           <!-- Shop For Dropdown Menu -->
@@ -430,8 +430,8 @@
               <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-fyn-gold transition-transform duration-200 group-hover:rotate-180"></i>
             </button>
             <div 
-              id="shop-for-dropdown"
-              class="absolute left-0 top-full mt-1.5 w-52 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/90 py-2.5 transition-all duration-200 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible"
+              id="shop-for-dropdown" 
+              class="absolute left-0 top-full mt-1.5 w-52 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/90 py-2.5 transition-all duration-200 z-[110] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible"
             >
               <a href="shop.html?audience=men" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2.5 transition">
                 <i data-lucide="user" class="w-4 h-4 text-fyn-forest"></i>
@@ -468,16 +468,16 @@
         </nav>
 
         <!-- Right Action Icons -->
-        <div class="flex items-center space-x-1.5 sm:space-x-2.5 flex-shrink-0 ml-auto">
+        <div class="flex items-center space-x-1.5 sm:space-x-2 flex-shrink-0 ml-auto">
           
           <!-- Search Bar -->
-          <form class="relative hidden xl:block" role="search" onsubmit="event.preventDefault(); window.location.href='shop.html?search=' + encodeURIComponent(document.getElementById('search-input').value);">
+          <form class="relative hidden 2xl:block" role="search" onsubmit="event.preventDefault(); window.location.href='shop.html?search=' + encodeURIComponent(document.getElementById('search-input').value);">
             <input 
               type="text" 
               id="search-input" 
               name="query"
-              placeholder="Search drops, gear & quotes..." 
-              class="w-36 lg:w-44 xl:w-52 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
+              placeholder="Search drops & gear..." 
+              class="w-36 lg:w-40 xl:w-44 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
             >
             <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"></i>
           </form>

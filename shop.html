@@ -102,7 +102,7 @@
     .fyn-btn-secondary:hover { background: #ffffff; border-color: #1D3C34; box-shadow: 0 6px 18px rgba(29, 60, 52, 0.12); transform: translateY(-1.5px); }
   </style>
 </head>
-<body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5] overflow-x-hidden w-full relative">
+<body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5] overflow-x-clip max-w-[100vw] w-full relative">
 
   <!-- TOP ANNOUNCEMENT BAR -->
   <div class="w-full bg-fyn-forest-dark text-fyn-sand text-xs py-2.5 px-3 sm:px-4 border-b border-fyn-forest/40 overflow-hidden">
@@ -128,17 +128,17 @@
   </div>
 
   <!-- NAVIGATION HEADER -->
-  <header class="w-full sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm transition-all duration-300">
+  <header class="w-full sticky top-0 z-[100] bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm transition-all duration-300">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20 gap-2 sm:gap-4">
         
         <!-- Brand Logo -->
-        <a href="index.html" class="flex-shrink-0 flex items-center group cursor-pointer mr-2 sm:mr-4 lg:mr-6" title="FYN - Find Your North">
-          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-7 sm:h-8 md:h-9 w-auto max-w-[160px] sm:max-w-[190px] object-contain transition-transform group-hover:scale-[1.02]">
+        <a href="index.html" class="flex-shrink-0 flex items-center group cursor-pointer mr-2 sm:mr-3 lg:mr-4" title="FYN - Find Your North">
+          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-7 sm:h-8 md:h-9 w-auto max-w-[150px] sm:max-w-[170px] object-contain transition-transform group-hover:scale-[1.02]">
         </a>
 
         <!-- Desktop Navigation with Shop For Dropdown -->
-        <nav class="hidden lg:flex items-center space-x-3.5 xl:space-x-6 text-xs font-semibold tracking-wide text-fyn-charcoal uppercase flex-shrink-0">
+        <nav class="hidden lg:flex items-center space-x-2.5 xl:space-x-4 2xl:space-x-5 text-[11px] xl:text-xs font-semibold tracking-wide text-fyn-charcoal uppercase flex-shrink-0">
           <a href="shop.html" class="nav-link text-fyn-forest font-bold hover:text-fyn-forest-light transition">All Drops</a>
 
           <!-- Shop For Dropdown -->
@@ -156,7 +156,7 @@
             </button>
             <div 
               id="shop-for-dropdown" 
-              class="absolute left-0 top-full mt-1.5 w-52 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/90 py-2.5 transition-all duration-200 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible"
+              class="absolute left-0 top-full mt-1.5 w-52 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/90 py-2.5 transition-all duration-200 z-[110] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible"
             >
               <button onclick="filterAudience('men'); toggleShopForMenu();" class="w-full text-left flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2.5 transition">
                 <i data-lucide="user" class="w-4 h-4 text-fyn-forest"></i>
@@ -193,16 +193,16 @@
         </nav>
 
         <!-- Right Action Icons -->
-        <div class="flex items-center space-x-1.5 sm:space-x-2.5 flex-shrink-0 ml-auto">
+        <div class="flex items-center space-x-1.5 sm:space-x-2 flex-shrink-0 ml-auto">
           
           <!-- Search Bar -->
-          <form class="relative hidden xl:block" role="search" onsubmit="event.preventDefault()">
+          <form class="relative hidden 2xl:block" role="search" onsubmit="event.preventDefault()">
             <input 
               type="text" 
               id="search-input" 
-              placeholder="Search gear, drops & quotes..." 
+              placeholder="Search gear & drops..." 
               oninput="handleSearch(this.value)"
-              class="w-36 lg:w-44 xl:w-52 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
+              class="w-36 lg:w-40 xl:w-44 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
             >
             <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"></i>
           </form>
@@ -420,8 +420,8 @@
   <!-- ======================================================== -->
 
   <!-- 1. CART DRAWER -->
-  <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeCartDrawer()"></div>
-  <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+  <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/50 z-[115] opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeCartDrawer()"></div>
+  <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-full sm:max-w-md w-full bg-white z-[120] shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-5 border-b border-gray-200 flex items-center justify-between bg-fyn-sand">
       <div class="flex items-center space-x-2">
         <i data-lucide="shopping-bag" class="w-5 h-5 text-fyn-forest"></i>
@@ -555,7 +555,9 @@
       <div class="bg-fyn-sand rounded-xl p-4 text-left text-xs space-y-2 mb-6 border border-gray-200">
         <div class="flex justify-between border-b border-gray-200 pb-2"><span class="text-gray-500">Order Number:</span><span id="success-order-num" class="font-mono font-bold text-fyn-forest">FYN-IND-2026-9812</span></div>
         <div class="flex justify-between border-b border-gray-200 pb-2"><span class="text-gray-500">Customer Name:</span><span id="success-cust-name" class="font-semibold text-gray-800">Aditya Sharma</span></div>
+        <div class="flex justify-between border-b border-gray-200 pb-2"><span class="text-gray-500">Customer Email:</span><span id="success-cust-email" class="font-semibold text-gray-800">aditya@example.com</span></div>
         <div class="flex justify-between border-b border-gray-200 pb-2"><span class="text-gray-500">Amount Paid:</span><span id="success-total" class="font-extrabold text-fyn-forest text-sm">₹0.00</span></div>
+        <div class="pt-1"><span class="text-gray-400 block text-[11px] mb-1">Compass Inscription:</span><p id="success-quote" class="italic text-fyn-forest font-serif text-xs">"The compass is inside you. Follow your own trajectory."</p></div>
       </div>
       <div class="flex flex-col sm:flex-row gap-2 justify-center">
         <button onclick="printInvoice()" class="px-5 py-2.5 rounded-full border border-gray-300 text-gray-700 text-xs font-semibold hover:bg-gray-50 flex items-center justify-center space-x-1.5"><i data-lucide="printer" class="w-3.5 h-3.5"></i><span>Print Invoice</span></button>
