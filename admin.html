@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FYN Admin Command Central — Hostinger-Style E-Commerce Control OS</title>
+  <title>FYN Admin Command Central — Hostinger-Style Store & Finance OS</title>
   <link rel="icon" type="image/png" href="brand_assets/fyn_sparkle_symbol_forest_green.png">
 
   <!-- Google Fonts: Montserrat & Plus Jakarta Sans -->
@@ -13,10 +13,10 @@
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  
+  <!-- Chart.js for Executive Financial & Traffic Graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -64,7 +64,7 @@
       </div>
 
       <h2 class="text-xl font-brand font-bold text-center text-fyn-forest-dark mb-1">Administrative Login</h2>
-      <p class="text-xs text-center text-gray-500 mb-6">Control orders, tracking, inventory, and customer notifications.</p>
+      <p class="text-xs text-center text-gray-500 mb-6">Full command over inventory, profit, discounts, orders & CRM.</p>
 
       <form onsubmit="handleAdminLogin(event)" class="space-y-4">
         <div>
@@ -122,7 +122,7 @@
   <!-- ======================================================== -->
   <div id="admin-dashboard-view" class="hidden min-h-screen flex flex-col">
     
-    <!-- Top Bar -->
+    <!-- Top Bar with Dedicated Links to CRM and Marketing -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         
@@ -134,11 +134,24 @@
           </span>
         </div>
 
-        <div class="flex items-center space-x-3">
-          <a href="index.html" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-semibold text-gray-700 hover:bg-gray-50 flex items-center space-x-1.5">
-            <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i>
-            <span>View Storefront</span>
+        <!-- External Hub Launchers (Opens in New Tab) -->
+        <div class="flex items-center space-x-2 sm:space-x-3 text-xs">
+          
+          <a href="crm.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-bold hover:bg-blue-100 flex items-center space-x-1.5 transition shadow-sm" title="Open Dedicated CRM in New Tab">
+            <i data-lucide="inbox" class="w-3.5 h-3.5"></i>
+            <span>CRM & Help Hub ↗</span>
           </a>
+
+          <a href="marketing.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-purple-50 text-purple-700 border border-purple-200 font-bold hover:bg-purple-100 flex items-center space-x-1.5 transition shadow-sm" title="Open Marketing & Meta Ads Hub in New Tab">
+            <i data-lucide="megaphone" class="w-3.5 h-3.5"></i>
+            <span>Marketing & Ads Hub ↗</span>
+          </a>
+
+          <a href="index.html" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-semibold text-gray-700 hover:bg-gray-50 flex items-center space-x-1">
+            <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i>
+            <span>Storefront</span>
+          </a>
+
           <button onclick="handleAdminLogout()" class="px-3 py-1.5 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 text-xs font-bold flex items-center space-x-1">
             <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
             <span>Logout</span>
@@ -149,17 +162,18 @@
     </header>
 
     <!-- Main Container -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
       
-      <!-- Metrics Row (Hostinger E-Commerce KPIs in INR) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+      <!-- FINANCIAL ACCOUNTS & STOCK CALCULATOR ROW -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         
+        <!-- Gross Sales -->
         <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Gross Sales</p>
             <h3 id="metric-total-sales" class="text-xl font-extrabold text-fyn-forest-dark mt-1">₹0.00</h3>
-            <span class="text-[10px] text-green-600 font-bold flex items-center mt-1">
-              <i data-lucide="trending-up" class="w-3 h-3 mr-0.5"></i> Supabase Live
+            <span class="text-[10px] text-green-600 font-bold flex items-center mt-0.5">
+              <i data-lucide="trending-up" class="w-3 h-3 mr-0.5"></i> Live Revenue
             </span>
           </div>
           <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
@@ -167,61 +181,106 @@
           </div>
         </div>
 
+        <!-- Net Profit & Margin -->
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+          <div>
+            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Estimated Net Profit</p>
+            <h3 id="metric-net-profit" class="text-xl font-extrabold text-green-700 mt-1">₹0.00</h3>
+            <span id="metric-profit-margin" class="text-[10px] text-green-700 font-bold mt-0.5 block">
+              Margin: 58.4%
+            </span>
+          </div>
+          <div class="p-2.5 rounded-xl bg-green-50 text-green-700">
+            <i data-lucide="wallet" class="w-5 h-5"></i>
+          </div>
+        </div>
+
+        <!-- Total Stock Units Available Calculator -->
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+          <div>
+            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Available Stock</p>
+            <h3 id="metric-total-stock-units" class="text-xl font-extrabold text-fyn-forest mt-1">0 Units</h3>
+            <span class="text-[10px] text-gray-500 font-semibold mt-0.5 block" id="metric-stock-status">
+              Calculated across 8 drops
+            </span>
+          </div>
+          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
+            <i data-lucide="boxes" class="w-5 h-5"></i>
+          </div>
+        </div>
+
+        <!-- Orders & Fulfilment -->
         <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
           <div>
             <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Total Orders</p>
             <h3 id="metric-total-orders" class="text-xl font-extrabold text-fyn-forest-dark mt-1">0</h3>
-            <span id="metric-pending-orders" class="text-[10px] text-amber-600 font-bold flex items-center mt-1">
+            <span id="metric-pending-orders" class="text-[10px] text-amber-600 font-bold flex items-center mt-0.5">
               0 Pending Action
             </span>
           </div>
           <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
-            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
           </div>
         </div>
 
+        <!-- Traffic & SEO Health Score -->
         <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
           <div>
-            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Avg Order Value</p>
-            <h3 id="metric-aov" class="text-xl font-extrabold text-fyn-forest-dark mt-1">₹0.00</h3>
-            <span class="text-[10px] text-gray-500 font-semibold flex items-center mt-1">
-              Per Completed Cart
+            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">SEO & Traffic Health</p>
+            <h3 class="text-xl font-extrabold text-fyn-forest mt-1">94 / 100</h3>
+            <span class="text-[10px] text-blue-600 font-bold block mt-0.5">
+              14.2k Monthly Visitors
             </span>
           </div>
-          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
-            <i data-lucide="pie-chart" class="w-5 h-5"></i>
+          <div class="p-2.5 rounded-xl bg-blue-50 text-blue-700">
+            <i data-lucide="activity" class="w-5 h-5"></i>
           </div>
         </div>
 
-        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Catalog Items</p>
-            <h3 id="metric-total-products" class="text-xl font-extrabold text-fyn-forest-dark mt-1">8</h3>
-            <span class="text-[10px] text-gray-500 font-semibold flex items-center mt-1">
-              Active FYN Drops
-            </span>
-          </div>
-          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
-            <i data-lucide="package" class="w-5 h-5"></i>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Customer Emails</p>
-            <h3 id="metric-total-emails" class="text-xl font-extrabold text-fyn-forest-dark mt-1">0</h3>
-            <span class="text-[10px] text-blue-600 font-bold flex items-center mt-1">
-              Dispatched & Logged
-            </span>
-          </div>
-          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
-            <i data-lucide="mail-check" class="w-5 h-5"></i>
-          </div>
-        </div>
       </div>
 
-      <!-- Command Central Navigation Tabs -->
-      <div class="border-b border-gray-200 mb-6 flex flex-wrap gap-2 text-xs font-bold">
+      <!-- INTERACTIVE EXECUTIVE GRAPHS ROW (CHART.JS) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Graph 1: Sales & Profit Curve -->
+        <div class="lg:col-span-2 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-brand font-bold text-sm text-gray-900">Revenue & Profit Trajectory (INR ₹)</h3>
+              <p class="text-[11px] text-gray-500">Correlated daily gross sales and net margins</p>
+            </div>
+            <span class="text-xs font-bold text-fyn-forest bg-fyn-sand px-2.5 py-1 rounded-lg">Last 30 Days</span>
+          </div>
+          <div class="h-64">
+            <canvas id="salesProfitChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Graph 2: Category Sales Distribution -->
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="font-brand font-bold text-sm text-gray-900">Category Share</h3>
+                <p class="text-[11px] text-gray-500">Volume by product segment</p>
+              </div>
+              <i data-lucide="pie-chart" class="w-4 h-4 text-fyn-stone"></i>
+            </div>
+            <div class="h-48 relative flex items-center justify-center">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-gray-100 grid grid-cols-3 gap-1 text-center text-[10px]">
+            <div><span class="font-bold text-fyn-forest">Apparel</span> (48%)</div>
+            <div><span class="font-bold text-fyn-gold">Travel Gear</span> (36%)</div>
+            <div><span class="font-bold text-gray-500">Accessories</span> (16%)</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COMMAND CENTRAL MODULE NAVIGATION TABS -->
+      <div class="border-b border-gray-200 flex flex-wrap gap-2 text-xs font-bold">
         <button onclick="switchTab('orders')" id="tab-btn-orders" class="admin-tab active py-3 px-5 border-b-2 border-fyn-forest text-fyn-forest flex items-center space-x-2">
           <i data-lucide="truck" class="w-4 h-4"></i>
           <span>Order Fulfilment & Tracking Hub</span>
@@ -230,17 +289,17 @@
 
         <button onclick="switchTab('products')" id="tab-btn-products" class="admin-tab py-3 px-5 border-b-2 border-transparent text-gray-500 hover:text-fyn-forest flex items-center space-x-2">
           <i data-lucide="package-search" class="w-4 h-4"></i>
-          <span>Product Inventory (Add / Delete)</span>
+          <span>Product Inventory (Add / Edit / Stock)</span>
         </button>
 
         <button onclick="switchTab('discounts')" id="tab-btn-discounts" class="admin-tab py-3 px-5 border-b-2 border-transparent text-gray-500 hover:text-fyn-forest flex items-center space-x-2">
           <i data-lucide="tag" class="w-4 h-4"></i>
-          <span>Discounts & Coupon Engine</span>
+          <span>Discounts & Redemption Limits</span>
         </button>
 
         <button onclick="switchTab('customers')" id="tab-btn-customers" class="admin-tab py-3 px-5 border-b-2 border-transparent text-gray-500 hover:text-fyn-forest flex items-center space-x-2">
           <i data-lucide="users" class="w-4 h-4"></i>
-          <span>Customer Database (CRM)</span>
+          <span>Customer CRM Quick View</span>
         </button>
 
         <button onclick="switchTab('emails')" id="tab-btn-emails" class="admin-tab py-3 px-5 border-b-2 border-transparent text-gray-500 hover:text-fyn-forest flex items-center space-x-2">
@@ -257,7 +316,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-gray-200">
           <div>
             <h3 class="text-sm font-bold text-fyn-forest-dark">Customer Expeditions & Fulfilment Workflow</h3>
-            <p class="text-xs text-gray-500">Manage order statuses from Pending, to Confirmed, to entering Tracking Numbers & triggering customer delivery emails.</p>
+            <p class="text-xs text-gray-500">From status updates to carrier selection and customer tracking notifications.</p>
           </div>
           <div class="flex items-center space-x-2">
             <select id="order-status-filter" onchange="filterOrders(this.value)" class="text-xs px-3 py-1.5 rounded-lg border border-gray-200 bg-white">
@@ -279,10 +338,10 @@
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-gray-600">
-              <thead class="bg-gray-50 text-gray-700 uppercase font-semibold border-b border-gray-200 text-[10px] tracking-wider">
+              <thead class="bg-gray-50 text-gray-700 uppercase font-bold border-b border-gray-200 text-[10px] tracking-wider">
                 <tr>
                   <th class="py-3 px-4">Order #</th>
-                  <th class="py-3 px-4">Customer & City</th>
+                  <th class="py-3 px-4">Customer Details</th>
                   <th class="py-3 px-4">Items Summary</th>
                   <th class="py-3 px-4">Total Amount (₹)</th>
                   <th class="py-3 px-4">Payment</th>
@@ -300,14 +359,14 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- TAB 2: PRODUCT INVENTORY (ADD / DELETE) -->
+      <!-- TAB 2: PRODUCT INVENTORY (ADD / EDIT / STOCK) -->
       <!-- ============================================== -->
       <div id="tab-content-products" class="hidden space-y-4">
         
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-gray-200">
           <div>
-            <h3 class="text-sm font-bold text-fyn-forest-dark">Product Catalog & Stock Management</h3>
-            <p class="text-xs text-gray-500">Add new drops with quotes, manage inventory in ₹ INR, or delete discontinued products.</p>
+            <h3 class="text-sm font-bold text-fyn-forest-dark">Product Catalog & Inventory Management</h3>
+            <p class="text-xs text-gray-500">Add new drops with 'Why Purchase', sizes, prices, or edit existing products and update stock inline.</p>
           </div>
           <button onclick="openAddProductModal()" class="px-4 py-2 rounded-lg bg-fyn-forest text-white text-xs font-bold hover:bg-fyn-forest-light flex items-center space-x-1.5 shadow">
             <i data-lucide="plus" class="w-3.5 h-3.5"></i>
@@ -319,15 +378,15 @@
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-gray-600">
-              <thead class="bg-gray-50 text-gray-700 uppercase font-semibold border-b border-gray-200 text-[10px] tracking-wider">
+              <thead class="bg-gray-50 text-gray-700 uppercase font-bold border-b border-gray-200 text-[10px] tracking-wider">
                 <tr>
                   <th class="py-3 px-4">Product</th>
                   <th class="py-3 px-4">Category</th>
                   <th class="py-3 px-4">Price (INR ₹)</th>
-                  <th class="py-3 px-4">Stock</th>
-                  <th class="py-3 px-4">Badge</th>
-                  <th class="py-3 px-4">Inscribed Life Quote</th>
-                  <th class="py-3 px-4 text-right">Actions</th>
+                  <th class="py-3 px-4">Stock Units</th>
+                  <th class="py-3 px-4">Sizes</th>
+                  <th class="py-3 px-4">Why Purchase</th>
+                  <th class="py-3 px-4 text-right">Edit / Delete</th>
                 </tr>
               </thead>
               <tbody id="products-table-body" class="divide-y divide-gray-100">
@@ -340,14 +399,14 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- TAB 3: DISCOUNTS & COUPON ENGINE -->
+      <!-- TAB 3: DISCOUNTS & REDEMPTION LIMITS -->
       <!-- ============================================== -->
       <div id="tab-content-discounts" class="hidden space-y-4">
         
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-gray-200">
           <div>
-            <h3 class="text-sm font-bold text-fyn-forest-dark">Promotions & Summit Discount Codes (₹)</h3>
-            <p class="text-xs text-gray-500">Configure percentage discounts (e.g. NORTH20) or flat rupee cuts (e.g. FYN500).</p>
+            <h3 class="text-sm font-bold text-fyn-forest-dark">Promotions & Coupon Redemption Tracking</h3>
+            <p class="text-xs text-gray-500">Monitor how many times each coupon has been redeemed against its maximum limit (e.g., 25 customers only).</p>
           </div>
           <button onclick="openAddDiscountModal()" class="px-4 py-2 rounded-lg bg-fyn-forest text-white text-xs font-bold hover:bg-fyn-forest-light flex items-center space-x-1.5 shadow">
             <i data-lucide="plus" class="w-3.5 h-3.5"></i>
@@ -359,12 +418,13 @@
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-gray-600">
-              <thead class="bg-gray-50 text-gray-700 uppercase font-semibold border-b border-gray-200 text-[10px] tracking-wider">
+              <thead class="bg-gray-50 text-gray-700 uppercase font-bold border-b border-gray-200 text-[10px] tracking-wider">
                 <tr>
-                  <th class="py-3 px-4">Promo Code</th>
-                  <th class="py-3 px-4">Description</th>
+                  <th class="py-3 px-4">Coupon Code</th>
                   <th class="py-3 px-4">Discount Value</th>
-                  <th class="py-3 px-4">Min. Spend (₹)</th>
+                  <th class="py-3 px-4">Min. Spend</th>
+                  <th class="py-3 px-4">Redemption Quota (Used / Max)</th>
+                  <th class="py-3 px-4">Usage Progress</th>
                   <th class="py-3 px-4">Status</th>
                   <th class="py-3 px-4 text-right">Actions</th>
                 </tr>
@@ -379,19 +439,25 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- TAB 4: CUSTOMER DATABASE (CRM) -->
+      <!-- TAB 4: CUSTOMER CRM QUICK VIEW -->
       <!-- ============================================== -->
       <div id="tab-content-customers" class="hidden space-y-4">
         
-        <div class="bg-white p-4 rounded-xl border border-gray-200">
-          <h3 class="text-sm font-bold text-fyn-forest-dark">Customer Profiles & Purchase History</h3>
-          <p class="text-xs text-gray-500">View customer lifetime spending in ₹, contact details, and dispatch direct updates.</p>
+        <div class="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-bold text-fyn-forest-dark">Customer Database & Lifetime Accounts</h3>
+            <p class="text-xs text-gray-500">View customer lifetime purchases in ₹. For detailed support ticket inquiries, open the dedicated CRM hub.</p>
+          </div>
+          <a href="crm.html" target="_blank" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-bold text-xs hover:bg-blue-700 flex items-center space-x-1.5 shadow">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            <span>Open Dedicated CRM Hub ↗</span>
+          </a>
         </div>
 
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-gray-600">
-              <thead class="bg-gray-50 text-gray-700 uppercase font-semibold border-b border-gray-200 text-[10px] tracking-wider">
+              <thead class="bg-gray-50 text-gray-700 uppercase font-bold border-b border-gray-200 text-[10px] tracking-wider">
                 <tr>
                   <th class="py-3 px-4">Customer Name</th>
                   <th class="py-3 px-4">Email</th>
@@ -419,7 +485,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-gray-200">
           <div>
             <h3 class="text-sm font-bold text-fyn-forest-dark">Customer Email Dispatcher & Live Audit Log</h3>
-            <p class="text-xs text-gray-500">Every tracking dispatch, order confirmation, and status alert is logged with full HTML preview.</p>
+            <p class="text-xs text-gray-500">Every tracking dispatch, order confirmation, and support alert is logged with full HTML preview.</p>
           </div>
           <button onclick="openSendCustomEmailModal()" class="px-4 py-2 rounded-lg bg-fyn-forest text-white text-xs font-bold hover:bg-fyn-forest-light flex items-center space-x-1.5 shadow">
             <i data-lucide="send" class="w-3.5 h-3.5"></i>
@@ -430,12 +496,12 @@
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-gray-600">
-              <thead class="bg-gray-50 text-gray-700 uppercase font-semibold border-b border-gray-200 text-[10px] tracking-wider">
+              <thead class="bg-gray-50 text-gray-700 uppercase font-bold border-b border-gray-200 text-[10px] tracking-wider">
                 <tr>
                   <th class="py-3 px-4">Recipient</th>
                   <th class="py-3 px-4">Subject Line</th>
                   <th class="py-3 px-4">Email Type</th>
-                  <th class="py-3 px-4">Order #</th>
+                  <th class="py-3 px-4">Order / Ticket #</th>
                   <th class="py-3 px-4">Status</th>
                   <th class="py-3 px-4">Sent Timestamp</th>
                   <th class="py-3 px-4 text-right">HTML Preview</th>
@@ -457,7 +523,126 @@
   <!-- MODALS -->
   <!-- ======================================================== -->
 
-  <!-- 1. SHIPPING & TRACKING DISPATCH MODAL -->
+  <!-- 1. ADD / EDIT PRODUCT MODAL (WITH WHY PURCHASE & SIZES) -->
+  <div id="modal-product-form" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+        <div>
+          <h3 class="font-brand font-bold text-fyn-forest-dark text-base" id="product-modal-title">Add New Drop</h3>
+          <p class="text-xs text-gray-500">Configure complete specifications, reasons to buy & sizes</p>
+        </div>
+        <button onclick="closeProductModal()" class="text-gray-400 hover:text-gray-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="product-form" onsubmit="handleSaveProduct(event)" class="space-y-3.5 text-xs">
+        <input type="hidden" id="prod-form-mode" value="add">
+        <input type="hidden" id="prod-form-id" value="">
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Product Title *</label>
+          <input type="text" id="prod-name" required placeholder="e.g. FYN Explorer Oversized Tee" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Category *</label>
+            <select id="prod-category" class="w-full px-3 py-2 rounded-lg border border-gray-300">
+              <option value="Apparel">Apparel</option>
+              <option value="Travel Gear">Travel Gear</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Badge</label>
+            <input type="text" id="prod-badge" placeholder="Bestseller, Essential, New" class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Price (₹ INR) *</label>
+            <input type="number" step="1" id="prod-price" required placeholder="1499" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-bold">
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Original Price (₹)</label>
+            <input type="number" step="1" id="prod-orig-price" placeholder="1999" class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Stock Units Available *</label>
+            <input type="number" id="prod-stock" required value="50" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-bold">
+          </div>
+        </div>
+
+        <!-- Available Sizes Selector -->
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Available Sizes (Check all that apply) *</label>
+          <div class="flex flex-wrap gap-2 pt-1" id="sizes-checkbox-container">
+            <label class="inline-flex items-center space-x-1.5 px-3 py-1 bg-gray-100 rounded-lg border border-gray-200 cursor-pointer">
+              <input type="checkbox" name="prod-size" value="XS" class="text-fyn-forest">
+              <span class="font-bold">XS</span>
+            </label>
+            <label class="inline-flex items-center space-x-1.5 px-3 py-1 bg-gray-100 rounded-lg border border-gray-200 cursor-pointer">
+              <input type="checkbox" name="prod-size" value="S" checked class="text-fyn-forest">
+              <span class="font-bold">S</span>
+            </label>
+            <label class="inline-flex items-center space-x-1.5 px-3 py-1 bg-gray-100 rounded-lg border border-gray-200 cursor-pointer">
+              <input type="checkbox" name="prod-size" value="M" checked class="text-fyn-forest">
+              <span class="font-bold">M</span>
+            </label>
+            <label class="inline-flex items-center space-x-1.5 px-3 py-1 bg-gray-100 rounded-lg border border-gray-200 cursor-pointer">
+              <input type="checkbox" name="prod-size" value="L" checked class="text-fyn-forest">
+              <span class="font-bold">L</span>
+            </label>
+            <label class="inline-flex items-center space-x-1.5 px-3 py-1 bg-gray-100 rounded-lg border border-gray-200 cursor-pointer">
+              <input type="checkbox" name="prod-size" value="XL" checked class="text-fyn-forest">
+              <span class="font-bold">XL</span>
+            </label>
+            <label class="inline-flex items-center space-x-1.5 px-3 py-1 bg-gray-100 rounded-lg border border-gray-200 cursor-pointer">
+              <input type="checkbox" name="prod-size" value="XXL" class="text-fyn-forest">
+              <span class="font-bold">XXL</span>
+            </label>
+            <label class="inline-flex items-center space-x-1.5 px-3 py-1 bg-gray-100 rounded-lg border border-gray-200 cursor-pointer">
+              <input type="checkbox" name="prod-size" value="One Size / Standard" class="text-fyn-forest">
+              <span class="font-bold">Standard</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 'Why One Should Purchase It' Field -->
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Why One Should Purchase It (Key Selling Proposition) *</label>
+          <textarea id="prod-why-purchase" rows="2" required placeholder="e.g. 480 GSM French Terry that endures for a decade with zero shrinkage..." class="w-full px-3 py-2 rounded-lg border border-gray-300"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Inscribed Life Quote *</label>
+          <input type="text" id="prod-quote" required placeholder="TRAVEL. LEARN. IMPROVE. Find your true north." class="w-full px-3 py-2 rounded-lg border border-gray-300 font-serif italic">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Image URL / Path *</label>
+          <input type="text" id="prod-image" required value="brand_assets/products/fyn_sand_tee.jpg" class="w-full px-3 py-2 rounded-lg border border-gray-300">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Full Description (Specifications, Weave, Materials)</label>
+          <textarea id="prod-desc" rows="2" placeholder="Fabric weight, wash details, fit..." class="w-full px-3 py-2 rounded-lg border border-gray-300"></textarea>
+        </div>
+
+        <div class="pt-3 flex justify-end space-x-2">
+          <button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-lg bg-fyn-forest text-white font-bold hover:bg-fyn-forest-light flex items-center space-x-1.5 shadow">
+            <i data-lucide="save" class="w-3.5 h-3.5"></i>
+            <span id="prod-submit-btn-text">Save Drop</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. SHIPPING & TRACKING DISPATCH MODAL -->
   <div id="modal-shipping-tracking" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border-t-8 border-fyn-forest">
       <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
@@ -477,7 +662,7 @@
         <input type="hidden" id="ship-customer-name">
 
         <div>
-          <label class="block font-bold text-gray-700 mb-1">Logistics / Courier Partner *</label>
+          <label class="block font-bold text-gray-700 mb-1">Courier Logistics Partner *</label>
           <select id="ship-carrier" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-semibold text-gray-800">
             <option value="Blue Dart Express">Blue Dart Express</option>
             <option value="Delhivery Logistics">Delhivery</option>
@@ -505,13 +690,9 @@
             <input type="text" id="ship-est-delivery" value="3-5 Business Days" class="w-full px-3 py-2 rounded-lg border border-gray-300">
           </div>
           <div>
-            <label class="block font-bold text-gray-700 mb-1">Dispatch Hub</label>
-            <input type="text" id="ship-hub" readonly value="Central India Hub (BLR)" class="w-full px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-500">
+            <label class="block font-bold text-gray-700 mb-1">Dispatch Depot</label>
+            <input type="text" id="ship-hub" readonly value="Central Hub (BLR, India)" class="w-full px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 text-gray-500">
           </div>
-        </div>
-
-        <div class="p-3 bg-fyn-sand rounded-xl border border-fyn-sand-dark text-[11px] text-fyn-forest">
-          <strong>Automated Action:</strong> Clicking Dispatch will update the order status to <strong>Shipped</strong> in Supabase and send an official Tracking Notice email with a "Track Your Package" button directly to the customer.
         </div>
 
         <div class="pt-3 flex justify-end space-x-2">
@@ -525,78 +706,9 @@
     </div>
   </div>
 
-  <!-- 2. ADD PRODUCT MODAL -->
-  <div id="modal-add-product" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8">
-      <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
-        <h3 class="font-brand font-bold text-fyn-forest-dark text-base">Add New Drop to Catalog</h3>
-        <button onclick="closeAddProductModal()" class="text-gray-400 hover:text-gray-600">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <form onsubmit="handleCreateProduct(event)" class="space-y-3 text-xs">
-        <div>
-          <label class="block font-semibold text-gray-700 mb-1">Product Title *</label>
-          <input type="text" id="new-prod-name" required placeholder="e.g. FYN Explorer Oversized Tee" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Category *</label>
-            <select id="new-prod-category" class="w-full px-3 py-2 rounded-lg border border-gray-300">
-              <option value="Apparel">Apparel</option>
-              <option value="Travel Gear">Travel Gear</option>
-              <option value="Accessories">Accessories</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Badge</label>
-            <input type="text" id="new-prod-badge" placeholder="Bestseller, Essential, New" class="w-full px-3 py-2 rounded-lg border border-gray-300">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-3 gap-2">
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Price (₹ INR) *</label>
-            <input type="number" step="1" id="new-prod-price" required placeholder="1499" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-bold">
-          </div>
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Original Price (₹)</label>
-            <input type="number" step="1" id="new-prod-orig-price" placeholder="1999" class="w-full px-3 py-2 rounded-lg border border-gray-300">
-          </div>
-          <div>
-            <label class="block font-semibold text-gray-700 mb-1">Stock Units *</label>
-            <input type="number" id="new-prod-stock" required value="50" class="w-full px-3 py-2 rounded-lg border border-gray-300">
-          </div>
-        </div>
-
-        <div>
-          <label class="block font-semibold text-gray-700 mb-1">Inscribed Life Quote *</label>
-          <input type="text" id="new-prod-quote" required placeholder='TRAVEL. LEARN. IMPROVE. Find your true north.' class="w-full px-3 py-2 rounded-lg border border-gray-300 font-serif italic">
-        </div>
-
-        <div>
-          <label class="block font-semibold text-gray-700 mb-1">Image URL / Path *</label>
-          <input type="text" id="new-prod-image" required value="brand_assets/products/fyn_sand_tee.jpg" class="w-full px-3 py-2 rounded-lg border border-gray-300">
-        </div>
-
-        <div>
-          <label class="block font-semibold text-gray-700 mb-1">Description</label>
-          <textarea id="new-prod-desc" rows="2" placeholder="Fabric weight, specifications, fit..." class="w-full px-3 py-2 rounded-lg border border-gray-300"></textarea>
-        </div>
-
-        <div class="pt-3 flex justify-end space-x-2">
-          <button type="button" onclick="closeAddProductModal()" class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
-          <button type="submit" class="px-5 py-2 rounded-lg bg-fyn-forest text-white font-bold hover:bg-fyn-forest-light">Publish Drop</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 3. ADD DISCOUNT MODAL -->
+  <!-- 3. ADD DISCOUNT MODAL (WITH REDEMPTION LIMIT) -->
   <div id="modal-add-discount" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border-t-8 border-fyn-forest">
       <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
         <h3 class="font-brand font-bold text-fyn-forest-dark text-base">Create Promo Coupon (₹)</h3>
         <button onclick="closeAddDiscountModal()" class="text-gray-400 hover:text-gray-600">
@@ -607,12 +719,12 @@
       <form onsubmit="handleCreateDiscount(event)" class="space-y-3 text-xs">
         <div>
           <label class="block font-semibold text-gray-700 mb-1">Coupon Code *</label>
-          <input type="text" id="new-disc-code" required placeholder="e.g. NORTH25" class="w-full px-3 py-2 uppercase rounded-lg border border-gray-300 font-mono font-bold">
+          <input type="text" id="new-disc-code" required placeholder="e.g. VIP25" class="w-full px-3 py-2 uppercase rounded-lg border border-gray-300 font-mono font-bold">
         </div>
 
         <div>
           <label class="block font-semibold text-gray-700 mb-1">Description</label>
-          <input type="text" id="new-disc-desc" required placeholder="25% off all FYN drops" class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          <input type="text" id="new-disc-desc" required placeholder="25% off drop for loyal explorers" class="w-full px-3 py-2 rounded-lg border border-gray-300">
         </div>
 
         <div class="grid grid-cols-2 gap-2">
@@ -624,6 +736,12 @@
             <label class="block font-semibold text-gray-700 mb-1">Min Spend (₹)</label>
             <input type="number" id="new-disc-min" value="1999" class="w-full px-3 py-2 rounded-lg border border-gray-300">
           </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Maximum Redemption Limit (Customer Quota) *</label>
+          <input type="number" id="new-disc-limit" required value="25" min="1" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-bold">
+          <span class="text-[10px] text-gray-500 mt-0.5 block">e.g. Code will automatically expire after 25 customers redeem it.</span>
         </div>
 
         <div class="pt-3 flex justify-end space-x-2">

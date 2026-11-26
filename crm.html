@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FYN CRM Command Hub — Customer Support & Inquiries</title>
+  <link rel="icon" type="image/png" href="brand_assets/fyn_sparkle_symbol_forest_green.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            fyn: {
+              forest: '#1D3C34',
+              'forest-dark': '#142A24',
+              'forest-light': '#2A554A',
+              sand: '#F7F5F0',
+              'sand-dark': '#ECE7DC',
+              stone: '#8D9093',
+              charcoal: '#171918',
+              gold: '#D4AF37',
+            }
+          },
+          fontFamily: {
+            brand: ['"Montserrat"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+  <!-- TOP CRM HEADER -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      
+      <div class="flex items-center space-x-3">
+        <a href="admin.html">
+          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN" class="h-8 w-auto">
+        </a>
+        <span class="text-xs bg-fyn-sand text-fyn-forest px-3 py-1 rounded-full font-bold border border-fyn-forest/20 flex items-center space-x-1.5">
+          <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+          <span>Customer CRM & Support Central</span>
+        </span>
+      </div>
+
+      <div class="flex items-center space-x-3 text-xs">
+        <button onclick="openNewTicketModal()" class="px-3.5 py-2 rounded-lg bg-fyn-forest text-white font-bold hover:bg-fyn-forest-light flex items-center space-x-1.5 shadow-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Create Ticket</span>
+        </button>
+        <a href="admin.html" class="px-3 py-2 rounded-lg border border-gray-200 font-semibold text-gray-700 hover:bg-gray-50 flex items-center space-x-1">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Store Admin</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    
+    <!-- CRM KPI ROW -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Total Inquiries</p>
+          <h3 id="crm-total-tickets" class="text-2xl font-extrabold text-fyn-forest-dark mt-1">0</h3>
+          <span class="text-[10px] text-gray-500 font-medium">All support channels</span>
+        </div>
+        <div class="p-3 rounded-xl bg-fyn-sand text-fyn-forest">
+          <i data-lucide="inbox" class="w-6 h-6"></i>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Urgent Escalations</p>
+          <h3 id="crm-urgent-tickets" class="text-2xl font-extrabold text-red-600 mt-1">0</h3>
+          <span class="text-[10px] text-red-700 font-semibold">Payment & dispatch issues</span>
+        </div>
+        <div class="p-3 rounded-xl bg-red-50 text-red-600">
+          <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Avg Response Time</p>
+          <h3 class="text-2xl font-extrabold text-fyn-forest-dark mt-1">18 mins</h3>
+          <span class="text-[10px] text-green-600 font-bold">Fast customer resolution</span>
+        </div>
+        <div class="p-3 rounded-xl bg-fyn-sand text-fyn-forest">
+          <i data-lucide="clock" class="w-6 h-6"></i>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Resolution Rate</p>
+          <h3 class="text-2xl font-extrabold text-green-700 mt-1">94.8%</h3>
+          <span class="text-[10px] text-gray-500 font-medium">Customer satisfaction high</span>
+        </div>
+        <div class="p-3 rounded-xl bg-green-50 text-green-700">
+          <i data-lucide="check-circle" class="w-6 h-6"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CRM INTERFACE: FILTERS & TICKETS -->
+    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+      
+      <!-- Filter Bar -->
+      <div class="p-4 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-fyn-sand/40">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold text-fyn-forest uppercase tracking-wider">Category:</span>
+          <select id="crm-category-filter" onchange="filterTickets()" class="text-xs px-3 py-1.5 rounded-lg border border-gray-300 bg-white">
+            <option value="All">All Categories</option>
+            <option value="Payment Issue">Payment Issues</option>
+            <option value="Order Tracking & Delivery">Order Tracking & Delivery</option>
+            <option value="Size & Exchange">Size & Exchange</option>
+            <option value="Product Inquiry">Product Inquiry</option>
+            <option value="Refund / Cancellation">Refund / Cancellation</option>
+          </select>
+
+          <span class="text-xs font-bold text-fyn-forest uppercase tracking-wider ml-2">Status:</span>
+          <select id="crm-status-filter" onchange="filterTickets()" class="text-xs px-3 py-1.5 rounded-lg border border-gray-300 bg-white">
+            <option value="All">All Statuses</option>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <input 
+            type="text" 
+            id="crm-search-input" 
+            placeholder="Search customer, order #, subject..." 
+            oninput="filterTickets()"
+            class="text-xs px-3 py-1.5 rounded-lg border border-gray-300 bg-white w-64 focus:outline-none focus:border-fyn-forest"
+          >
+          <button onclick="loadCrmTickets()" class="p-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100" title="Refresh">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tickets Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-gray-600">
+          <thead class="bg-gray-50 text-gray-700 uppercase font-bold border-b border-gray-200 text-[10px] tracking-wider">
+            <tr>
+              <th class="py-3 px-4">Ticket #</th>
+              <th class="py-3 px-4">Customer Details</th>
+              <th class="py-3 px-4">Subject & Inquiry</th>
+              <th class="py-3 px-4">Category</th>
+              <th class="py-3 px-4">Order Ref</th>
+              <th class="py-3 px-4">Priority</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="crm-tickets-table-body" class="divide-y divide-gray-100">
+            <!-- Populated via script -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TICKET DETAILS & REPLY MODAL -->
+  <div id="modal-ticket-details" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative border-t-8 border-fyn-forest my-8">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200 mb-4">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-fyn-stone" id="td-ticket-num">TCK-1001</span>
+          <h3 class="font-brand font-bold text-base text-fyn-forest-dark" id="td-subject">Payment Issue Subject</h3>
+        </div>
+        <button onclick="closeTicketDetailsModal()" class="text-gray-400 hover:text-gray-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Customer Profile & Metadata -->
+      <div class="grid grid-cols-2 gap-3 p-3.5 bg-fyn-sand rounded-xl text-xs mb-4 border border-fyn-sand-dark">
+        <div>
+          <span class="text-gray-500 font-semibold block">Customer Name:</span>
+          <span class="font-bold text-gray-900" id="td-cust-name">-</span>
+          <span class="text-gray-600 block text-[11px]" id="td-cust-email">-</span>
+          <span class="text-gray-500 block text-[11px]" id="td-cust-phone">-</span>
+        </div>
+        <div>
+          <span class="text-gray-500 font-semibold block">Related Order #:</span>
+          <span class="font-mono font-bold text-fyn-forest" id="td-order-num">-</span>
+          <div class="mt-2 flex items-center space-x-2">
+            <select id="td-status-select" class="text-xs px-2 py-1 rounded border border-gray-300 bg-white font-bold">
+              <option value="Open">Open</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+              <option value="Closed">Closed</option>
+            </select>
+            <select id="td-priority-select" class="text-xs px-2 py-1 rounded border border-gray-300 bg-white font-bold">
+              <option value="Urgent">Urgent</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Message Body -->
+      <div class="mb-4">
+        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Customer Inquiry:</label>
+        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 text-xs text-gray-800 leading-relaxed font-sans" id="td-message">
+          -
+        </div>
+      </div>
+
+      <!-- Previous Agent Reply (if any) -->
+      <div id="td-previous-reply-container" class="hidden mb-4 p-3 bg-green-50 rounded-xl border border-green-200 text-xs text-green-900">
+        <span class="font-bold block uppercase text-[10px] text-green-700 mb-1">Last Reply Sent to Customer:</span>
+        <div id="td-previous-reply-text"></div>
+      </div>
+
+      <!-- Reply Composer Form -->
+      <form onsubmit="handleSendTicketReply(event)" class="space-y-3">
+        <input type="hidden" id="td-hidden-id">
+        <input type="hidden" id="td-hidden-email">
+        <input type="hidden" id="td-hidden-name">
+        <input type="hidden" id="td-hidden-tck">
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Compose Reply & Email Customer:</label>
+          <textarea 
+            id="td-reply-body" 
+            rows="4" 
+            required
+            placeholder="Dear Explorer, thank you for reaching out. We have verified your transaction..." 
+            class="w-full text-xs p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-fyn-forest"
+          ></textarea>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button type="button" onclick="handleQuickStatusUpdate()" class="px-3 py-1.5 rounded-lg border border-gray-300 text-gray-700 text-xs font-semibold hover:bg-gray-50">
+            Save Status Only
+          </button>
+          <div class="space-x-2">
+            <button type="button" onclick="closeTicketDetailsModal()" class="px-3.5 py-1.5 rounded-lg border border-gray-300 text-gray-600 text-xs">Close</button>
+            <button type="submit" class="px-5 py-2 rounded-lg bg-fyn-forest text-white font-bold text-xs hover:bg-fyn-forest-light shadow flex items-center space-x-1.5">
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+              <span>Send Email Reply</span>
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- CREATE NEW TICKET MODAL -->
+  <div id="modal-new-ticket" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border-t-8 border-fyn-forest">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200 mb-4">
+        <h3 class="font-brand font-bold text-base text-fyn-forest-dark">Create Support Inquiry</h3>
+        <button onclick="closeNewTicketModal()" class="text-gray-400 hover:text-gray-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleCreateNewTicket(event)" class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Customer Name *</label>
+            <input type="text" id="new-tck-name" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Customer Email *</label>
+            <input type="email" id="new-tck-email" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Mobile Number</label>
+            <input type="tel" id="new-tck-phone" class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Related Order # (Optional)</label>
+            <input type="text" id="new-tck-order" placeholder="FYN-IND-2026-..." class="w-full px-3 py-2 rounded-lg border border-gray-300 font-mono">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Category *</label>
+            <select id="new-tck-category" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-semibold">
+              <option value="Payment Issue">Payment Issue</option>
+              <option value="Order Tracking & Delivery">Order Tracking & Delivery</option>
+              <option value="Size & Exchange">Size & Exchange</option>
+              <option value="Product Inquiry">Product Inquiry</option>
+              <option value="Refund / Cancellation">Refund / Cancellation</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Priority *</label>
+            <select id="new-tck-priority" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-semibold">
+              <option value="Urgent">Urgent</option>
+              <option value="High">High</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Subject *</label>
+          <input type="text" id="new-tck-subject" required placeholder="Brief summary of inquiry" class="w-full px-3 py-2 rounded-lg border border-gray-300">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Inquiry Details *</label>
+          <textarea id="new-tck-message" rows="3" required placeholder="Describe issue in full detail..." class="w-full px-3 py-2 rounded-lg border border-gray-300"></textarea>
+        </div>
+
+        <div class="pt-3 flex justify-end space-x-2">
+          <button type="button" onclick="closeNewTicketModal()" class="px-4 py-2 rounded-lg border border-gray-300">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-lg bg-fyn-forest text-white font-bold hover:bg-fyn-forest-light">Log Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    const SUPABASE_URL = 'https://oqrlyhcgilmqnynvhunr.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xcmx5aGNnaWxtcW55bnZodW5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU1MjMxNTEsImV4cCI6MjExMTA5OTE1MX0.gJBweQQGwLqaxj5Uu35bgxQQkx_vfKmppoazebV0YqU';
+    
+    let supabaseClient = null;
+    try {
+      if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch(e) {}
+
+    let crmTickets = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCrmTickets();
+    });
+
+    async function loadCrmTickets() {
+      try {
+        if (supabaseClient) {
+          const { data, error } = await supabaseClient
+            .from('fyn_crm_tickets')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+          if (!error && data) {
+            crmTickets = data;
+          }
+        }
+      } catch (e) {
+        console.warn("Tickets load error:", e);
+      }
+
+      filterTickets();
+    }
+
+    function filterTickets() {
+      const cat = document.getElementById('crm-category-filter').value;
+      const stat = document.getElementById('crm-status-filter').value;
+      const q = document.getElementById('crm-search-input').value.toLowerCase().trim();
+
+      let list = [...crmTickets];
+      if (cat !== 'All') list = list.filter(t => t.category === cat);
+      if (stat !== 'All') list = list.filter(t => t.status === stat);
+      if (q) {
+        list = list.filter(t => 
+          t.ticket_number.toLowerCase().includes(q) ||
+          t.customer_name.toLowerCase().includes(q) ||
+          t.customer_email.toLowerCase().includes(q) ||
+          t.subject.toLowerCase().includes(q) ||
+          (t.order_number && t.order_number.toLowerCase().includes(q))
+        );
+      }
+
+      // Update KPI
+      document.getElementById('crm-total-tickets').innerText = crmTickets.length;
+      document.getElementById('crm-urgent-tickets').innerText = crmTickets.filter(t => t.priority === 'Urgent' && t.status !== 'Resolved').length;
+
+      renderTicketsTable(list);
+    }
+
+    function renderTicketsTable(list) {
+      const tbody = document.getElementById('crm-tickets-table-body');
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-10 text-gray-400">No support inquiries found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(t => {
+        const priorityColors = {
+          'Urgent': 'bg-red-100 text-red-800 border-red-300',
+          'High': 'bg-amber-100 text-amber-800 border-amber-300',
+          'Medium': 'bg-blue-100 text-blue-800 border-blue-300',
+          'Low': 'bg-gray-100 text-gray-700 border-gray-300'
+        };
+
+        const statusColors = {
+          'Open': 'bg-purple-100 text-purple-800',
+          'In Progress': 'bg-amber-100 text-amber-800',
+          'Resolved': 'bg-green-100 text-green-800',
+          'Closed': 'bg-gray-100 text-gray-700'
+        };
+
+        return `
+          <tr class="hover:bg-gray-50 transition cursor-pointer" onclick="openTicketDetails('${t.id}')">
+            <td class="py-3 px-4 font-mono font-bold text-fyn-forest">${t.ticket_number}</td>
+            <td class="py-3 px-4">
+              <div class="font-bold text-gray-900">${t.customer_name}</div>
+              <div class="text-[11px] text-gray-500">${t.customer_email}</div>
+            </td>
+            <td class="py-3 px-4 max-w-xs truncate">
+              <span class="font-bold text-gray-800 block truncate">${t.subject}</span>
+              <span class="text-[11px] text-gray-400 block truncate">${t.message}</span>
+            </td>
+            <td class="py-3 px-4 font-semibold text-gray-700">${t.category}</td>
+            <td class="py-3 px-4 font-mono text-[11px] font-bold text-fyn-forest">${t.order_number || '-'}</td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${priorityColors[t.priority] || ''}">
+                ${t.priority}
+              </span>
+            </td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${statusColors[t.status] || ''}">
+                ${t.status}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-right">
+              <button class="px-2.5 py-1 rounded bg-fyn-sand hover:bg-fyn-sand-dark text-fyn-forest font-bold text-[11px]">
+                Inspect & Reply
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function openTicketDetails(id) {
+      const t = crmTickets.find(item => item.id === id);
+      if (!t) return;
+
+      document.getElementById('td-hidden-id').value = t.id;
+      document.getElementById('td-hidden-email').value = t.customer_email;
+      document.getElementById('td-hidden-name').value = t.customer_name;
+      document.getElementById('td-hidden-tck').value = t.ticket_number;
+
+      document.getElementById('td-ticket-num').innerText = t.ticket_number;
+      document.getElementById('td-subject').innerText = t.subject;
+      document.getElementById('td-cust-name').innerText = t.customer_name;
+      document.getElementById('td-cust-email').innerText = t.customer_email;
+      document.getElementById('td-cust-phone').innerText = t.customer_phone || 'No phone provided';
+      document.getElementById('td-order-num').innerText = t.order_number || 'General Inquiry';
+      document.getElementById('td-message').innerText = t.message;
+
+      document.getElementById('td-status-select').value = t.status;
+      document.getElementById('td-priority-select').value = t.priority;
+
+      const replyContainer = document.getElementById('td-previous-reply-container');
+      const replyText = document.getElementById('td-previous-reply-text');
+      if (t.admin_reply) {
+        replyContainer.classList.remove('hidden');
+        replyText.innerText = t.admin_reply;
+      } else {
+        replyContainer.classList.add('hidden');
+      }
+
+      document.getElementById('td-reply-body').value = '';
+      document.getElementById('modal-ticket-details').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeTicketDetailsModal() {
+      document.getElementById('modal-ticket-details').classList.add('hidden');
+    }
+
+    async function handleQuickStatusUpdate() {
+      const id = document.getElementById('td-hidden-id').value;
+      const status = document.getElementById('td-status-select').value;
+      const priority = document.getElementById('td-priority-select').value;
+
+      try {
+        if (supabaseClient) {
+          await supabaseClient.from('fyn_crm_tickets').update({
+            status: status,
+            priority: priority,
+            updated_at: new Date().toISOString()
+          }).eq('id', id);
+        }
+        await loadCrmTickets();
+        closeTicketDetailsModal();
+        alert("Status updated.");
+      } catch (e) {
+        alert("Error: " + e.message);
+      }
+    }
+
+    async function handleSendTicketReply(e) {
+      e.preventDefault();
+      const id = document.getElementById('td-hidden-id').value;
+      const email = document.getElementById('td-hidden-email').value;
+      const name = document.getElementById('td-hidden-name').value;
+      const tck = document.getElementById('td-hidden-tck').value;
+      const reply = document.getElementById('td-reply-body').value.trim();
+      const status = document.getElementById('td-status-select').value;
+      const priority = document.getElementById('td-priority-select').value;
+
+      try {
+        if (supabaseClient) {
+          // 1. Update ticket in Supabase
+          await supabaseClient.from('fyn_crm_tickets').update({
+            admin_reply: reply,
+            status: 'Resolved',
+            priority: priority,
+            updated_at: new Date().toISOString()
+          }).eq('id', id);
+
+          // 2. Dispatch Customer Reply Email
+          const emailHtml = `
+            <div style="font-family:'Montserrat', Arial, sans-serif; max-width:600px; margin:0 auto; background:#FAF8F5; border:1px solid #ECE7DC; border-radius:12px; overflow:hidden;">
+              <div style="background:#1D3C34; color:#fff; padding:20px; text-align:center;">
+                <h1 style="margin:0; font-size:24px; font-weight:800;">FYN SUPPORT</h1>
+                <p style="margin:4px 0 0; font-size:11px; text-transform:uppercase; color:#D4AF37;">Ticket Response: ${tck}</p>
+              </div>
+              <div style="padding:24px; background:#fff;">
+                <p style="font-size:14px; color:#1D3C34; font-weight:bold;">Hello ${name},</p>
+                <p style="font-size:13px; color:#4a5568; line-height:1.6;">Our support team has reviewed your inquiry (Ticket <strong>${tck}</strong>):</p>
+                
+                <div style="background:#F7F5F0; padding:16px; border-radius:8px; margin:16px 0; border-left:4px solid #1D3C34; font-size:13px; color:#171918;">
+                  ${reply.replace(/\n/g, '<br>')}
+                </div>
+
+                <p style="font-size:12px; color:#718096;">If you have any further questions, simply reply to this email or contact support@fynbrand.com.</p>
+                <p style="font-style:italic; font-size:12px; color:#1D3C34; margin-top:20px;">"TRAVEL. LEARN. IMPROVE. FIND YOUR NORTH."</p>
+              </div>
+            </div>
+          `;
+
+          await supabaseClient.from('fyn_email_logs').insert([{
+            order_number: tck,
+            recipient_email: email,
+            subject: `✓ Response to Your FYN Support Ticket: ${tck}`,
+            email_type: 'Support Reply',
+            html_content: emailHtml,
+            status: 'Sent'
+          }]);
+        }
+
+        closeTicketDetailsModal();
+        await loadCrmTickets();
+        alert(`Reply sent to ${email} and ticket marked Resolved!`);
+
+      } catch (err) {
+        alert("Error sending reply: " + err.message);
+      }
+    }
+
+    function openNewTicketModal() {
+      document.getElementById('modal-new-ticket').classList.remove('hidden');
+    }
+
+    function closeNewTicketModal() {
+      document.getElementById('modal-new-ticket').classList.add('hidden');
+    }
+
+    async function handleCreateNewTicket(e) {
+      e.preventDefault();
+      const name = document.getElementById('new-tck-name').value;
+      const email = document.getElementById('new-tck-email').value;
+      const phone = document.getElementById('new-tck-phone').value;
+      const order = document.getElementById('new-tck-order').value || null;
+      const category = document.getElementById('new-tck-category').value;
+      const priority = document.getElementById('new-tck-priority').value;
+      const subject = document.getElementById('new-tck-subject').value;
+      const message = document.getElementById('new-tck-message').value;
+      const ticketNum = 'TCK-' + Math.floor(1000 + Math.random() * 9000);
+
+      try {
+        if (supabaseClient) {
+          await supabaseClient.from('fyn_crm_tickets').insert([{
+            ticket_number: ticketNum,
+            customer_name: name,
+            customer_email: email,
+            customer_phone: phone,
+            order_number: order,
+            category: category,
+            priority: priority,
+            status: 'Open',
+            subject: subject,
+            message: message
+          }]);
+        }
+        closeNewTicketModal();
+        await loadCrmTickets();
+        alert(`Ticket ${ticketNum} logged successfully!`);
+      } catch (err) {
+        alert("Error logging ticket: " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>

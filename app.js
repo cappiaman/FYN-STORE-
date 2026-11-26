@@ -927,3 +927,65 @@ function toggleMobileMenu() {
   const m = document.getElementById('mobile-menu');
   if (m) m.classList.toggle('hidden');
 }
+
+// Help & Support CRM Inquiries
+function openHelpModal() {
+  document.getElementById('help-modal').classList.remove('hidden');
+  document.getElementById('help-form-container').classList.remove('hidden');
+  document.getElementById('help-success-state').classList.add('hidden');
+  if (window.lucide) lucide.createIcons();
+}
+
+function closeHelpModal() {
+  document.getElementById('help-modal').classList.add('hidden');
+}
+
+async function handleHelpSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('help-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = `<span class="animate-spin inline-block mr-1">↻</span> Submitting...`;
+
+  const name = document.getElementById('help-name').value.trim();
+  const email = document.getElementById('help-email').value.trim();
+  const phone = document.getElementById('help-phone').value.trim();
+  const orderNum = document.getElementById('help-order').value.trim();
+  const category = document.getElementById('help-category').value;
+  const subject = document.getElementById('help-subject').value.trim();
+  const message = document.getElementById('help-message').value.trim();
+
+  const ticketNum = `TCK-${Math.floor(1000 + Math.random() * 9000)}`;
+
+  // Priority logic based on category
+  let priority = 'Medium';
+  if (category === 'Payment Issue') priority = 'Urgent';
+  else if (category === 'Refund / Cancellation' || category === 'Order Tracking & Delivery') priority = 'High';
+
+  try {
+    if (supabaseClient) {
+      await supabaseClient.from('fyn_crm_tickets').insert([{
+        ticket_number: ticketNum,
+        customer_name: name,
+        customer_email: email,
+        customer_phone: phone || null,
+        order_number: orderNum || null,
+        category: category,
+        priority: priority,
+        status: 'Open',
+        subject: subject,
+        message: message
+      }]);
+    }
+  } catch (err) {
+    console.warn("Supabase CRM ticket insert error:", err);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = `<i data-lucide="send" class="w-3.5 h-3.5"></i><span>Submit Ticket to CRM</span>`;
+
+  document.getElementById('help-ticket-reference').innerText = ticketNum;
+  document.getElementById('help-form-container').classList.add('hidden');
+  document.getElementById('help-success-state').classList.remove('hidden');
+  document.getElementById('help-ticket-form').reset();
+  if (window.lucide) lucide.createIcons();
+}

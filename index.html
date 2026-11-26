@@ -410,15 +410,24 @@
 
         <!-- Admin & Support -->
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Store Administration</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Store Administration & CRM</h4>
           <ul class="space-y-2 text-xs text-fyn-stone">
             <li><a href="admin.html" class="text-fyn-gold font-bold hover:underline flex items-center space-x-1">
               <i data-lucide="shield" class="w-3.5 h-3.5"></i>
               <span>Hostinger Admin Dashboard</span>
             </a></li>
-            <li><span>Order Fulfilment & Tracking Dispatch</span></li>
-            <li><span>Direct Bank Payment Link Testing</span></li>
-            <li><span>Customer Email Notifications</span></li>
+            <li><a href="crm.html" target="_blank" class="hover:text-white flex items-center space-x-1">
+              <i data-lucide="life-buoy" class="w-3.5 h-3.5 text-blue-400"></i>
+              <span>CRM Support Hub (New Tab) ↗</span>
+            </a></li>
+            <li><a href="marketing.html" target="_blank" class="hover:text-white flex items-center space-x-1">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5 text-purple-400"></i>
+              <span>Marketing & Meta/Google Ads (New Tab) ↗</span>
+            </a></li>
+            <li><button onclick="openHelpModal()" class="text-fyn-sand hover:underline flex items-center space-x-1">
+              <i data-lucide="message-square" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <span>Submit Help Ticket / Inquiry</span>
+            </button></li>
           </ul>
         </div>
 
@@ -875,6 +884,119 @@
           Carry With Me
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- 7. FLOATING HELP & CONCIERGE BUTTON -->
+  <div class="fixed bottom-6 right-6 z-40">
+    <button onclick="openHelpModal()" class="flex items-center space-x-2 bg-fyn-forest hover:bg-fyn-forest-light text-white px-4 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 border border-fyn-sand/30 group">
+      <div class="relative">
+        <i data-lucide="help-circle" class="w-5 h-5 text-fyn-gold"></i>
+        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-400 rounded-full animate-ping"></span>
+        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full"></span>
+      </div>
+      <span class="font-bold text-xs tracking-wide group-hover:text-fyn-sand">Need Help? / Support</span>
+    </button>
+  </div>
+
+  <!-- 8. CUSTOMER HELP & SUPPORT CRM INQUIRY MODAL -->
+  <div id="help-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      
+      <button onclick="closeHelpModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-fyn-sand text-fyn-forest flex items-center justify-center">
+          <i data-lucide="life-buoy" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="font-brand font-bold text-lg text-fyn-forest-dark">FYN Customer Concierge</h3>
+          <p class="text-xs text-gray-500">Inquiries, payment help, size exchanges & tracking</p>
+        </div>
+      </div>
+
+      <div id="help-form-container">
+        <form id="help-ticket-form" onsubmit="handleHelpSubmit(event)" class="space-y-3.5 text-xs">
+          
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-semibold text-gray-700 mb-1">Your Full Name *</label>
+              <input type="text" id="help-name" required placeholder="e.g. Rahul Verma" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+            <div>
+              <label class="block font-semibold text-gray-700 mb-1">Email Address *</label>
+              <input type="email" id="help-email" required placeholder="rahul@example.com" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-semibold text-gray-700 mb-1">Mobile (Optional)</label>
+              <input type="tel" id="help-phone" placeholder="+91 98765 43210" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+            </div>
+            <div>
+              <label class="block font-semibold text-gray-700 mb-1">Order # (If applicable)</label>
+              <input type="text" id="help-order" placeholder="FYN-IND-2026-..." class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest font-mono">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Inquiry Category *</label>
+            <select id="help-category" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest font-medium">
+              <option value="Payment Issue">Payment Issue / Bank Link Failure</option>
+              <option value="Order Tracking & Delivery">Order Tracking & Delivery Status</option>
+              <option value="Size & Exchange">Size, Fit & Product Exchange</option>
+              <option value="Product Inquiry">Product Inquiry & Specifications</option>
+              <option value="Refund / Cancellation">Refund & Cancellation Request</option>
+              <option value="General Support">General Support & Expedition Feedback</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Subject *</label>
+            <input type="text" id="help-subject" required placeholder="Brief subject of your inquiry" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">How can we assist you? *</label>
+            <textarea id="help-message" rows="3" required placeholder="Describe your question or issue in detail..." class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest"></textarea>
+          </div>
+
+          <div class="pt-2 flex justify-end space-x-2">
+            <button type="button" onclick="closeHelpModal()" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 font-semibold hover:bg-gray-50">
+              Cancel
+            </button>
+            <button type="submit" id="help-submit-btn" class="px-5 py-2 rounded-lg bg-fyn-forest text-white font-bold hover:bg-fyn-forest-light transition flex items-center space-x-1.5 shadow">
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+              <span>Submit Ticket to CRM</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Ticket Success State -->
+      <div id="help-success-state" class="hidden text-center py-6">
+        <div class="w-14 h-14 bg-green-100 text-green-700 rounded-full flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="check" class="w-8 h-8"></i>
+        </div>
+        <h4 class="font-brand font-bold text-lg text-fyn-forest-dark mb-1">Ticket Submitted Successfully!</h4>
+        <p class="text-xs text-gray-500 mb-4">Your inquiry has been logged in our real-time CRM database.</p>
+        
+        <div class="bg-fyn-sand p-3.5 rounded-xl border border-gray-200 text-xs mb-5 font-mono">
+          <span class="text-gray-500 block text-[11px] font-sans">Ticket Tracking Reference:</span>
+          <span class="text-fyn-forest font-bold text-base" id="help-ticket-reference">TCK-1099</span>
+        </div>
+
+        <p class="text-[11px] text-gray-500 mb-6">Our concierge team will review and reply to your email within 2 to 4 business hours.</p>
+
+        <button onclick="closeHelpModal()" class="w-full py-2.5 rounded-xl bg-fyn-forest text-white font-bold text-xs hover:bg-fyn-forest-light">
+          Done
+        </button>
+      </div>
+
     </div>
   </div>
 
