@@ -29,8 +29,10 @@ const server = http.createServer((req, res) => {
 
   // If AI agent requests markdown or accepts markdown on root
   const acceptHeader = (req.headers['accept'] || '').toLowerCase();
+  let forceMarkdown = false;
   if ((safePath === '/' || safePath === '/index.html') && acceptHeader.includes('text/markdown')) {
-    safePath = '/llms.txt';
+    safePath = '/index.md';
+    forceMarkdown = true;
   } else if (safePath === '/' || safePath === '') {
     safePath = '/index.html';
   } else if (safePath === '/.well-known/mcp' || safePath === '/.well-known/mcp.json') {
@@ -60,7 +62,11 @@ const server = http.createServer((req, res) => {
     }
 
     const ext = path.extname(filePath).toLowerCase();
-    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+    let contentType = MIME_TYPES[ext] || 'application/octet-stream';
+
+    if (forceMarkdown || ext === '.md' || safePath.includes('llms.txt')) {
+      contentType = 'text/markdown; charset=utf-8';
+    }
 
     res.writeHead(200, {
       'Content-Type': contentType,
