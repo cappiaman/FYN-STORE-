@@ -69,40 +69,91 @@
     img, svg, video { max-width: 100%; }
     body { font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #171918; }
     
-    .fyn-glass-card {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(236, 231, 220, 0.95);
-      box-shadow: 0 10px 25px -5px rgba(29, 60, 52, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Apple-Style Glassmorphism & Liquid Translucent Aesthetics */
+    .fyn-mountain-fixed-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(to bottom, rgba(250, 248, 245, 0.45) 0%, rgba(244, 241, 232, 0.35) 60%, rgba(250, 248, 245, 0.75) 100%),
+        url('brand_assets/fyn_mountain_artwork.png');
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-attachment: fixed;
+      opacity: 0.22;
     }
-    .fyn-glass-card:hover {
-      box-shadow: 0 18px 35px -8px rgba(29, 60, 52, 0.1);
-      transform: translateY(-2px);
+
+    /* Apple-Caliber Ultra-Clear Liquid Frosted Glass */
+    .fyn-liquid-card, .fyn-glass-card {
+      background: rgba(255, 255, 255, 0.72) !important;
+      backdrop-filter: blur(28px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 
+        0 4px 6px -1px rgba(29, 60, 52, 0.03), 
+        0 12px 32px -4px rgba(29, 60, 52, 0.08),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9) !important;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
+    .fyn-liquid-card:hover, .fyn-glass-card:hover {
+      background: rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 
+        0 10px 15px -3px rgba(29, 60, 52, 0.05), 
+        0 24px 44px -8px rgba(29, 60, 52, 0.12),
+        inset 0 1px 2px 0 rgba(255, 255, 255, 1) !important;
+      transform: translateY(-3px) scale(1.005);
+    }
+
+    /* Apple Translucent Buttons */
     .fyn-btn-primary {
-      background: #1D3C34;
+      background: rgba(29, 60, 52, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 4px 14px rgba(29, 60, 52, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 4px 14px rgba(29, 60, 52, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .fyn-btn-primary:hover { background: #142A24; box-shadow: 0 8px 24px rgba(29, 60, 52, 0.35); transform: translateY(-1.5px); }
-    .fyn-btn-primary:active { transform: scale(0.98); }
+    .fyn-btn-primary:hover {
+      background: rgba(20, 42, 36, 1);
+      box-shadow: 0 8px 24px rgba(29, 60, 52, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transform: translateY(-1.5px);
+    }
+    .fyn-btn-primary:active {
+      transform: scale(0.98);
+    }
+
     .fyn-btn-secondary {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
       color: #1D3C34;
-      border: 1px solid rgba(29, 60, 52, 0.22);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 12px rgba(29, 60, 52, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .fyn-btn-secondary:hover { background: #ffffff; border-color: #1D3C34; box-shadow: 0 6px 18px rgba(29, 60, 52, 0.12); transform: translateY(-1.5px); }
+    .fyn-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.88);
+      border-color: rgba(29, 60, 52, 0.3);
+      box-shadow: 0 6px 20px rgba(29, 60, 52, 0.12);
+      transform: translateY(-1.5px);
+    }
+    .fyn-btn-secondary:active {
+      transform: scale(0.98);
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5] overflow-x-clip max-w-[100vw] w-full relative">
+
+  <!-- Fixed Panoramic Himalayan Mountain Backdrop (Behind Everything) -->
+  <div class="fyn-mountain-fixed-bg" aria-hidden="true"></div>
+
+  <!-- Content Container (Flows over background in liquid glass boxes) -->
+  <div class="relative z-10 w-full">
 
   <!-- TOP ANNOUNCEMENT BAR -->
   <div class="w-full bg-fyn-forest-dark text-fyn-sand text-xs py-2.5 px-3 sm:px-4 border-b border-fyn-forest/40 overflow-hidden">
@@ -634,6 +685,8 @@
       </form>
     </div>
   </div>
+
+  </div><!-- End of relative z-10 w-full -->
 
   <!-- Scripts -->
   <script src="app.js"></script>

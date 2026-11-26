@@ -53,16 +53,44 @@
     *, *::before, *::after { box-sizing: border-box; }
     html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
     body { font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #171918; }
-    .fyn-glass-card {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(236, 231, 220, 0.95);
-      box-shadow: 0 10px 25px -5px rgba(29, 60, 52, 0.05);
+    /* Apple-Style Glassmorphism & Liquid Translucent Aesthetics */
+    .fyn-mountain-fixed-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(to bottom, rgba(250, 248, 245, 0.45) 0%, rgba(244, 241, 232, 0.35) 60%, rgba(250, 248, 245, 0.75) 100%),
+        url('brand_assets/fyn_mountain_artwork.png');
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-attachment: fixed;
+      opacity: 0.22;
+    }
+
+    .fyn-liquid-card, .fyn-glass-card {
+      background: rgba(255, 255, 255, 0.72) !important;
+      backdrop-filter: blur(28px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 
+        0 4px 6px -1px rgba(29, 60, 52, 0.03), 
+        0 12px 32px -4px rgba(29, 60, 52, 0.08),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9) !important;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
   </style>
 </head>
-<body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5]">
+<body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5] relative">
+
+  <!-- Fixed Panoramic Himalayan Mountain Backdrop (Behind Everything) -->
+  <div class="fyn-mountain-fixed-bg" aria-hidden="true"></div>
+
+  <!-- Page Content Container -->
+  <div class="relative z-10 w-full">
 
   <!-- TOP BAR -->
   <div class="w-full bg-fyn-forest-dark text-fyn-sand text-xs py-2.5 px-4 border-b border-fyn-forest/40">
@@ -297,6 +325,8 @@
       </div>
     </div>
   </footer>
+
+  </div><!-- End of relative z-10 w-full -->
 
   <script src="app.js"></script>
   <script>

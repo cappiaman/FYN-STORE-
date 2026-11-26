@@ -284,30 +284,58 @@
       pointer-events: none;
     }
 
-    /* Classy Glassmorphism Effects & Luxury Elevation */
-    .fyn-glass-card {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(236, 231, 220, 0.95);
-      box-shadow: 0 10px 25px -5px rgba(29, 60, 52, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .fyn-glass-card:hover {
-      box-shadow: 0 18px 35px -8px rgba(29, 60, 52, 0.1);
-      transform: translateY(-2px);
+    /* Apple-Style Glassmorphism & Liquid Translucent Aesthetics */
+    .fyn-mountain-fixed-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(to bottom, rgba(250, 248, 245, 0.45) 0%, rgba(244, 241, 232, 0.35) 60%, rgba(250, 248, 245, 0.75) 100%),
+        url('brand_assets/fyn_mountain_artwork.png');
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-attachment: fixed;
+      opacity: 0.22;
     }
 
+    /* Apple-Caliber Ultra-Clear Liquid Frosted Glass */
+    .fyn-liquid-card, .fyn-glass-card {
+      background: rgba(255, 255, 255, 0.72) !important;
+      backdrop-filter: blur(28px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 
+        0 4px 6px -1px rgba(29, 60, 52, 0.03), 
+        0 12px 32px -4px rgba(29, 60, 52, 0.08),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9) !important;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .fyn-liquid-card:hover, .fyn-glass-card:hover {
+      background: rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 
+        0 10px 15px -3px rgba(29, 60, 52, 0.05), 
+        0 24px 44px -8px rgba(29, 60, 52, 0.12),
+        inset 0 1px 2px 0 rgba(255, 255, 255, 1) !important;
+      transform: translateY(-3px) scale(1.005);
+    }
+
+    /* Apple Translucent Buttons */
     .fyn-btn-primary {
-      background: #1D3C34;
+      background: rgba(29, 60, 52, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 4px 14px rgba(29, 60, 52, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 4px 14px rgba(29, 60, 52, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .fyn-btn-primary:hover {
-      background: #142A24;
-      box-shadow: 0 8px 24px rgba(29, 60, 52, 0.35);
+      background: rgba(20, 42, 36, 1);
+      box-shadow: 0 8px 24px rgba(29, 60, 52, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
       transform: translateY(-1.5px);
     }
     .fyn-btn-primary:active {
@@ -315,18 +343,18 @@
     }
 
     .fyn-btn-secondary {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
       color: #1D3C34;
-      border: 1px solid rgba(29, 60, 52, 0.22);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 12px rgba(29, 60, 52, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .fyn-btn-secondary:hover {
-      background: #ffffff;
-      border-color: #1D3C34;
-      box-shadow: 0 6px 18px rgba(29, 60, 52, 0.12);
+      background: rgba(255, 255, 255, 0.88);
+      border-color: rgba(29, 60, 52, 0.3);
+      box-shadow: 0 6px 20px rgba(29, 60, 52, 0.12);
       transform: translateY(-1.5px);
     }
     .fyn-btn-secondary:active {
@@ -346,6 +374,12 @@
   </style>
 </head>
 <body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5] overflow-x-hidden w-full relative">
+
+  <!-- Fixed Panoramic Himalayan Mountain Backdrop (Behind Everything) -->
+  <div class="fyn-mountain-fixed-bg" aria-hidden="true"></div>
+
+  <!-- Page Content Wrapper (Flows smoothly over mountain background in liquid glass boxes) -->
+  <div class="relative z-10 w-full">
 
   <!-- SECRET OWNER / ADMIN COMMAND BAR (ONLY UNLOCKED VIA URL CODE ?admin=fyn OR ?code=fyn2026) -->
   <div id="secret-admin-bar" class="hidden bg-stone-900 text-white text-xs py-2.5 px-4 border-b border-fyn-gold/50 shadow-lg sticky top-0 z-50">
@@ -562,12 +596,7 @@
   <!-- ======================================================== -->
   <!-- 1. HERO SECTION: CURRENT SEASON SPOTLIGHT & OFFERS -->
   <!-- ======================================================== -->
-  <section class="w-full relative bg-gradient-to-b from-[#F7F5F0] via-[#F4F1E8] to-[#FAF8F5] overflow-hidden py-12 sm:py-20 border-b border-fyn-sand-dark">
-    
-    <!-- Authentic Vector Mountain Skyline Artwork in Background -->
-    <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-20 sm:opacity-25 flex justify-center items-end overflow-hidden select-none">
-      <img src="brand_assets/fyn_mountain_artwork.png" alt="FYN Himalayan Ridge" class="w-full max-w-7xl h-auto object-cover object-bottom translate-y-2">
-    </div>
+  <section class="w-full relative overflow-hidden py-12 sm:py-20 border-b border-fyn-sand-dark/70">
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
@@ -590,22 +619,22 @@
 
           <!-- Current Season Promotional Offer Strip -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-8 max-w-2xl text-left">
-            <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 shadow-xs">
+            <div class="fyn-liquid-card p-3 rounded-2xl border border-white/60 shadow-xs">
               <span class="text-[10px] font-extrabold uppercase text-fyn-gold block">PROMO OFFER</span>
               <p class="text-xs font-bold text-fyn-forest-dark">20% OFF Code</p>
               <span class="text-[11px] font-mono font-bold text-fyn-forest">NORTH20</span>
             </div>
-            <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 shadow-xs">
+            <div class="fyn-liquid-card p-3 rounded-2xl border border-white/60 shadow-xs">
               <span class="text-[10px] font-extrabold uppercase text-emerald-700 block">SHIPPING</span>
               <p class="text-xs font-bold text-fyn-forest-dark">Free Delivery</p>
               <span class="text-[11px] text-gray-500">Orders ₹1,999+</span>
             </div>
-            <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 shadow-xs">
+            <div class="fyn-liquid-card p-3 rounded-2xl border border-white/60 shadow-xs">
               <span class="text-[10px] font-extrabold uppercase text-blue-700 block">SEASON DROP</span>
               <p class="text-xs font-bold text-fyn-forest-dark">480 GSM Cotton</p>
               <span class="text-[11px] text-gray-500">French Terry</span>
             </div>
-            <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 shadow-xs">
+            <div class="fyn-liquid-card p-3 rounded-2xl border border-white/60 shadow-xs">
               <span class="text-[10px] font-extrabold uppercase text-purple-700 block">EXPEDITIONS</span>
               <p class="text-xs font-bold text-fyn-forest-dark">Travel Circle</p>
               <span class="text-[11px] text-emerald-700 font-bold">100% Free Join</span>
@@ -628,13 +657,13 @@
 
         <!-- Right Hero Mockup Collage with Classy Shadow -->
         <div class="lg:col-span-5 relative mt-6 lg:mt-0">
-          <div class="fyn-glass-card p-3 sm:p-3.5 rounded-3xl shadow-xl overflow-hidden relative">
+          <div class="fyn-liquid-card p-3 sm:p-3.5 rounded-3xl overflow-hidden relative">
             <img 
               src="brand_assets/fyn_brand_overview.jpg" 
               alt="FYN Brand Mockup Kit" 
               class="w-full h-auto rounded-2xl object-cover hover:scale-[1.01] transition-transform duration-500"
             >
-            <div class="absolute bottom-5 left-5 bg-fyn-forest/95 backdrop-blur-md text-white px-4 py-2.5 rounded-xl shadow-lg border border-white/20 flex items-center space-x-3">
+            <div class="absolute bottom-5 left-5 bg-fyn-forest/90 backdrop-blur-xl text-white px-4 py-2.5 rounded-2xl shadow-xl border border-white/25 flex items-center space-x-3">
               <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-5 h-5 invert brightness-200">
               <div>
                 <p class="text-[10px] font-bold tracking-widest text-fyn-gold uppercase">OFFICIAL STORE</p>
@@ -1848,6 +1877,8 @@
 
     </div>
   </div>
+
+  </div><!-- End of relative z-10 w-full wrapper -->
 
   <!-- APPLICATION SCRIPTS -->
   <script src="app.js"></script>
