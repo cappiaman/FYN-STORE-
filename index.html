@@ -407,13 +407,13 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20 gap-2 sm:gap-4">
         
-        <!-- Brand Logo (Secret 5-tap gesture unlocks admin) -->
-        <a href="index.html" onclick="handleLogoClick(event)" class="flex-shrink min-w-0 flex items-center group cursor-pointer" title="FYN - Find Your North">
-          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-8 sm:h-11 w-auto max-w-[160px] xs:max-w-[200px] sm:max-w-[270px] object-contain transition-transform group-hover:scale-[1.02]">
+        <!-- Brand Logo (flex-shrink-0 guarantees it never gets compressed or overlapped) -->
+        <a href="index.html" onclick="handleLogoClick(event)" class="flex-shrink-0 flex items-center group cursor-pointer mr-2 sm:mr-4 lg:mr-6" title="FYN - Find Your North">
+          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-7 sm:h-8 md:h-9 w-auto max-w-[160px] sm:max-w-[190px] object-contain transition-transform group-hover:scale-[1.02]">
         </a>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center space-x-7 text-xs sm:text-sm font-semibold tracking-wide text-fyn-charcoal uppercase">
+        <!-- Desktop Navigation (flex-shrink-0 with refined spacing) -->
+        <nav class="hidden lg:flex items-center space-x-3.5 xl:space-x-6 text-xs font-semibold tracking-wide text-fyn-charcoal uppercase flex-shrink-0">
           <button onclick="filterCategory('All')" class="nav-link text-fyn-forest font-bold hover:text-fyn-forest-light transition">All Drops</button>
           <button onclick="filterCategory('Apparel')" class="nav-link hover:text-fyn-forest transition">Apparel</button>
           <button onclick="filterCategory('Travel Gear')" class="nav-link hover:text-fyn-forest transition">Travel Gear</button>
@@ -430,35 +430,35 @@
         </nav>
 
         <!-- Right Action Icons -->
-        <div class="flex items-center space-x-1.5 sm:space-x-3 flex-shrink-0">
+        <div class="flex items-center space-x-1.5 sm:space-x-2.5 flex-shrink-0 ml-auto">
           
-          <!-- Search Bar (Annotated for WebMCP & Browser Agents) -->
-          <form class="relative hidden md:block" role="search" toolname="searchProducts" tooldescription="Search FYN catalog for gear, apparel and drops" onsubmit="event.preventDefault()">
+          <!-- Search Bar: visible on xl to prevent crowding on laptops -->
+          <form class="relative hidden xl:block" role="search" toolname="searchProducts" tooldescription="Search FYN catalog for gear, apparel and drops" onsubmit="event.preventDefault()">
             <input 
               type="text" 
               id="search-input" 
               name="query"
               placeholder="Search drops, gear & quotes..." 
               oninput="handleSearch(this.value)"
-              class="w-36 lg:w-44 xl:w-56 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
+              class="w-36 lg:w-44 xl:w-52 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
             >
             <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"></i>
           </form>
 
-          <!-- Currency Indicator: visible on md+ -->
-          <span class="hidden md:inline-flex px-2.5 py-1 rounded-full bg-fyn-sand text-fyn-forest font-bold text-xs border border-gray-200 shadow-xs">
+          <!-- Currency Indicator: visible on 2xl or xl -->
+          <span class="hidden 2xl:inline-flex px-2.5 py-1 rounded-full bg-fyn-sand text-fyn-forest font-bold text-xs border border-gray-200 shadow-xs">
             ₹ INR
           </span>
 
-          <!-- Wisdom Generator Icon: visible on sm+ (also in mobile drawer) -->
+          <!-- Wisdom Generator Icon -->
           <button onclick="showRandomQuoteModal()" title="Draw Compass Wisdom" class="hidden sm:inline-flex p-2 text-fyn-forest hover:text-fyn-gold hover:bg-fyn-sand rounded-full transition">
             <i data-lucide="compass" class="w-5 h-5"></i>
           </button>
 
           <!-- Customer Account / Login Button -->
-          <button onclick="handleCustomerAccountClick()" id="nav-customer-btn" class="fyn-btn-secondary flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-full transition whitespace-nowrap">
+          <button onclick="handleCustomerAccountClick()" id="nav-customer-btn" class="fyn-btn-secondary flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-full transition whitespace-nowrap max-w-[160px] truncate">
             <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-gold flex-shrink-0"></i>
-            <span id="nav-customer-label" class="hidden sm:inline">Sign In</span>
+            <span id="nav-customer-label" class="hidden sm:inline truncate">Sign In</span>
           </button>
 
           <!-- Cart Drawer Button -->
