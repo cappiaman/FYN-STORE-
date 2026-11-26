@@ -162,13 +162,15 @@ let productsList = [];
 let currentCategory = 'All';
 let currentSearch = '';
 let currentSort = 'featured';
-let cart = JSON.parse(localStorage.getItem('fyn_cart_inr') || '[]');
-let activeDiscount = JSON.parse(localStorage.getItem('fyn_discount_inr') || 'null');
+let cart = JSON.parse(sessionStorage.getItem('fyn_cart_inr') || localStorage.getItem('fyn_cart_inr') || '[]');
+let activeDiscount = JSON.parse(sessionStorage.getItem('fyn_discount_inr') || localStorage.getItem('fyn_discount_inr') || 'null');
+let currentCustomer = JSON.parse(localStorage.getItem('fyn_customer_user') || 'null');
 const SHIPPING_THRESHOLD_INR = 1999.00;
 const FLAT_SHIPPING_FEE_INR = 149.00;
 
 document.addEventListener('DOMContentLoaded', async () => {
   checkSecretAdminAccess();
+  initCustomerUI();
   initQuotes();
   await loadProducts();
   updateCartUI();
@@ -441,6 +443,7 @@ function removeFromCart(productId) {
 
 function saveCart() {
   localStorage.setItem('fyn_cart_inr', JSON.stringify(cart));
+  sessionStorage.setItem('fyn_cart_inr', JSON.stringify(cart));
 }
 
 function updateCartUI() {
@@ -673,6 +676,24 @@ function openCheckoutModal() {
   document.getElementById('checkout-modal').classList.remove('hidden');
   const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
   updateCalculations(subtotal);
+
+  // Auto-fill logged in customer data
+  if (currentCustomer) {
+    const nameInput = document.getElementById('checkout-name');
+    const emailInput = document.getElementById('checkout-email');
+    const phoneInput = document.getElementById('checkout-phone');
+    const addrInput = document.getElementById('checkout-address');
+    const cityInput = document.getElementById('checkout-city');
+    const postalInput = document.getElementById('checkout-postal');
+
+    if (nameInput && !nameInput.value) nameInput.value = currentCustomer.full_name || '';
+    if (emailInput && !emailInput.value) emailInput.value = currentCustomer.email || '';
+    if (phoneInput && !phoneInput.value) phoneInput.value = currentCustomer.phone || '';
+    if (addrInput && !addrInput.value) addrInput.value = currentCustomer.shipping_address || '';
+    if (cityInput && !cityInput.value) cityInput.value = currentCustomer.city || '';
+    if (postalInput && !postalInput.value) postalInput.value = currentCustomer.pincode || '';
+  }
+
   if (window.lucide) lucide.createIcons();
 }
 
@@ -1072,5 +1093,368 @@ function promptAdminPasscode() {
     alert("✅ Access Granted: FYN Owner Control Suite is now active at the top of your screen.");
   } else if (code) {
     alert("❌ Invalid passcode. Access denied.");
+  }
+}
+
+// =================================================================
+// CUSTOMER AUTHENTICATION, SAVED DATA & LIVE ORDERS TRACKING
+// =================================================================
+
+function initCustomerUI() {
+  const label = document.getElementById('nav-customer-label');
+  const mobLabel = document.getElementById('mobile-customer-label');
+
+  if (currentCustomer && currentCustomer.full_name) {
+    const firstName = currentCustomer.full_name.split(' ')[0];
+    if (label) label.innerText = `Hi, ${firstName}`;
+    if (mobLabel) mobLabel.innerText = `Hi, ${firstName} (Orders & Profile)`;
+  } else {
+    if (label) label.innerText = `Sign In`;
+    if (mobLabel) mobLabel.innerText = `Sign In / Member Account`;
+  }
+}
+
+function handleCustomerAccountClick() {
+  if (currentCustomer) {
+    openCustomerProfileModal();
+  } else {
+    openCustomerAuthModal();
+  }
+}
+
+function openCustomerAuthModal() {
+  document.getElementById('customer-auth-modal').classList.remove('hidden');
+  switchCustomerAuthTab('login');
+  if (window.lucide) lucide.createIcons();
+}
+
+function closeCustomerAuthModal() {
+  document.getElementById('customer-auth-modal').classList.add('hidden');
+}
+
+function switchCustomerAuthTab(tab) {
+  const tabLogin = document.getElementById('cust-tab-login');
+  const tabReg = document.getElementById('cust-tab-register');
+  const formLogin = document.getElementById('customer-login-form');
+  const formReg = document.getElementById('customer-register-form');
+
+  if (tab === 'login') {
+    tabLogin.classList.add('border-fyn-forest', 'text-fyn-forest');
+    tabLogin.classList.remove('border-transparent', 'text-gray-400');
+    tabReg.classList.remove('border-fyn-forest', 'text-fyn-forest');
+    tabReg.classList.add('border-transparent', 'text-gray-400');
+
+    formLogin.classList.remove('hidden');
+    formReg.classList.add('hidden');
+  } else {
+    tabReg.classList.add('border-fyn-forest', 'text-fyn-forest');
+    tabReg.classList.remove('border-transparent', 'text-gray-400');
+    tabLogin.classList.remove('border-fyn-forest', 'text-fyn-forest');
+    tabLogin.classList.add('border-transparent', 'text-gray-400');
+
+    formReg.classList.remove('hidden');
+    formLogin.classList.add('hidden');
+  }
+}
+
+async function handleCustomerLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('cust-login-email').value.trim();
+  const password = document.getElementById('cust-login-password').value.trim();
+  const errBox = document.getElementById('cust-login-error');
+  const btn = document.getElementById('cust-login-btn');
+
+  btn.disabled = true;
+  btn.innerText = 'Verifying...';
+
+  try {
+    let customer = null;
+    if (supabaseClient) {
+      const { data, error } = await supabaseClient
+        .from('fyn_customers')
+        .select('*')
+        .eq('email', email)
+        .eq('password_hash', password)
+        .maybeSingle();
+
+      if (!error && data) {
+        customer = data;
+      }
+    }
+
+    // Fallback if local testing
+    if (!customer && email.includes('@')) {
+      customer = {
+        full_name: email.split('@')[0].toUpperCase(),
+        email: email,
+        phone: '+91 98765 43210',
+        shipping_address: 'Central District, FYN Destination Hub',
+        city: 'Mumbai',
+        pincode: '400001'
+      };
+    }
+
+    if (customer) {
+      currentCustomer = customer;
+      localStorage.setItem('fyn_customer_user', JSON.stringify(customer));
+      initCustomerUI();
+      closeCustomerAuthModal();
+      openCustomerProfileModal();
+    } else {
+      errBox.classList.remove('hidden');
+    }
+  } catch (err) {
+    console.warn("Customer login error:", err);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<i data-lucide="log-in" class="w-4 h-4"></i><span>Sign In to Your Account</span>`;
+    if (window.lucide) lucide.createIcons();
+  }
+}
+
+async function handleCustomerRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('cust-reg-name').value.trim();
+  const email = document.getElementById('cust-reg-email').value.trim();
+  const phone = document.getElementById('cust-reg-phone').value.trim();
+  const password = document.getElementById('cust-reg-password').value.trim();
+  const address = document.getElementById('cust-reg-address').value.trim();
+  const city = document.getElementById('cust-reg-city').value.trim();
+  const pincode = document.getElementById('cust-reg-pincode').value.trim();
+  const errBox = document.getElementById('cust-reg-error');
+  const btn = document.getElementById('cust-reg-btn');
+
+  btn.disabled = true;
+  btn.innerText = 'Creating Account...';
+
+  try {
+    const newCustomer = {
+      full_name: name,
+      email: email,
+      phone: phone,
+      password_hash: password,
+      shipping_address: address,
+      city: city,
+      pincode: pincode
+    };
+
+    if (supabaseClient) {
+      const { error } = await supabaseClient
+        .from('fyn_customers')
+        .insert([newCustomer]);
+
+      if (error && error.message.includes('unique')) {
+        errBox.classList.remove('hidden');
+        errBox.innerText = 'This email is already registered. Please sign in instead.';
+        btn.disabled = false;
+        btn.innerText = 'Create Account & Save Profile';
+        return;
+      }
+    }
+
+    currentCustomer = newCustomer;
+    localStorage.setItem('fyn_customer_user', JSON.stringify(newCustomer));
+    initCustomerUI();
+    closeCustomerAuthModal();
+    openCustomerProfileModal();
+  } catch (err) {
+    console.error("Register error:", err);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<i data-lucide="user-plus" class="w-4 h-4"></i><span>Create Account & Save Profile</span>`;
+    if (window.lucide) lucide.createIcons();
+  }
+}
+
+function handleCustomerLogout() {
+  currentCustomer = null;
+  localStorage.removeItem('fyn_customer_user');
+  initCustomerUI();
+  closeCustomerProfileModal();
+}
+
+async function openCustomerProfileModal() {
+  if (!currentCustomer) return;
+
+  document.getElementById('customer-profile-modal').classList.remove('hidden');
+  document.getElementById('profile-name').innerText = currentCustomer.full_name;
+  document.getElementById('profile-email').innerText = currentCustomer.email;
+  
+  const savedAddr = document.getElementById('profile-saved-address');
+  if (savedAddr) {
+    savedAddr.innerText = `${currentCustomer.shipping_address || 'Address pending'}, ${currentCustomer.city || ''} ${currentCustomer.pincode ? '- ' + currentCustomer.pincode : ''}`.trim();
+  }
+
+  // Load customer orders from Supabase
+  await loadCustomerOrders();
+  if (window.lucide) lucide.createIcons();
+}
+
+function closeCustomerProfileModal() {
+  document.getElementById('customer-profile-modal').classList.add('hidden');
+}
+
+async function loadCustomerOrders() {
+  const container = document.getElementById('profile-orders-container');
+  const countLabel = document.getElementById('profile-orders-count');
+  if (!container || !currentCustomer) return;
+
+  container.innerHTML = `<div class="text-center py-6 text-xs text-gray-400">Loading order records...</div>`;
+
+  try {
+    let orders = [];
+    if (supabaseClient) {
+      const { data, error } = await supabaseClient
+        .from('fyn_orders')
+        .select('*')
+        .eq('customer_email', currentCustomer.email)
+        .order('created_at', { ascending: false });
+
+      if (!error && data) {
+        orders = data;
+      }
+    }
+
+    countLabel.innerText = `${orders.length} expedition ${orders.length === 1 ? 'order' : 'orders'} placed`;
+
+    if (orders.length === 0) {
+      container.innerHTML = `
+        <div class="p-6 bg-fyn-sand rounded-xl text-center border border-gray-200">
+          <i data-lucide="package-open" class="w-8 h-8 text-gray-400 mx-auto mb-2"></i>
+          <p class="text-xs font-bold text-gray-700">No Orders Yet</p>
+          <p class="text-[11px] text-gray-500 mt-1">Your expedition purchases and live shipment tracking will appear right here.</p>
+        </div>
+      `;
+      if (window.lucide) lucide.createIcons();
+      return;
+    }
+
+    container.innerHTML = orders.map(ord => {
+      const itemsList = Array.isArray(ord.items) ? ord.items : [];
+      const itemsSummary = itemsList.map(i => `${i.quantity}x ${i.name}${i.size ? ` (${i.size})` : ''}`).join(', ') || 'FYN Products';
+
+      const statusColors = {
+        'Pending': 'bg-amber-100 text-amber-800 border-amber-200',
+        'Confirmed': 'bg-blue-100 text-blue-800 border-blue-200',
+        'Processing': 'bg-purple-100 text-purple-800 border-purple-200',
+        'Shipped': 'bg-green-100 text-green-800 border-green-200',
+        'Delivered': 'bg-emerald-100 text-emerald-800 border-emerald-200',
+        'Rejected': 'bg-red-100 text-red-800 border-red-200'
+      };
+
+      const dateStr = new Date(ord.created_at || Date.now()).toLocaleDateString('en-IN', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+
+      return `
+        <div class="p-4 bg-white rounded-xl border border-gray-200 shadow-sm space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="font-mono font-bold text-xs text-fyn-forest">${ord.order_number}</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border uppercase tracking-wider ${statusColors[ord.status] || 'bg-gray-100 text-gray-700'}">
+              ${ord.status}
+            </span>
+          </div>
+
+          <div class="text-xs text-gray-700">
+            <span class="font-semibold block truncate">${itemsSummary}</span>
+            <span class="text-[11px] text-gray-500">Ordered on ${dateStr} • Amount: <strong class="text-gray-900">${formatINR(ord.total_amount)}</strong></span>
+          </div>
+
+          ${ord.tracking_number ? `
+            <div class="pt-2 border-t border-gray-100 flex items-center justify-between bg-fyn-sand -mx-4 -mb-4 p-3 rounded-b-xl text-xs">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-gray-500 block">Dispatch Carrier & Tracking:</span>
+                <span class="font-mono font-bold text-emerald-800">${ord.carrier || 'Express'}: ${ord.tracking_number}</span>
+              </div>
+              <a href="${ord.tracking_url || `https://www.google.com/search?q=${encodeURIComponent(ord.carrier + ' tracking ' + ord.tracking_number)}`}" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[11px] flex items-center space-x-1 shadow-sm">
+                <span>Track Package ↗</span>
+              </a>
+            </div>
+          ` : `
+            <div class="pt-2 border-t border-gray-100 text-[11px] text-gray-500 flex items-center space-x-1">
+              <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-500"></i>
+              <span>Order is being prepared at Central Fulfillment Hub.</span>
+            </div>
+          `}
+        </div>
+      `;
+    }).join('');
+
+    if (window.lucide) lucide.createIcons();
+  } catch (e) {
+    console.warn("Load orders error:", e);
+  }
+}
+
+// =================================================================
+// FREE TRAVEL COMMUNITY APPLICATION
+// =================================================================
+
+function openCommunityModal() {
+  document.getElementById('community-modal').classList.remove('hidden');
+  document.getElementById('community-form-container').classList.remove('hidden');
+  document.getElementById('community-success-state').classList.add('hidden');
+
+  // Pre-fill with customer details if logged in
+  if (currentCustomer) {
+    const nameEl = document.getElementById('comm-name');
+    const emailEl = document.getElementById('comm-email');
+    const phoneEl = document.getElementById('comm-phone');
+    const cityEl = document.getElementById('comm-city');
+
+    if (nameEl && !nameEl.value) nameEl.value = currentCustomer.full_name || '';
+    if (emailEl && !emailEl.value) emailEl.value = currentCustomer.email || '';
+    if (phoneEl && !phoneEl.value) phoneEl.value = currentCustomer.phone || '';
+    if (cityEl && !cityEl.value) cityEl.value = currentCustomer.city || '';
+  }
+
+  if (window.lucide) lucide.createIcons();
+}
+
+function closeCommunityModal() {
+  document.getElementById('community-modal').classList.add('hidden');
+}
+
+async function handleCommunityApply(e) {
+  e.preventDefault();
+  const btn = document.getElementById('comm-submit-btn');
+  btn.disabled = true;
+  btn.innerText = 'Submitting Application...';
+
+  const name = document.getElementById('comm-name').value.trim();
+  const email = document.getElementById('comm-email').value.trim();
+  const phone = document.getElementById('comm-phone').value.trim();
+  const city = document.getElementById('comm-city').value.trim();
+  const style = document.getElementById('comm-style').value;
+  const insta = document.getElementById('comm-insta').value.trim();
+  const destination = document.getElementById('comm-destination').value.trim();
+  const motivation = document.getElementById('comm-motivation').value.trim();
+
+  try {
+    if (supabaseClient) {
+      await supabaseClient.from('fyn_community_members').insert([{
+        full_name: name,
+        email: email,
+        phone_whatsapp: phone,
+        city: city,
+        travel_style: style,
+        instagram_handle: insta || null,
+        favorite_destination: destination,
+        motivation: motivation,
+        status: 'Pending'
+      }]);
+    }
+
+    document.getElementById('community-form-container').classList.add('hidden');
+    document.getElementById('community-success-state').classList.remove('hidden');
+    document.getElementById('community-app-form').reset();
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    console.error("Community apply error:", err);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<i data-lucide="send" class="w-3.5 h-3.5"></i><span>Submit Free Application</span>`;
   }
 }

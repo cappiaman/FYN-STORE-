@@ -74,7 +74,7 @@
               type="email" 
               id="admin-email" 
               required 
-              value="admin@fyn.com"
+              placeholder="admin@fyn.com"
               class="w-full text-xs pl-9 pr-3 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest"
             >
             <i data-lucide="mail" class="w-4 h-4 text-gray-400 absolute left-3 top-3"></i>
@@ -88,7 +88,7 @@
               type="password" 
               id="admin-password" 
               required 
-              value="fyn2026"
+              placeholder="••••••••"
               class="w-full text-xs pl-9 pr-3 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest"
             >
             <i data-lucide="lock" class="w-4 h-4 text-gray-400 absolute left-3 top-3"></i>
@@ -107,7 +107,10 @@
       </form>
 
       <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
-        <span>Demo: admin@fyn.com / fyn2026</span>
+        <span class="flex items-center space-x-1 text-gray-400">
+          <i data-lucide="lock" class="w-3 h-3"></i>
+          <span>Strict Executive Authentication</span>
+        </span>
         <a href="index.html" class="text-fyn-forest font-bold hover:underline flex items-center space-x-1">
           <i data-lucide="arrow-left" class="w-3 h-3"></i>
           <span>Live Storefront</span>
@@ -305,6 +308,12 @@
         <button onclick="switchTab('emails')" id="tab-btn-emails" class="admin-tab py-3 px-5 border-b-2 border-transparent text-gray-500 hover:text-fyn-forest flex items-center space-x-2">
           <i data-lucide="mail" class="w-4 h-4"></i>
           <span>Customer Email Dispatcher & Logs</span>
+        </button>
+
+        <button onclick="switchTab('community')" id="tab-btn-community" class="admin-tab py-3 px-5 border-b-2 border-transparent text-gray-500 hover:text-fyn-forest flex items-center space-x-2">
+          <i data-lucide="compass" class="w-4 h-4 text-emerald-600"></i>
+          <span>Travel Community & Approvals</span>
+          <span id="tab-community-pending-badge" class="ml-1 bg-emerald-600 text-white px-2 py-0.5 rounded-full text-[10px] hidden">0</span>
         </button>
       </div>
 
@@ -509,6 +518,56 @@
               </thead>
               <tbody id="emails-table-body" class="divide-y divide-gray-100">
                 <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 6: TRAVEL COMMUNITY & GROUP APPROVALS -->
+      <!-- ============================================== -->
+      <div id="tab-content-community" class="hidden space-y-4">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-gray-200">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="p-1.5 rounded-lg bg-emerald-100 text-emerald-800">
+                <i data-lucide="compass" class="w-4 h-4"></i>
+              </span>
+              <h3 class="text-sm font-bold text-fyn-forest-dark">FYN Free Travel Community Applications</h3>
+            </div>
+            <p class="text-xs text-gray-500 mt-1">Review explorer applications, approve members, and automatically send official WhatsApp Community Group invite links.</p>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <select id="community-status-filter" onchange="filterCommunityApplicants(this.value)" class="text-xs px-3 py-1.5 rounded-lg border border-gray-200 bg-white font-semibold">
+              <option value="All">All Applications</option>
+              <option value="Pending" selected>Pending Review</option>
+              <option value="Approved">Approved Members</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Community Applicants Table -->
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-gray-600">
+              <thead class="bg-gray-50 text-gray-700 uppercase font-bold border-b border-gray-200 text-[10px] tracking-wider">
+                <tr>
+                  <th class="py-3 px-4">Applicant Name</th>
+                  <th class="py-3 px-4">Contact (WhatsApp / Email)</th>
+                  <th class="py-3 px-4">City</th>
+                  <th class="py-3 px-4">Travel Style</th>
+                  <th class="py-3 px-4">Dream Summit / Destination</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Review Action</th>
+                </tr>
+              </thead>
+              <tbody id="community-table-body" class="divide-y divide-gray-100">
+                <!-- Rendered dynamically -->
               </tbody>
             </table>
           </div>

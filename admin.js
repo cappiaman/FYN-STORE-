@@ -74,7 +74,7 @@ function switchTab(tabId) {
     activeBtn.classList.remove('border-transparent', 'text-gray-500');
   }
 
-  ['orders', 'products', 'discounts', 'customers', 'emails'].forEach(t => {
+  ['orders', 'products', 'discounts', 'customers', 'emails', 'community'].forEach(t => {
     const el = document.getElementById(`tab-content-${t}`);
     if (el) el.classList.add('hidden');
   });
@@ -95,7 +95,8 @@ async function loadAllDashboardData() {
     loadAdminOrders(),
     loadAdminProducts(),
     loadAdminDiscounts(),
-    loadAdminEmails()
+    loadAdminEmails(),
+    loadCommunityApplicants()
   ]);
   updateMetrics();
   renderCustomersTable();
@@ -1079,4 +1080,194 @@ function initDashboardCharts() {
       }
     });
   }
+}
+
+// ==========================================
+// 5. TRAVEL COMMUNITY & GROUP APPROVALS
+// ==========================================
+
+let communityApplicants = [];
+
+async function loadCommunityApplicants() {
+  try {
+    if (supabaseClient) {
+      const { data, error } = await supabaseClient
+        .from('fyn_community_members')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && data) {
+        communityApplicants = data;
+      }
+    }
+  } catch (e) {
+    console.warn("Community applicants load error:", e);
+  }
+
+  const pendingCount = communityApplicants.filter(c => c.status === 'Pending').length;
+  const badge = document.getElementById('tab-community-pending-badge');
+  if (badge) {
+    if (pendingCount > 0) {
+      badge.innerText = pendingCount;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  filterCommunityApplicants('Pending');
+}
+
+function filterCommunityApplicants(status) {
+  let list = [...communityApplicants];
+  if (status !== 'All') {
+    list = list.filter(a => a.status === status);
+  }
+  renderCommunityTable(list);
+}
+
+function renderCommunityTable(list) {
+  const tbody = document.getElementById('community-table-body');
+  if (!tbody) return;
+
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" class="py-10 text-center text-gray-400">No community applications matching selected filter.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(app => {
+    const statusClasses = {
+      'Pending': 'bg-amber-100 text-amber-800 border-amber-200',
+      'Approved': 'bg-emerald-100 text-emerald-800 border-emerald-200',
+      'Rejected': 'bg-gray-100 text-gray-600 border-gray-200'
+    };
+
+    return `
+      <tr class="hover:bg-gray-50 transition">
+        <td class="py-3.5 px-4 font-bold text-gray-900">
+          <div>${app.full_name}</div>
+          ${app.instagram_handle ? `<div class="text-[11px] text-pink-600 font-mono">@${app.instagram_handle}</div>` : ''}
+        </td>
+        <td class="py-3.5 px-4">
+          <div class="font-bold text-emerald-700 flex items-center space-x-1">
+            <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+            <span>${app.phone_whatsapp || '-'}</span>
+          </div>
+          <div class="text-[11px] text-gray-500">${app.email}</div>
+        </td>
+        <td class="py-3.5 px-4 text-gray-700 font-medium">${app.city || '-'}</td>
+        <td class="py-3.5 px-4">
+          <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-fyn-sand text-fyn-forest border border-fyn-sand-dark">
+            ${app.travel_style || 'Explorer'}
+          </span>
+        </td>
+        <td class="py-3.5 px-4 max-w-xs">
+          <div class="font-bold text-gray-800 truncate">${app.favorite_destination || '-'}</div>
+          ${app.motivation ? `<div class="text-[11px] text-gray-500 italic truncate">"${app.motivation}"</div>` : ''}
+        </td>
+        <td class="py-3.5 px-4">
+          <span class="px-2.5 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${statusClasses[app.status] || 'bg-gray-100 text-gray-700'}">
+            ${app.status}
+          </span>
+        </td>
+        <td class="py-3.5 px-4 text-right">
+          ${app.status === 'Pending' ? `
+            <div class="flex items-center justify-end space-x-1.5">
+              <button onclick="approveCommunityApplicant('${app.id}', '${escapeAttr(app.full_name)}', '${escapeAttr(app.email)}', '${escapeAttr(app.phone_whatsapp)}')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition flex items-center space-x-1 shadow">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                <span>Approve & Invite</span>
+              </button>
+              <button onclick="rejectCommunityApplicant('${app.id}')" class="px-2.5 py-1.5 rounded-lg border border-gray-300 text-gray-600 font-semibold text-xs hover:bg-red-50 hover:text-red-600">
+                <i data-lucide="x" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          ` : `
+            <span class="text-xs text-gray-400 font-semibold">${app.status === 'Approved' ? '✓ Group Invite Sent' : 'Archived'}</span>
+          `}
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  if (window.lucide) lucide.createIcons();
+}
+
+async function approveCommunityApplicant(id, name, email, phone) {
+  const whatsappLink = "https://chat.whatsapp.com/invite/FYN-Summiteers-Global";
+  
+  try {
+    if (supabaseClient) {
+      // 1. Update applicant status
+      await supabaseClient
+        .from('fyn_community_members')
+        .update({
+          status: 'Approved',
+          whatsapp_group_link: whatsappLink,
+          approved_at: new Date().toISOString()
+        })
+        .eq('id', id);
+
+      // 2. Log confirmation email dispatch
+      const emailSubject = `Welcome to FYN Explorer Circle, ${name}! Your Group Invite is Inside`;
+      const emailHtml = `
+        <div style="font-family: 'Montserrat', sans-serif; max-width: 600px; margin: 0 auto; background: #FAF9F6; padding: 24px; border-radius: 12px; border: 1px solid #E5E1D8;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: #1D3C34; margin: 0; font-size: 24px; font-weight: 800;">FYN — FIND YOUR NORTH</h2>
+            <p style="color: #8D9093; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;">Travel. Learn. Improve.</p>
+          </div>
+          <div style="background: #ffffff; padding: 24px; border-radius: 10px; border: 1px solid #ECE7DC;">
+            <h3 style="color: #1D3C34; font-size: 18px; margin-top: 0;">Congratulations, ${name}!</h3>
+            <p style="color: #4A4D4E; font-size: 13px; line-height: 1.6;">
+              Your application to join the <strong>FYN Global Travel & Explorer Community</strong> has been approved by our expedition team.
+            </p>
+            <p style="color: #4A4D4E; font-size: 13px; line-height: 1.6;">
+              Click below to join the private WhatsApp group to connect with fellow summit seekers, coordinate group treks across India, and receive secret technical drops:
+            </p>
+            <div style="text-align: center; margin: 25px 0;">
+              <a href="${whatsappLink}" style="background: #1D3C34; color: #D4AF37; padding: 14px 28px; font-weight: bold; font-size: 13px; text-decoration: none; border-radius: 8px; display: inline-block;">
+                Join Official FYN WhatsApp Community Group ↗
+              </a>
+            </div>
+            <p style="color: #8D9093; font-size: 11px; font-style: italic; text-align: center; margin-bottom: 0;">
+              "The compass is inside you. Follow your own trajectory."
+            </p>
+          </div>
+        </div>
+      `;
+
+      await supabaseClient.from('fyn_email_logs').insert([{
+        recipient_email: email,
+        subject: emailSubject,
+        email_type: 'Community Approval',
+        html_content: emailHtml,
+        status: 'Sent'
+      }]);
+    }
+
+    alert(`✓ Applicant Approved! Welcome email with WhatsApp invite sent to ${email}`);
+    await loadCommunityApplicants();
+    await loadAdminEmails();
+  } catch (err) {
+    console.error("Community approval error:", err);
+  }
+}
+
+async function rejectCommunityApplicant(id) {
+  if (!confirm("Are you sure you want to decline this community application?")) return;
+  try {
+    if (supabaseClient) {
+      await supabaseClient
+        .from('fyn_community_members')
+        .update({ status: 'Rejected' })
+        .eq('id', id);
+    }
+    await loadCommunityApplicants();
+  } catch (e) {
+    console.warn("Reject error:", e);
+  }
+}
+
+function escapeAttr(str) {
+  if (!str) return '';
+  return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 }
