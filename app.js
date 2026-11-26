@@ -273,10 +273,10 @@ function renderProducts(items) {
       : null;
 
     return `
-      <div class="group bg-white rounded-2xl border border-fyn-sand-dark hover:border-fyn-forest/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden transform hover:-translate-y-1">
+      <div class="group fyn-glass-card rounded-2xl hover:border-fyn-forest/50 transition-all duration-300 flex flex-col overflow-hidden transform hover:-translate-y-1.5">
         
         <!-- Image & Badges -->
-        <div class="relative overflow-hidden bg-fyn-sand aspect-[4/3] flex items-center justify-center p-2">
+        <div class="relative overflow-hidden bg-fyn-sand/80 aspect-[4/3] flex items-center justify-center p-2">
           <img 
             src="${product.image_url}" 
             alt="${product.name}" 
@@ -287,12 +287,12 @@ function renderProducts(items) {
           <!-- Badges -->
           <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
             ${product.badge ? `
-              <span class="inline-block px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase rounded-full bg-fyn-forest text-white shadow-sm">
+              <span class="inline-block px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase rounded-full bg-fyn-forest text-white shadow-sm border border-white/20">
                 ${product.badge}
               </span>
             ` : ''}
             ${discountPercent ? `
-              <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-600 text-white shadow-sm">
+              <span class="inline-block px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-600 text-white shadow-sm border border-white/20">
                 -${discountPercent}%
               </span>
             ` : ''}
@@ -301,7 +301,7 @@ function renderProducts(items) {
           <!-- Quick View Trigger -->
           <button 
             onclick="openQuickView('${product.id}')"
-            class="absolute bottom-3 right-3 p-2 bg-white/90 backdrop-blur-md rounded-full text-fyn-forest opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:bg-fyn-forest hover:text-white"
+            class="absolute bottom-3 right-3 p-2 bg-white/95 backdrop-blur-md rounded-full text-fyn-forest border border-fyn-sand-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:bg-fyn-forest hover:text-white"
             title="Inspect"
           >
             <i data-lucide="eye" class="w-4 h-4"></i>
@@ -312,7 +312,7 @@ function renderProducts(items) {
         <div class="p-5 flex-1 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between text-[11px] text-gray-500 mb-1.5 font-bold uppercase tracking-wider">
-              <span class="text-fyn-forest/90">${product.category}</span>
+              <span class="text-fyn-forest/90 font-extrabold">${product.category}</span>
               <div class="flex items-center space-x-1 text-amber-500">
                 <span>★</span>
                 <span>${product.rating || '4.9'}</span>
@@ -325,7 +325,7 @@ function renderProducts(items) {
             </h3>
 
             <!-- Inscribed Quote -->
-            <div class="mt-2.5 mb-3 p-2 rounded-lg bg-fyn-sand border border-fyn-sand-dark text-[11px] text-fyn-forest font-serif italic flex items-start space-x-1.5">
+            <div class="mt-2.5 mb-3 p-2 rounded-lg bg-fyn-sand/80 border border-fyn-sand-dark text-[11px] text-fyn-forest font-serif italic flex items-start space-x-1.5">
               <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-3 h-3 flex-shrink-0 mt-0.5">
               <span class="line-clamp-2">"${product.quote || 'Find your true north.'}"</span>
             </div>
@@ -346,7 +346,7 @@ function renderProducts(items) {
 
             <button 
               onclick="addToCart('${product.id}')"
-              class="px-4 py-2 rounded-xl bg-fyn-forest text-white text-xs font-bold hover:bg-fyn-forest-light transition flex items-center space-x-1.5 shadow active:scale-95 uppercase tracking-wider"
+              class="fyn-btn-primary px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 uppercase tracking-wider"
             >
               <i data-lucide="plus" class="w-3.5 h-3.5"></i>
               <span>Add</span>

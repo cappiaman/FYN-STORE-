@@ -246,28 +246,91 @@
   </script>
 
   <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    img, svg, video {
+      max-width: 100%;
+    }
     body {
       font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
       background-color: #FAF8F5;
       color: #171918;
     }
-    
-    /* Subtle Mountain Line-Art & Topo Vector Watermark */
-    .bg-topo-hint {
-      background-image: radial-gradient(#1D3C34 0.75px, transparent 0.75px), radial-gradient(#8D9093 0.5px, #FAF8F5 0.5px);
-      background-size: 30px 30px;
-      background-position: 0 0, 15px 15px;
+
+    /* Authentic Mountain Ridge Graphics (No Dots) */
+    .fyn-mountain-skyline {
+      background-image: url('brand_assets/fyn_mountain_artwork.png');
+      background-repeat: no-repeat;
+      background-position: bottom right;
+      background-size: 700px auto;
+      opacity: 0.12;
+      pointer-events: none;
     }
 
-    .mountain-line-art {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none' opacity='0.06'%3E%3Cpath d='M0,120 L180,60 L320,95 L480,30 L640,85 L820,15 L980,70 L1200,40 L1200,120 Z' fill='%231D3C34'/%3E%3Cpath d='M0,120 L220,75 L380,105 L560,45 L720,90 L900,35 L1060,80 L1200,60 L1200,120 Z' fill='%238D9093' opacity='0.5'/%3E%3C/svg%3E");
+    .fyn-mountain-banner {
+      background-image: url('brand_assets/fyn_mountain_artwork.png');
       background-repeat: repeat-x;
-      background-position: bottom;
-      background-size: 1000px 80px;
+      background-position: bottom center;
+      background-size: 850px auto;
+      opacity: 0.16;
+      pointer-events: none;
     }
 
-    .topo-lines-overlay {
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10c20-5 40 10 60 5s20-15 30-10' stroke='%231D3C34' stroke-width='0.5' fill='none' opacity='0.05'/%3E%3Cpath d='M0 40c25 5 45-10 70-5s20 15 30 10' stroke='%231D3C34' stroke-width='0.5' fill='none' opacity='0.05'/%3E%3Cpath d='M15 70c20-10 50 15 75 0' stroke='%231D3C34' stroke-width='0.5' fill='none' opacity='0.05'/%3E%3C/svg%3E");
+    /* Classy Glassmorphism Effects & Luxury Elevation */
+    .fyn-glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(236, 231, 220, 0.95);
+      box-shadow: 0 10px 25px -5px rgba(29, 60, 52, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fyn-glass-card:hover {
+      box-shadow: 0 18px 35px -8px rgba(29, 60, 52, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .fyn-btn-primary {
+      background: #1D3C34;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 14px rgba(29, 60, 52, 0.25);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fyn-btn-primary:hover {
+      background: #142A24;
+      box-shadow: 0 8px 24px rgba(29, 60, 52, 0.35);
+      transform: translateY(-1.5px);
+    }
+    .fyn-btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .fyn-btn-secondary {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #1D3C34;
+      border: 1px solid rgba(29, 60, 52, 0.22);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fyn-btn-secondary:hover {
+      background: #ffffff;
+      border-color: #1D3C34;
+      box-shadow: 0 6px 18px rgba(29, 60, 52, 0.12);
+      transform: translateY(-1.5px);
+    }
+    .fyn-btn-secondary:active {
+      transform: scale(0.98);
     }
 
     ::-webkit-scrollbar {
@@ -282,7 +345,7 @@
     }
   </style>
 </head>
-<body class="antialiased selection:bg-fyn-forest selection:text-white bg-topo-hint">
+<body class="antialiased selection:bg-fyn-forest selection:text-white bg-[#FAF8F5] overflow-x-hidden w-full relative">
 
   <!-- SECRET OWNER / ADMIN COMMAND BAR (ONLY UNLOCKED VIA URL CODE ?admin=fyn OR ?code=fyn2026) -->
   <div id="secret-admin-bar" class="hidden bg-stone-900 text-white text-xs py-2.5 px-4 border-b border-fyn-gold/50 shadow-lg sticky top-0 z-50">
@@ -316,37 +379,37 @@
   </div>
 
   <!-- TOP ANNOUNCEMENT BAR: INR FREE SHIPPING & LIFE QUOTE -->
-  <div class="bg-fyn-forest-dark text-fyn-sand text-xs py-2.5 px-4 border-b border-fyn-forest/40">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-fyn-gold/20 text-fyn-gold border border-fyn-gold/40 uppercase tracking-wider">
+  <div class="w-full bg-fyn-forest-dark text-fyn-sand text-xs py-2.5 px-3 sm:px-4 border-b border-fyn-forest/40 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+      <div class="flex items-center space-x-2 truncate">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-fyn-gold/20 text-fyn-gold border border-fyn-gold/40 uppercase tracking-wider flex-shrink-0">
           FYN DROP
         </span>
-        <span class="hidden md:inline font-medium">✨ FREE Express Shipping across India on orders over ₹1,999 | Use Code: <strong class="text-white tracking-wider underline">NORTH20</strong> for 20% OFF</span>
-        <span class="md:hidden font-medium">Code NORTH20 for 20% OFF (₹ Orders)</span>
+        <span class="hidden md:inline font-medium truncate">✨ FREE Express Shipping across India on orders over ₹1,999 | Use Code: <strong class="text-white tracking-wider underline">NORTH20</strong> for 20% OFF</span>
+        <span class="md:hidden font-medium truncate">Code NORTH20 for 20% OFF (₹ Orders)</span>
       </div>
 
       <!-- Life Quote Ticker -->
-      <div class="hidden lg:flex items-center space-x-2 text-fyn-stone italic text-xs font-serif">
+      <div class="hidden lg:flex items-center space-x-2 text-fyn-stone italic text-xs font-serif flex-shrink-0">
         <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="FYN" class="w-3.5 h-3.5 invert brightness-200 opacity-70">
         <span id="header-quote-text">"TRAVEL. LEARN. IMPROVE. Find your true north."</span>
       </div>
 
-      <div class="flex items-center space-x-3 text-[11px]">
-        <span class="text-fyn-stone">Currency:</span>
+      <div class="flex items-center space-x-2 text-[11px] flex-shrink-0">
+        <span class="text-fyn-stone hidden sm:inline">Currency:</span>
         <span class="text-white font-semibold">INR (₹)</span>
       </div>
     </div>
   </div>
 
   <!-- NAVIGATION HEADER -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20 gap-3">
+  <header class="w-full sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-fyn-sand-dark shadow-sm transition-all duration-300 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-2 sm:gap-4">
         
         <!-- Brand Logo (Secret 5-tap gesture unlocks admin) -->
-        <a href="index.html" onclick="handleLogoClick(event)" class="flex-shrink-0 flex items-center group cursor-pointer" title="FYN - Find Your North">
-          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-9 sm:h-11 w-auto max-w-[210px] sm:max-w-[270px] object-contain transition-transform group-hover:scale-[1.02]">
+        <a href="index.html" onclick="handleLogoClick(event)" class="flex-shrink min-w-0 flex items-center group cursor-pointer" title="FYN - Find Your North">
+          <img src="brand_assets/fyn_horizontal_lockup_forest_green.png" alt="FYN - Find Your North" class="h-8 sm:h-11 w-auto max-w-[160px] xs:max-w-[200px] sm:max-w-[270px] object-contain transition-transform group-hover:scale-[1.02]">
         </a>
 
         <!-- Desktop Navigation -->
@@ -367,7 +430,7 @@
         </nav>
 
         <!-- Right Action Icons -->
-        <div class="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
+        <div class="flex items-center space-x-1.5 sm:space-x-3 flex-shrink-0">
           
           <!-- Search Bar (Annotated for WebMCP & Browser Agents) -->
           <form class="relative hidden md:block" role="search" toolname="searchProducts" tooldescription="Search FYN catalog for gear, apparel and drops" onsubmit="event.preventDefault()">
@@ -377,25 +440,25 @@
               name="query"
               placeholder="Search drops, gear & quotes..." 
               oninput="handleSearch(this.value)"
-              class="w-44 xl:w-60 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
+              class="w-36 lg:w-44 xl:w-56 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
             >
             <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"></i>
           </form>
 
-          <!-- Currency Indicator -->
-          <span class="px-2 py-1 rounded bg-fyn-sand text-fyn-forest font-bold text-xs border border-gray-200">
+          <!-- Currency Indicator: visible on md+ -->
+          <span class="hidden md:inline-flex px-2.5 py-1 rounded-full bg-fyn-sand text-fyn-forest font-bold text-xs border border-gray-200 shadow-xs">
             ₹ INR
           </span>
 
-          <!-- Wisdom Generator Icon -->
-          <button onclick="showRandomQuoteModal()" title="Draw Compass Wisdom" class="p-2 text-fyn-forest hover:text-fyn-gold hover:bg-fyn-sand rounded-full transition">
+          <!-- Wisdom Generator Icon: visible on sm+ (also in mobile drawer) -->
+          <button onclick="showRandomQuoteModal()" title="Draw Compass Wisdom" class="hidden sm:inline-flex p-2 text-fyn-forest hover:text-fyn-gold hover:bg-fyn-sand rounded-full transition">
             <i data-lucide="compass" class="w-5 h-5"></i>
           </button>
 
           <!-- Customer Account / Login Button -->
-          <button onclick="handleCustomerAccountClick()" id="nav-customer-btn" class="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-fyn-sand text-fyn-forest border border-fyn-forest/20 hover:bg-fyn-forest hover:text-white transition whitespace-nowrap">
-            <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-gold"></i>
-            <span id="nav-customer-label">Sign In</span>
+          <button onclick="handleCustomerAccountClick()" id="nav-customer-btn" class="fyn-btn-secondary flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-full transition whitespace-nowrap">
+            <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-gold flex-shrink-0"></i>
+            <span id="nav-customer-label" class="hidden sm:inline">Sign In</span>
           </button>
 
           <!-- Cart Drawer Button -->
@@ -407,7 +470,7 @@
           </button>
 
           <!-- Mobile Toggle -->
-          <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-fyn-forest hover:bg-fyn-sand rounded-lg">
+          <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-fyn-forest hover:bg-fyn-sand rounded-lg" aria-label="Toggle Navigation">
             <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
@@ -449,19 +512,20 @@
     </div>
   </header>
 
-  <!-- HERO SECTION: CLEAN LIFESTYLE WITH SUBTLE MOUNTAIN GRAPHIC WATERMARK -->
-  <section class="relative bg-gradient-to-b from-[#F7F5F0] via-[#F4F1E8] to-[#FAF8F5] overflow-hidden py-14 sm:py-20 border-b border-fyn-sand-dark">
+  <!-- HERO SECTION: CLASSY MOUNTAIN WATERMARK BANNER & GLASSMORPHISM -->
+  <section class="w-full relative bg-gradient-to-b from-[#F7F5F0] via-[#F4F1E8] to-[#FAF8F5] overflow-hidden py-12 sm:py-20 border-b border-fyn-sand-dark">
     
-    <!-- Subtle Mountain Contour Graphic Line-Art in Background -->
-    <div class="absolute inset-0 mountain-line-art pointer-events-none"></div>
-    <div class="absolute inset-0 topo-lines-overlay pointer-events-none"></div>
+    <!-- Authentic Vector Mountain Skyline Artwork in Background (Flush to Bottom) -->
+    <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-20 sm:opacity-25 flex justify-center items-end overflow-hidden select-none">
+      <img src="brand_assets/fyn_mountain_artwork.png" alt="FYN Himalayan Ridge" class="w-full max-w-7xl h-auto object-cover object-bottom translate-y-2">
+    </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
         
         <!-- Left Hero Narrative -->
         <div class="lg:col-span-7">
-          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-fyn-forest/10 border border-fyn-forest/20 text-fyn-forest text-xs font-bold uppercase tracking-wider mb-5">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/80 backdrop-blur-md border border-fyn-forest/20 text-fyn-forest text-xs font-bold uppercase tracking-wider mb-5 shadow-xs">
             <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="Sparkle" class="w-3.5 h-3.5">
             <span>TRAVEL. LEARN. IMPROVE.</span>
           </div>
@@ -474,53 +538,60 @@
             Modern travel essentials, luxury heavyweight streetwear, and everyday gear designed to anchor your compass. Purpose-built for the journey of self-elevation.
           </p>
 
-          <!-- 3 Brand Pillars from Brand Kit -->
-          <div id="brand-pillars" class="grid grid-cols-3 gap-3 pt-2 mb-8 max-w-lg">
-            <div class="bg-white/80 backdrop-blur-sm p-3.5 rounded-xl border border-fyn-sand-dark shadow-sm text-center">
-              <i data-lucide="mountain" class="w-6 h-6 mx-auto mb-1 text-fyn-forest"></i>
-              <h4 class="text-xs font-bold tracking-wider text-fyn-forest uppercase">TRAVEL</h4>
-              <p class="text-[10px] text-fyn-stone">Chart New Horizons</p>
+          <!-- 3 Brand Pillars: Luxury Glass Cards -->
+          <div id="brand-pillars" class="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-2 mb-8 max-w-lg">
+            <div class="fyn-glass-card p-3 sm:p-4 rounded-2xl text-center group">
+              <div class="w-8 h-8 mx-auto mb-1.5 rounded-full bg-fyn-forest/10 flex items-center justify-center group-hover:bg-fyn-forest group-hover:text-white transition-colors duration-300">
+                <i data-lucide="mountain" class="w-4 h-4 text-fyn-forest group-hover:text-white transition-colors"></i>
+              </div>
+              <h4 class="text-[11px] sm:text-xs font-bold tracking-wider text-fyn-forest uppercase">TRAVEL</h4>
+              <p class="text-[10px] text-fyn-stone hidden xs:block">Chart New Horizons</p>
             </div>
-            <div class="bg-white/80 backdrop-blur-sm p-3.5 rounded-xl border border-fyn-sand-dark shadow-sm text-center">
-              <i data-lucide="book-open" class="w-6 h-6 mx-auto mb-1 text-fyn-forest"></i>
-              <h4 class="text-xs font-bold tracking-wider text-fyn-forest uppercase">LEARN</h4>
-              <p class="text-[10px] text-fyn-stone">Feed Your Mind</p>
+            <div class="fyn-glass-card p-3 sm:p-4 rounded-2xl text-center group">
+              <div class="w-8 h-8 mx-auto mb-1.5 rounded-full bg-fyn-forest/10 flex items-center justify-center group-hover:bg-fyn-forest group-hover:text-white transition-colors duration-300">
+                <i data-lucide="book-open" class="w-4 h-4 text-fyn-forest group-hover:text-white transition-colors"></i>
+              </div>
+              <h4 class="text-[11px] sm:text-xs font-bold tracking-wider text-fyn-forest uppercase">LEARN</h4>
+              <p class="text-[10px] text-fyn-stone hidden xs:block">Feed Your Mind</p>
             </div>
-            <div class="bg-white/80 backdrop-blur-sm p-3.5 rounded-xl border border-fyn-sand-dark shadow-sm text-center">
-              <i data-lucide="trending-up" class="w-6 h-6 mx-auto mb-1 text-fyn-forest"></i>
-              <h4 class="text-xs font-bold tracking-wider text-fyn-forest uppercase">IMPROVE</h4>
-              <p class="text-[10px] text-fyn-stone">Conquer Daily Peaks</p>
+            <div class="fyn-glass-card p-3 sm:p-4 rounded-2xl text-center group">
+              <div class="w-8 h-8 mx-auto mb-1.5 rounded-full bg-fyn-forest/10 flex items-center justify-center group-hover:bg-fyn-forest group-hover:text-white transition-colors duration-300">
+                <i data-lucide="trending-up" class="w-4 h-4 text-fyn-forest group-hover:text-white transition-colors"></i>
+              </div>
+              <h4 class="text-[11px] sm:text-xs font-bold tracking-wider text-fyn-forest uppercase">IMPROVE</h4>
+              <p class="text-[10px] text-fyn-stone hidden xs:block">Conquer Daily Peaks</p>
             </div>
           </div>
 
-          <!-- CTAs -->
+          <!-- CTAs with Class Effect -->
           <div class="flex flex-wrap gap-3 items-center">
-            <a href="#store-catalog" class="px-7 py-3.5 rounded-full bg-fyn-forest text-white font-bold text-xs uppercase tracking-wider hover:bg-fyn-forest-light transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center space-x-2">
+            <a href="#store-catalog" class="fyn-btn-primary px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center space-x-2">
               <span>Explore Collection (INR ₹)</span>
               <i data-lucide="arrow-down" class="w-4 h-4"></i>
             </a>
-            <button onclick="showRandomQuoteModal()" class="px-6 py-3.5 rounded-full bg-white text-fyn-forest font-bold text-xs uppercase tracking-wider border border-gray-300 hover:bg-fyn-sand transition flex items-center space-x-2 shadow-sm">
+            <button onclick="showRandomQuoteModal()" class="fyn-btn-secondary px-6 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center space-x-2">
               <i data-lucide="compass" class="w-4 h-4 text-fyn-gold"></i>
               <span>Draw Compass Wisdom</span>
             </button>
           </div>
         </div>
 
-        <!-- Right Hero Mockup Collage -->
-        <div class="lg:col-span-5 relative">
-          <div class="bg-white p-3 rounded-2xl shadow-xl border border-fyn-sand-dark overflow-hidden">
+        <!-- Right Hero Mockup Collage with Classy Shadow & Contained Badge -->
+        <div class="lg:col-span-5 relative mt-6 lg:mt-0">
+          <div class="fyn-glass-card p-3 sm:p-3.5 rounded-3xl shadow-xl overflow-hidden relative">
             <img 
               src="brand_assets/fyn_brand_overview.jpg" 
               alt="FYN Brand Mockup Kit" 
-              class="w-full h-auto rounded-xl object-cover hover:scale-[1.01] transition-transform duration-300"
+              class="w-full h-auto rounded-2xl object-cover hover:scale-[1.01] transition-transform duration-500"
             >
-          </div>
-          <!-- Floating Badge -->
-          <div class="absolute -bottom-4 -left-4 bg-fyn-forest text-white px-4 py-2.5 rounded-xl shadow-lg border border-white/20 flex items-center space-x-3">
-            <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-6 h-6 invert brightness-200">
-            <div>
-              <p class="text-[10px] font-bold tracking-widest text-fyn-gold uppercase">OFFICIAL STORE</p>
-              <p class="text-xs font-semibold">100% Guaranteed Authenticity</p>
+            
+            <!-- Contained Official Store Badge (Never causes horizontal overflow) -->
+            <div class="absolute bottom-5 left-5 bg-fyn-forest/95 backdrop-blur-md text-white px-4 py-2.5 rounded-xl shadow-lg border border-white/20 flex items-center space-x-3">
+              <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="" class="w-5 h-5 invert brightness-200">
+              <div>
+                <p class="text-[10px] font-bold tracking-widest text-fyn-gold uppercase">OFFICIAL STORE</p>
+                <p class="text-xs font-semibold">100% Guaranteed Authenticity</p>
+              </div>
             </div>
           </div>
         </div>
@@ -580,10 +651,12 @@
 
   </main>
 
-  <!-- MANIFESTO & SUBTLE MOUNTAIN GRAPHIC SECTION -->
-  <section id="manifesto" class="py-16 bg-white border-y border-gray-200 relative overflow-hidden">
-    <!-- Subtle Geometric Mountain Watermark -->
-    <div class="absolute inset-0 mountain-line-art pointer-events-none opacity-40"></div>
+  <!-- MANIFESTO & AUTHENTIC MOUNTAIN WATERMARK SECTION -->
+  <section id="manifesto" class="w-full py-20 bg-white border-y border-stone-200/80 relative overflow-hidden">
+    <!-- Mountain Vector Watermark in Background (No Dots) -->
+    <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-10 flex justify-center items-end overflow-hidden select-none">
+      <img src="brand_assets/fyn_mountain_artwork.png" alt="Mountain Ridge" class="w-full max-w-5xl h-auto object-cover object-bottom">
+    </div>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
       <img src="brand_assets/fyn_sparkle_symbol_forest_green.png" alt="Sparkle" class="w-10 h-10 mx-auto mb-4">
@@ -592,15 +665,15 @@
       <h3 class="text-3xl sm:text-4xl font-brand font-extrabold text-fyn-forest-dark mb-4">
         "Travel to broaden. Learn to understand. Improve to elevate."
       </h3>
-      <p class="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto mb-8 font-serif italic text-base">
+      <p class="text-base sm:text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto mb-8 font-serif italic">
         "We do not design gear simply to exist; we craft physical reminders of where you are going. When the road bends and the ascent steepens, check your compass. Find your North."
       </p>
 
-      <div class="flex items-center justify-center space-x-6 text-xs font-bold text-fyn-forest uppercase tracking-wider">
-        <span>● Forest Green</span>
-        <span>● Sand White</span>
-        <span>● Stone Grey</span>
-        <span>● Charcoal Black</span>
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs font-bold text-fyn-forest uppercase tracking-wider">
+        <span class="inline-flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#1D3C34]"></span><span>Forest Green</span></span>
+        <span class="inline-flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FAF8F5] border border-stone-300"></span><span>Sand White</span></span>
+        <span class="inline-flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#8D9093]"></span><span>Stone Grey</span></span>
+        <span class="inline-flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#171918]"></span><span>Charcoal Black</span></span>
       </div>
     </div>
   </section>
@@ -608,11 +681,15 @@
   <!-- ======================================================== -->
   <!-- FYN GLOBAL TRAVEL COMMUNITY & EXPEDITION CIRCLE -->
   <!-- ======================================================== -->
-  <section id="community-section" class="py-16 bg-gradient-to-br from-fyn-forest-dark via-fyn-forest to-fyn-forest-dark text-white relative overflow-hidden border-b border-fyn-forest/40">
-    <div class="absolute inset-0 mountain-line-art opacity-15 pointer-events-none"></div>
+  <section id="community-section" class="w-full py-20 bg-gradient-to-br from-fyn-forest-dark via-fyn-forest to-fyn-forest-dark text-white relative overflow-hidden border-b border-fyn-forest/40">
+    <!-- Mountain Vector Watermark in Background -->
+    <div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-15 flex justify-center items-end overflow-hidden select-none">
+      <img src="brand_assets/fyn_mountain_artwork.png" alt="Peaks" class="w-full max-w-6xl h-auto object-cover object-bottom invert brightness-200">
+    </div>
+
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
       
-      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30 uppercase tracking-widest mb-4">
+      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30 uppercase tracking-widest mb-4">
         <i data-lucide="compass" class="w-4 h-4 text-fyn-gold"></i>
         <span>100% Free Explorer Circle</span>
       </div>
@@ -626,28 +703,28 @@
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button onclick="openCommunityModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-fyn-gold text-fyn-forest font-extrabold text-xs uppercase tracking-wider hover:bg-white transition shadow-xl flex items-center justify-center space-x-2">
+        <button onclick="openCommunityModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-fyn-gold text-fyn-forest font-extrabold text-xs uppercase tracking-wider hover:bg-white hover:shadow-2xl transition-all shadow-xl flex items-center justify-center space-x-2 transform hover:-translate-y-0.5">
           <i data-lucide="compass" class="w-4 h-4"></i>
           <span>Apply to Join Free Travel Group</span>
         </button>
-        <button onclick="handleCustomerAccountClick()" class="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/30 text-white font-bold text-xs hover:bg-white/10 transition">
+        <button onclick="handleCustomerAccountClick()" class="w-full sm:w-auto px-6 py-3.5 rounded-full border border-white/30 text-white font-bold text-xs hover:bg-white/10 transition backdrop-blur-sm">
           Member Sign In & Orders
         </button>
       </div>
 
-      <!-- Community Benefits Grid -->
+      <!-- Community Benefits Grid with Frosted Glass -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 text-left pt-8 border-t border-white/10">
-        <div class="bg-white/5 backdrop-blur-sm p-5 rounded-2xl border border-white/10">
+        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 hover:border-white/30 transition shadow-sm">
           <i data-lucide="users" class="w-6 h-6 text-fyn-gold mb-3"></i>
           <h4 class="font-brand font-bold text-sm text-white mb-1">Group Expeditions</h4>
           <p class="text-[11px] text-fyn-sand/70 leading-relaxed">Co-ordinate high-altitude treks to Spiti, Ladakh, Kedarkantha & Western Ghats with verified FYN explorers.</p>
         </div>
-        <div class="bg-white/5 backdrop-blur-sm p-5 rounded-2xl border border-white/10">
+        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 hover:border-white/30 transition shadow-sm">
           <i data-lucide="tag" class="w-6 h-6 text-emerald-400 mb-3"></i>
           <h4 class="font-brand font-bold text-sm text-white mb-1">Exclusive Member Drops</h4>
           <p class="text-[11px] text-fyn-sand/70 leading-relaxed">Early access to limited technical drops, tester opportunities & secret member discount codes.</p>
         </div>
-        <div class="bg-white/5 backdrop-blur-sm p-5 rounded-2xl border border-white/10">
+        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 hover:border-white/30 transition shadow-sm">
           <i data-lucide="message-circle" class="w-6 h-6 text-blue-400 mb-3"></i>
           <h4 class="font-brand font-bold text-sm text-white mb-1">WhatsApp & Telegram Network</h4>
           <p class="text-[11px] text-fyn-sand/70 leading-relaxed">Direct connection with expedition leads, route advice, gear recommendations, and city meetup invites.</p>
