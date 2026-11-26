@@ -168,6 +168,7 @@ const SHIPPING_THRESHOLD_INR = 1999.00;
 const FLAT_SHIPPING_FEE_INR = 149.00;
 
 document.addEventListener('DOMContentLoaded', async () => {
+  checkSecretAdminAccess();
   initQuotes();
   await loadProducts();
   updateCartUI();
@@ -988,4 +989,88 @@ async function handleHelpSubmit(e) {
   document.getElementById('help-success-state').classList.remove('hidden');
   document.getElementById('help-ticket-form').reset();
   if (window.lucide) lucide.createIcons();
+}
+
+// =================================================================
+// SECRET OWNER / ADMIN ACCESS CONTROLLER
+// Triggers via URL Code (e.g., ?admin=fyn or ?code=fyn2026),
+// 5 quick taps on the FYN logo, or keyboard shortcut (Ctrl+Shift+A)
+// =================================================================
+
+function checkSecretAdminAccess() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const validCodes = ['fyn', 'fyn2026', 'admin', 'north', 'true', '1'];
+
+    // Check query params: ?admin=fyn, ?code=fyn2026, ?secret=fyn, ?access=fyn2026
+    const adminParam = (params.get('admin') || params.get('code') || params.get('secret') || params.get('access') || '').toLowerCase().trim();
+
+    const isMatch = validCodes.includes(adminParam) || (params.has('admin') && params.get('admin') === '');
+
+    if (isMatch) {
+      sessionStorage.setItem('fyn_admin_unlocked', 'true');
+      // Discreetly clean up the query string from the browser address bar
+      const cleanUrl = window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+
+    if (sessionStorage.getItem('fyn_admin_unlocked') === 'true') {
+      revealAdminSuite();
+    }
+  } catch (e) {
+    console.warn("Secret admin check error:", e);
+  }
+}
+
+function revealAdminSuite() {
+  const bar = document.getElementById('secret-admin-bar');
+  if (bar) {
+    bar.classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+  }
+}
+
+function lockAdminSuite() {
+  sessionStorage.removeItem('fyn_admin_unlocked');
+  const bar = document.getElementById('secret-admin-bar');
+  if (bar) {
+    bar.classList.add('hidden');
+  }
+}
+
+// Secret Tap Count on Logo (5 taps within 3 seconds prompts for password)
+let logoClickCount = 0;
+let logoClickTimer = null;
+
+function handleLogoClick(e) {
+  logoClickCount++;
+  clearTimeout(logoClickTimer);
+  logoClickTimer = setTimeout(() => {
+    logoClickCount = 0;
+  }, 2500);
+
+  if (logoClickCount >= 5) {
+    e.preventDefault();
+    logoClickCount = 0;
+    promptAdminPasscode();
+  }
+}
+
+// Secret Shortcut: Ctrl+Shift+A or Cmd+Shift+A
+window.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+    e.preventDefault();
+    promptAdminPasscode();
+  }
+});
+
+function promptAdminPasscode() {
+  const code = prompt("FYN Owner Passcode Entry:\nEnter access code to reveal the Store Control Suite:");
+  if (code && (code.toLowerCase() === 'fyn2026' || code.toLowerCase() === 'fyn')) {
+    sessionStorage.setItem('fyn_admin_unlocked', 'true');
+    revealAdminSuite();
+    alert("✅ Access Granted: FYN Owner Control Suite is now active at the top of your screen.");
+  } else if (code) {
+    alert("❌ Invalid passcode. Access denied.");
+  }
 }
