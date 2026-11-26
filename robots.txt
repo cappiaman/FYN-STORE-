@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /crm.html
+Disallow: /marketing.html
+
+# Content Signals declaration for AI & Search agents
+Content-Signal: search=yes, ai-train=no
+
+# Allow AI Search & Citation Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Canonical Sitemap Declaration
+Sitemap: https://fynstore.in/sitemap.xml

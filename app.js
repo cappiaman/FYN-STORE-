@@ -169,12 +169,53 @@ const SHIPPING_THRESHOLD_INR = 1999.00;
 const FLAT_SHIPPING_FEE_INR = 149.00;
 
 document.addEventListener('DOMContentLoaded', async () => {
+  initWebMCPTools();
   checkSecretAdminAccess();
   initCustomerUI();
   initQuotes();
   await loadProducts();
   updateCartUI();
 });
+
+// WebMCP Tool Registration for In-Browser AI Agents
+function initWebMCPTools() {
+  if (typeof navigator !== 'undefined' && navigator.modelContext && typeof navigator.modelContext.registerTool === 'function') {
+    try {
+      navigator.modelContext.registerTool({
+        name: "searchProducts",
+        description: "Search FYN catalog for travel gear, apparel, and prices in INR",
+        inputSchema: {
+          type: "object",
+          properties: {
+            query: { type: "string", description: "Search keyword e.g. hoodie, backpack, bottle" }
+          },
+          required: ["query"]
+        },
+        execute: async (args) => {
+          const q = (args.query || '').toLowerCase();
+          return productsList.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+        }
+      });
+
+      navigator.modelContext.registerTool({
+        name: "getStoreCatalog",
+        description: "Get full catalog of FYN products",
+        inputSchema: {
+          type: "object",
+          properties: {
+            category: { type: "string", enum: ["All", "Apparel", "Travel Gear", "Accessories"] }
+          }
+        },
+        execute: async (args) => {
+          const cat = args.category || 'All';
+          return cat === 'All' ? productsList : productsList.filter(p => p.category === cat);
+        }
+      });
+    } catch (e) {
+      console.warn("WebMCP registration note:", e);
+    }
+  }
+}
 
 // Format Indian Currency Helper
 function formatINR(amount) {

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "FYN Store Agent MCP",
+  "version": "1.0.0",
+  "description": "SEP-1649 Model Context Protocol server for FYN (Find Your North) E-Commerce Platform",
+  "homepage": "https://fynstore.in",
+  "endpoint": "https://fynstore.in/.well-known/mcp/server-card.json",
+  "transport": {
+    "type": "http"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "resources": {
+      "subscribe": false,
+      "listChanged": false
+    }
+  },
+  "tools": [
+    {
+      "name": "get_catalog",
+      "description": "List FYN technical apparel and travel gear products with prices in INR",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string", "enum": ["All", "Apparel", "Travel Gear", "Accessories"] }
+        }
+      }
+    },
+    {
+      "name": "check_order_status",
+      "description": "Look up live tracking details and fulfillment status for an order number",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "order_number": { "type": "string" }
+        },
+        "required": ["order_number"]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "https://fynstore.in/llms.txt",
+      "name": "FYN Store Overview",
+      "mimeType": "text/markdown"
+    }
+  ]
+}

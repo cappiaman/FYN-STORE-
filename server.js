@@ -16,7 +16,10 @@ const MIME_TYPES = {
   '.jpeg': 'image/jpeg',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
-  '.webp': 'image/webp'
+  '.webp': 'image/webp',
+  '.txt': 'text/plain; charset=UTF-8',
+  '.xml': 'application/xml; charset=UTF-8',
+  '.md': 'text/markdown; charset=UTF-8'
 };
 
 const server = http.createServer((req, res) => {
@@ -24,8 +27,14 @@ const server = http.createServer((req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   let safePath = path.normalize(decodeURIComponent(parsedUrl.pathname));
 
-  if (safePath === '/' || safePath === '') {
+  // If AI agent requests markdown or accepts markdown on root
+  const acceptHeader = (req.headers['accept'] || '').toLowerCase();
+  if ((safePath === '/' || safePath === '/index.html') && acceptHeader.includes('text/markdown')) {
+    safePath = '/llms.txt';
+  } else if (safePath === '/' || safePath === '') {
     safePath = '/index.html';
+  } else if (safePath === '/.well-known/mcp' || safePath === '/.well-known/mcp.json') {
+    safePath = '/.well-known/mcp/server-card.json';
   }
 
   let filePath = path.join(ROOT, safePath);
@@ -56,7 +65,8 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, {
       'Content-Type': contentType,
       'Cache-Control': 'no-cache',
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+      'Link': '<https://fynstore.in/llms.txt>; rel="alternate"; type="text/markdown", <https://fynstore.in/sitemap.xml>; rel="sitemap"; type="application/xml"'
     });
 
     const stream = fs.createReadStream(filePath);

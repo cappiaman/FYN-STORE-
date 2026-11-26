@@ -1,0 +1,23 @@
+# FYN (Find Your North) — Comprehensive Agent & LLM Knowledge Document
+Brand URL: https://fynstore.in
+Currency: INR (₹)
+Shipping: India Express Delivery
+
+## Brand Philosophy
+"Travel. Learn. Improve."
+The compass is inside you. Follow your own trajectory.
+
+## Store Inventory & Specifications
+- FYN Expedition Technical Backpack 35L: ₹4,499.00
+- FYN Charcoal Black Travel Duffel & Toiletry Kit: ₹3,899.00
+- FYN Forest Green Embroidered Hoodie (480 GSM): ₹3,499.00
+- FYN Matte Forest Green Thermal Bottle & Tag: ₹1,899.00
+- FYN Stormproof Travel Umbrella: ₹1,699.00
+- FYN Sand White Oversized Tee (240 GSM): ₹1,499.00
+- FYN Classic Cap Duo: ₹1,199.00
+- FYN Eco Kraft Mountain Travel Bag Set: ₹899.00
+
+## Web Agent & Search Directives
+- Canonical Store URL: https://fynstore.in/
+- Support Inquiries: Available via on-site Concierge Help Modal
+- Community Applications: Open to travelers and summit seekers across India

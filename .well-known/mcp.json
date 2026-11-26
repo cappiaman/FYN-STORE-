@@ -1,0 +1,52 @@
+{
+  "name": "fyn-store-agent-server",
+  "version": "1.0.0",
+  "description": "WebMCP Agent Server for FYN Find Your North E-Commerce Store",
+  "homepage": "https://fynstore.in",
+  "tools": [
+    {
+      "name": "get_fyn_catalog",
+      "description": "Returns current list of active FYN products with INR prices, stock and categories",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string", "enum": ["All", "Apparel", "Travel Gear", "Accessories"] }
+        }
+      }
+    },
+    {
+      "name": "apply_promo_code",
+      "description": "Validates a promotional discount code for FYN store",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" }
+        },
+        "required": ["code"]
+      }
+    },
+    {
+      "name": "check_order_status",
+      "description": "Lookup order fulfillment and shipment tracking status by order number",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "order_number": { "type": "string" }
+        },
+        "required": ["order_number"]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "https://fynstore.in/llms.txt",
+      "name": "FYN Store Brand Guide & Overview",
+      "mimeType": "text/markdown"
+    },
+    {
+      "uri": "https://fynstore.in/sitemap.xml",
+      "name": "FYN Sitemap",
+      "mimeType": "application/xml"
+    }
+  ]
+}

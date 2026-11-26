@@ -3,8 +3,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FYN | FIND YOUR NORTH — Travel. Learn. Improve.</title>
+  <title>FYN | FIND YOUR NORTH — Official E-Commerce Store</title>
+  
+  <!-- Canonical & SEO Meta Tags -->
+  <link rel="canonical" href="https://fynstore.in/">
+  <meta name="description" content="FYN (Find Your North) — Travel. Learn. Improve. Premium Indian mountain & lifestyle streetwear, technical 35L backpacks, 480 GSM French Terry hoodies, thermal bottles, and travel essentials in INR (₹). Free Express Shipping over ₹1,999.">
+  <meta name="keywords" content="FYN, Find Your North, travel apparel India, technical backpack 35L, oversized hoodie India, travel gear, mountain clothing, summmiteers, streetwear INR">
+  <meta name="author" content="FYN Enterprises">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="content-signals" content="ai-friendly, structured-data, llms-enabled">
+
+  <!-- Open Graph & Social Cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fynstore.in/">
+  <meta property="og:title" content="FYN | FIND YOUR NORTH — Travel. Learn. Improve.">
+  <meta property="og:description" content="Premium mountain & travel streetwear crafted in India. Technical backpacks, heavy French terry hoodies, and travel accessories. Use code NORTH20 for 20% OFF.">
+  <meta property="og:image" content="https://fynstore.in/brand_assets/fyn_horizontal_lockup_forest_green.png">
+  <meta property="og:site_name" content="FYN Store">
+  <meta property="og:locale" content="en_IN">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FYN | FIND YOUR NORTH — Travel. Learn. Improve.">
+  <meta name="twitter:description" content="Premium mountain apparel, technical backpacks & lifestyle gear in INR.">
+  <meta name="twitter:image" content="https://fynstore.in/brand_assets/fyn_horizontal_lockup_forest_green.png">
+
+  <!-- AI & Agent Discovery Headers -->
+  <link rel="alternate" type="text/markdown" href="https://fynstore.in/llms.txt" title="LLM Context">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://fynstore.in/sitemap.xml">
+  <link rel="mcp-server-card" type="application/json" href="https://fynstore.in/.well-known/mcp/server-card.json">
+  <meta name="mcp-server-card" content="https://fynstore.in/.well-known/mcp/server-card.json">
+  <meta name="mcp-server" content="https://fynstore.in/.well-known/mcp/server-card.json">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="brand_assets/fyn_sparkle_symbol_forest_green.png">
+
+  <!-- WebMCP / Browser Agent Tools Declaration -->
+  <script type="application/webmcp+json">
+  {
+    "version": "1.0",
+    "name": "fyn-store-webmcp",
+    "description": "In-browser agent tools for FYN E-Commerce store",
+    "tools": [
+      {
+        "name": "searchProducts",
+        "description": "Searches the FYN catalog for gear, apparel or keywords",
+        "parameters": {
+          "type": "object",
+          "properties": { "query": { "type": "string" } },
+          "required": ["query"]
+        }
+      },
+      {
+        "name": "addToCart",
+        "description": "Adds a specific product by slug or id to the expedition cart",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "productId": { "type": "string" },
+            "quantity": { "type": "number", "default": 1 },
+            "size": { "type": "string" }
+          },
+          "required": ["productId"]
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- MULTI-SCHEMA JSON-LD STRUCTURED DATA -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://fynstore.in/#organization",
+      "name": "FYN",
+      "legalName": "FYN (Find Your North) Brand Enterprises",
+      "url": "https://fynstore.in",
+      "logo": "https://fynstore.in/brand_assets/fyn_horizontal_lockup_forest_green.png",
+      "description": "Indian technical adventure travel brand. Travel. Learn. Improve.",
+      "foundingDate": "2026",
+      "slogan": "FIND YOUR NORTH",
+      "email": "support@fynstore.in",
+      "telephone": "+91-98765-43210",
+      "sameAs": [
+        "https://www.instagram.com/fynbrand",
+        "https://twitter.com/fynbrand",
+        "https://www.youtube.com/@fynbrand",
+        "https://www.facebook.com/fynbrand",
+        "https://chat.whatsapp.com/invite/FYN-Summiteers-Global"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Concierge & Expedition Support",
+        "email": "support@fynstore.in",
+        "telephone": "+91-98765-43210",
+        "availableLanguage": ["English", "Hindi"],
+        "areaServed": "IN"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://fynstore.in/#website",
+      "url": "https://fynstore.in",
+      "name": "FYN — Find Your North Official Store",
+      "description": "Premium mountain-inspired technical apparel, backpacks, and accessories.",
+      "publisher": { "@id": "https://fynstore.in/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://fynstore.in/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "OnlineStore",
+      "@id": "https://fynstore.in/#store",
+      "name": "FYN Store India",
+      "url": "https://fynstore.in",
+      "currenciesAccepted": "INR",
+      "paymentAccepted": "NetBanking, UPI, Credit Card, Debit Card",
+      "priceRange": "₹899 - ₹4,499",
+      "telephone": "+91-98765-43210",
+      "email": "support@fynstore.in",
+      "parentOrganization": { "@id": "https://fynstore.in/#organization" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "FYN Official Drop Collection",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Product",
+            "name": "FYN Expedition Technical Backpack 35L",
+            "image": "https://fynstore.in/brand_assets/products/fyn_backpack_35l.jpg",
+            "description": "Weatherproof 1000D Cordura alpine technical backpack with ergonomic harness and laptop compartment.",
+            "brand": { "@type": "Brand", "name": "FYN" },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "INR",
+              "price": "4499.00",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Product",
+            "name": "FYN Forest Green Embroidered Hoodie",
+            "image": "https://fynstore.in/brand_assets/products/fyn_forest_hoodie.jpg",
+            "description": "Luxury 480 GSM French terry cotton hoodie featuring FYN embroidered sparkle emblem.",
+            "brand": { "@type": "Brand", "name": "FYN" },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "INR",
+              "price": "3499.00",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Product",
+            "name": "FYN Sand White Oversized Tee",
+            "image": "https://fynstore.in/brand_assets/products/fyn_sand_tee.jpg",
+            "description": "240 GSM organic combed cotton oversized tee with FIND YOUR NORTH back crest.",
+            "brand": { "@type": "Brand", "name": "FYN" },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "INR",
+              "price": "1499.00",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        }
+      ]
+    }
+  ]
+  </script>
   
   <!-- Google Fonts: Montserrat for Brand Kit & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -172,17 +361,18 @@
         <!-- Right Action Icons -->
         <div class="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
           
-          <!-- Search Bar -->
-          <div class="relative hidden md:block">
+          <!-- Search Bar (Annotated for WebMCP & Browser Agents) -->
+          <form class="relative hidden md:block" role="search" toolname="searchProducts" tooldescription="Search FYN catalog for gear, apparel and drops" onsubmit="event.preventDefault()">
             <input 
               type="text" 
               id="search-input" 
+              name="query"
               placeholder="Search drops, gear & quotes..." 
               oninput="handleSearch(this.value)"
               class="w-44 xl:w-60 pl-8 pr-3 py-1.5 text-xs rounded-full border border-gray-200 bg-fyn-sand focus:outline-none focus:border-fyn-forest focus:ring-1 focus:ring-fyn-forest transition"
             >
             <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"></i>
-          </div>
+          </form>
 
           <!-- Currency Indicator -->
           <span class="px-2 py-1 rounded bg-fyn-sand text-fyn-forest font-bold text-xs border border-gray-200">
@@ -499,7 +689,7 @@
           </ul>
         </div>
 
-        <!-- Customer Care & Expedition Support -->
+        <!-- Customer Care, Legal & Machine-Readable Contact -->
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Customer Care & Support</h4>
           <ul class="space-y-2 text-xs text-fyn-stone">
@@ -507,9 +697,15 @@
               <i data-lucide="life-buoy" class="w-3.5 h-3.5 text-fyn-gold"></i>
               <span>FYN Concierge & Support Hub</span>
             </button></li>
-            <li><button onclick="openHelpModal()" class="hover:text-white transition">Track Order & Dispatch Status</button></li>
-            <li><button onclick="openHelpModal()" class="hover:text-white transition">Size Exchanges & Easy Returns</button></li>
-            <li><button onclick="openHelpModal()" class="hover:text-white transition">Payment & Invoice Support</button></li>
+            <li><a href="about.html" class="hover:text-white transition block">About FYN Philosophy</a></li>
+            <li><a href="contact.html" class="hover:text-white transition block">Contact & Help Desk</a></li>
+            <li><a href="privacy.html" class="hover:text-white transition block">Privacy Policy</a></li>
+            <li><a href="terms.html" class="hover:text-white transition block">Terms of Service & 7-Day Returns</a></li>
+            <li class="pt-2 border-t border-white/10 text-[11px]">
+              <span class="text-gray-400 block font-semibold">Direct Concierge Contact:</span>
+              <a href="mailto:support@fynstore.in" class="text-fyn-gold hover:underline block font-bold">support@fynstore.in</a>
+              <a href="tel:+919876543210" class="text-gray-300 hover:underline block font-medium">+91 98765 43210</a>
+            </li>
           </ul>
         </div>
 
