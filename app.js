@@ -597,6 +597,33 @@ function updateFilterUI() {
   }
 }
 
+// Toggle Shop For Menu on Click & Hover
+function toggleShopForMenu(e) {
+  if (e) {
+    e.stopPropagation();
+  }
+  const dropdown = document.getElementById('shop-for-dropdown');
+  if (dropdown) {
+    const isHidden = dropdown.classList.contains('opacity-0') || dropdown.classList.contains('invisible') || dropdown.classList.contains('hidden');
+    if (isHidden) {
+      dropdown.classList.remove('opacity-0', 'invisible', 'hidden');
+      dropdown.classList.add('opacity-100', 'visible');
+    } else {
+      dropdown.classList.add('opacity-0', 'invisible');
+      dropdown.classList.remove('opacity-100', 'visible');
+    }
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('shop-for-dropdown');
+  const trigger = document.getElementById('shop-for-trigger');
+  if (dropdown && trigger && !trigger.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.classList.add('opacity-0', 'invisible');
+    dropdown.classList.remove('opacity-100', 'visible');
+  }
+});
+
 // Category and Filter logic
 function filterCategory(cat) {
   currentCategory = cat;

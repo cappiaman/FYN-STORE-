@@ -92,25 +92,35 @@
           <a href="shop.html" class="hover:text-fyn-forest transition">All Drops</a>
 
           <div class="relative group">
-            <button class="flex items-center space-x-1 hover:text-fyn-forest transition font-semibold py-2">
+            <button 
+              type="button"
+              id="shop-for-trigger"
+              onclick="toggleShopForMenu(event)" 
+              class="nav-link flex items-center space-x-1 hover:text-fyn-forest transition text-fyn-charcoal font-semibold py-2 cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               <span>Shop For</span>
-              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-fyn-gold transition-transform group-hover:rotate-180"></i>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-fyn-gold transition-transform duration-200 group-hover:rotate-180"></i>
             </button>
-            <div class="absolute left-0 mt-0 w-44 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-fyn-sand-dark py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-              <a href="shop.html?audience=men" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
-                <i data-lucide="user" class="w-3.5 h-3.5 text-fyn-forest"></i><span>Men</span>
+            <div 
+              id="shop-for-dropdown" 
+              class="absolute left-0 top-full mt-1.5 w-52 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/90 py-2.5 transition-all duration-200 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible"
+            >
+              <a href="shop.html?audience=men" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2.5 transition">
+                <i data-lucide="user" class="w-4 h-4 text-fyn-forest"></i><span>Men's Collection</span>
               </a>
-              <a href="shop.html?audience=women" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-fyn-gold"></i><span>Women</span>
+              <a href="shop.html?audience=women" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2.5 transition">
+                <i data-lucide="sparkles" class="w-4 h-4 text-fyn-gold"></i><span>Women's Collection</span>
               </a>
-              <a href="shop.html?audience=boys" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
-                <i data-lucide="compass" class="w-3.5 h-3.5 text-blue-600"></i><span>Boys</span>
+              <a href="shop.html?audience=boys" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2.5 transition">
+                <i data-lucide="compass" class="w-4 h-4 text-blue-600"></i><span>Boys' Adventure</span>
               </a>
-              <a href="shop.html?audience=girls" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2">
-                <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500"></i><span>Girls</span>
+              <a href="shop.html?audience=girls" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2.5 transition">
+                <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i><span>Girls' Explorer</span>
               </a>
-              <a href="shop.html?audience=kids" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2 border-t border-gray-100">
-                <i data-lucide="smile" class="w-3.5 h-3.5 text-emerald-600"></i><span>Kids</span>
+              <a href="shop.html?audience=kids" class="flex items-center px-4 py-2 hover:bg-fyn-sand text-fyn-charcoal hover:text-fyn-forest text-xs font-semibold space-x-2.5 transition border-t border-gray-100">
+                <i data-lucide="smile" class="w-4 h-4 text-emerald-600"></i><span>Kids' Summit Gear</span>
               </a>
             </div>
           </div>
