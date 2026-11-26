@@ -1,0 +1,24 @@
+{
+  "name": "fyn-store",
+  "version": "1.0.0",
+  "description": "FYN (Find Your North) Official E-Commerce Store & Hostinger Admin Suite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'Static build ready'"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "keywords": [
+    "fyn",
+    "ecommerce",
+    "store",
+    "travel",
+    "learn",
+    "improve"
+  ],
+  "author": "FYN Brand",
+  "license": "ISC"
+}
