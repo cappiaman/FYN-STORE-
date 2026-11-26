@@ -167,78 +167,93 @@
     <!-- Main Container -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
       
-      <!-- FINANCIAL ACCOUNTS & STOCK CALCULATOR ROW -->
+      <!-- FINANCIAL ACCOUNTS & STOCK CALCULATOR ROW (INTERACTIVE DRILL-DOWN BUTTONS) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         
-        <!-- Gross Sales -->
-        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <!-- 1. Gross Sales (Clickable: shows all orders & info) -->
+        <button onclick="openGrossSalesModal()" class="w-full text-left bg-white p-4 rounded-xl border border-gray-200 hover:border-fyn-forest/60 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between group transform hover:-translate-y-0.5 active:scale-[0.98]" title="Click to view all orders and revenue details">
           <div>
-            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Gross Sales</p>
+            <div class="flex items-center space-x-1.5">
+              <p class="text-[11px] font-bold text-gray-500 uppercase tracking-wider group-hover:text-fyn-forest transition">Gross Sales</p>
+              <i data-lucide="external-link" class="w-3 h-3 text-gray-400 group-hover:text-fyn-forest"></i>
+            </div>
             <h3 id="metric-total-sales" class="text-xl font-extrabold text-fyn-forest-dark mt-1">₹0.00</h3>
-            <span class="text-[10px] text-green-600 font-bold flex items-center mt-0.5">
-              <i data-lucide="trending-up" class="w-3 h-3 mr-0.5"></i> Live Revenue
+            <span class="text-[10px] text-green-700 font-bold flex items-center mt-0.5">
+              <i data-lucide="trending-up" class="w-3 h-3 mr-0.5"></i> Live Revenue • View All ↗
             </span>
           </div>
-          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
+          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest group-hover:bg-fyn-forest group-hover:text-white transition">
             <i data-lucide="indian-rupee" class="w-5 h-5"></i>
           </div>
-        </div>
+        </button>
 
-        <!-- Net Profit & Margin -->
-        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <!-- 2. Net Profit & Margin (Clickable: complete money & numbers breakdown) -->
+        <button onclick="openProfitDetailsModal()" class="w-full text-left bg-white p-4 rounded-xl border border-gray-200 hover:border-green-600/60 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between group transform hover:-translate-y-0.5 active:scale-[0.98]" title="Click to view complete P&L profit breakdown with numbers">
           <div>
-            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Estimated Net Profit</p>
+            <div class="flex items-center space-x-1.5">
+              <p class="text-[11px] font-bold text-gray-500 uppercase tracking-wider group-hover:text-green-700 transition">Estimated Net Profit</p>
+              <i data-lucide="calculator" class="w-3 h-3 text-gray-400 group-hover:text-green-700"></i>
+            </div>
             <h3 id="metric-net-profit" class="text-xl font-extrabold text-green-700 mt-1">₹0.00</h3>
             <span id="metric-profit-margin" class="text-[10px] text-green-700 font-bold mt-0.5 block">
-              Margin: 58.4%
+              Margin: 58.4% • View P&L ↗
             </span>
           </div>
-          <div class="p-2.5 rounded-xl bg-green-50 text-green-700">
+          <div class="p-2.5 rounded-xl bg-green-50 text-green-700 group-hover:bg-green-700 group-hover:text-white transition">
             <i data-lucide="wallet" class="w-5 h-5"></i>
           </div>
-        </div>
+        </button>
 
-        <!-- Total Stock Units Available Calculator -->
-        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <!-- 3. Total Stock Units (Clickable: most order, most repeated, most visited, total orders in table) -->
+        <button onclick="openStockPerformanceModal()" class="w-full text-left bg-white p-4 rounded-xl border border-gray-200 hover:border-fyn-forest/60 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between group transform hover:-translate-y-0.5 active:scale-[0.98]" title="Click to view most ordered, most repeated, most visited drops">
           <div>
-            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Available Stock</p>
+            <div class="flex items-center space-x-1.5">
+              <p class="text-[11px] font-bold text-gray-500 uppercase tracking-wider group-hover:text-fyn-forest transition">Available Stock</p>
+              <i data-lucide="bar-chart-2" class="w-3 h-3 text-gray-400 group-hover:text-fyn-forest"></i>
+            </div>
             <h3 id="metric-total-stock-units" class="text-xl font-extrabold text-fyn-forest mt-1">0 Units</h3>
-            <span class="text-[10px] text-gray-500 font-semibold mt-0.5 block" id="metric-stock-status">
-              Calculated across 8 drops
+            <span class="text-[10px] text-fyn-forest font-semibold mt-0.5 block" id="metric-stock-status">
+              Calculated across 8 drops • View Matrix ↗
             </span>
           </div>
-          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
+          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest group-hover:bg-fyn-forest group-hover:text-white transition">
             <i data-lucide="boxes" class="w-5 h-5"></i>
           </div>
-        </div>
+        </button>
 
-        <!-- Orders & Fulfilment -->
-        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <!-- 4. Total Orders (Clickable: jumps to orders ledger) -->
+        <button onclick="switchTab('orders')" class="w-full text-left bg-white p-4 rounded-xl border border-gray-200 hover:border-amber-500/60 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between group transform hover:-translate-y-0.5 active:scale-[0.98]" title="Click to manage orders & fulfilment">
           <div>
-            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Total Orders</p>
+            <div class="flex items-center space-x-1.5">
+              <p class="text-[11px] font-bold text-gray-500 uppercase tracking-wider group-hover:text-amber-700 transition">Total Orders</p>
+              <i data-lucide="truck" class="w-3 h-3 text-gray-400 group-hover:text-amber-700"></i>
+            </div>
             <h3 id="metric-total-orders" class="text-xl font-extrabold text-fyn-forest-dark mt-1">0</h3>
             <span id="metric-pending-orders" class="text-[10px] text-amber-600 font-bold flex items-center mt-0.5">
-              0 Pending Action
+              0 Pending Action • Manage ↗
             </span>
           </div>
-          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest">
+          <div class="p-2.5 rounded-xl bg-fyn-sand text-fyn-forest group-hover:bg-amber-600 group-hover:text-white transition">
             <i data-lucide="shopping-bag" class="w-5 h-5"></i>
           </div>
-        </div>
+        </button>
 
-        <!-- Traffic & SEO Health Score -->
-        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+        <!-- 5. Traffic & SEO Health Score (Clickable: in-depth website intelligence) -->
+        <button onclick="openSEOAnalyticsModal()" class="w-full text-left bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-500/60 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between group transform hover:-translate-y-0.5 active:scale-[0.98]" title="Click to view detailed SEO and live traffic analytics">
           <div>
-            <p class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">SEO & Traffic Health</p>
+            <div class="flex items-center space-x-1.5">
+              <p class="text-[11px] font-bold text-gray-500 uppercase tracking-wider group-hover:text-blue-700 transition">SEO & Traffic Health</p>
+              <i data-lucide="activity" class="w-3 h-3 text-gray-400 group-hover:text-blue-700"></i>
+            </div>
             <h3 class="text-xl font-extrabold text-fyn-forest mt-1">94 / 100</h3>
             <span class="text-[10px] text-blue-600 font-bold block mt-0.5">
-              14.2k Monthly Visitors
+              14.2k Monthly Visitors • Full SEO ↗
             </span>
           </div>
-          <div class="p-2.5 rounded-xl bg-blue-50 text-blue-700">
+          <div class="p-2.5 rounded-xl bg-blue-50 text-blue-700 group-hover:bg-blue-600 group-hover:text-white transition">
             <i data-lucide="activity" class="w-5 h-5"></i>
           </div>
-        </div>
+        </button>
 
       </div>
 
@@ -288,6 +303,11 @@
           <i data-lucide="truck" class="w-4 h-4"></i>
           <span>Order Fulfilment & Tracking Hub</span>
           <span id="tab-pending-badge" class="ml-1 bg-amber-500 text-white px-2 py-0.5 rounded-full text-[10px] hidden">0</span>
+        </button>
+
+        <button onclick="switchTab('accounts')" id="tab-btn-accounts" class="admin-tab py-3 px-5 border-b-2 border-transparent text-gray-500 hover:text-fyn-forest flex items-center space-x-2">
+          <i data-lucide="calculator" class="w-4 h-4 text-emerald-700"></i>
+          <span>Accounts & Finance (P&L Ledger)</span>
         </button>
 
         <button onclick="switchTab('products')" id="tab-btn-products" class="admin-tab py-3 px-5 border-b-2 border-transparent text-gray-500 hover:text-fyn-forest flex items-center space-x-2">
@@ -368,8 +388,137 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- TAB 2: PRODUCT INVENTORY (ADD / EDIT / STOCK) -->
+      <!-- TAB: ACCOUNTS, FINANCE & P&L LEDGER -->
       <!-- ============================================== -->
+      <div id="tab-content-accounts" class="hidden space-y-6">
+        
+        <!-- Header & Action Row -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="p-2 rounded-xl bg-emerald-100 text-emerald-800">
+                <i data-lucide="calculator" class="w-5 h-5"></i>
+              </span>
+              <div>
+                <h3 class="text-base font-brand font-bold text-fyn-forest-dark">Financial Accounts & Executive P&L Ledger (₹ INR)</h3>
+                <p class="text-xs text-gray-500">Live reconciliation of Gross Sales, COGS (Cost of Goods), Shipping, Razorpay/UPI gateway fees, Taxes (GST) and Net Profit.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <button onclick="exportFinancialsCSV()" class="px-4 py-2 rounded-xl bg-fyn-forest text-white text-xs font-bold hover:bg-fyn-forest-light transition flex items-center space-x-1.5 shadow">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Export P&L Report (CSV)</span>
+            </button>
+            <button onclick="loadAllDashboardData()" class="p-2 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50" title="Refresh Accounts">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Detailed Financial Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">Gross Revenue (Live)</p>
+            <h4 id="acct-gross-sales" class="text-2xl font-brand font-extrabold text-fyn-forest-dark mt-1">₹0.00</h4>
+            <div class="mt-2 text-[11px] text-gray-500 flex justify-between border-t border-gray-100 pt-2">
+              <span>Paid Orders: <strong id="acct-paid-orders-count" class="text-fyn-forest">0</strong></span>
+              <span>AOV: <strong id="acct-aov" class="text-fyn-forest">₹0.00</strong></span>
+            </div>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-emerald-200/80 bg-emerald-50/20 shadow-sm">
+            <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Estimated Net Profit</p>
+            <h4 id="acct-net-profit" class="text-2xl font-brand font-extrabold text-emerald-800 mt-1">₹0.00</h4>
+            <div class="mt-2 text-[11px] text-emerald-700 flex justify-between border-t border-emerald-100 pt-2">
+              <span>Net Margin: <strong id="acct-margin-pct" class="font-bold">58.4%</strong></span>
+              <span class="font-bold text-emerald-700">Healthy</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">Production & COGS (~38%)</p>
+            <h4 id="acct-total-cogs" class="text-2xl font-brand font-extrabold text-amber-900 mt-1">₹0.00</h4>
+            <div class="mt-2 text-[11px] text-gray-500 flex justify-between border-t border-gray-100 pt-2">
+              <span>Fabric & Manufacturing</span>
+              <span class="text-amber-800 font-bold">Base Cost</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">Taxes & Gateway Surcharges</p>
+            <h4 id="acct-total-taxes-fees" class="text-2xl font-brand font-extrabold text-purple-900 mt-1">₹0.00</h4>
+            <div class="mt-2 text-[11px] text-gray-500 flex justify-between border-t border-gray-100 pt-2">
+              <span>GST (18%): <strong id="acct-gst-amt">₹0.00</strong></span>
+              <span>Gateway (2%): <strong id="acct-gateway-amt">₹0.00</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profit & Cost Distribution Breakdown Bar -->
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+          <div class="flex items-center justify-between mb-2 text-xs font-bold">
+            <span class="text-gray-700">Revenue Distribution Structure (100% Gross)</span>
+            <span class="text-fyn-forest">INR (₹) Breakdown</span>
+          </div>
+          <div class="w-full h-4 bg-gray-100 rounded-full overflow-hidden flex shadow-inner">
+            <div class="bg-emerald-600 h-full" style="width: 58.4%;" title="Net Profit: 58.4%"></div>
+            <div class="bg-amber-600 h-full" style="width: 25.6%;" title="COGS & Production: 25.6%"></div>
+            <div class="bg-purple-600 h-full" style="width: 10%;" title="GST 18% inclusive: 10%"></div>
+            <div class="bg-blue-500 h-full" style="width: 4%;" title="Courier & Shipping: 4%"></div>
+            <div class="bg-gray-400 h-full" style="width: 2%;" title="Gateway Fees: 2%"></div>
+          </div>
+          <div class="flex flex-wrap items-center gap-4 mt-3 text-[11px] text-gray-600">
+            <span class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span><strong class="text-gray-800">Net Profit (58.4%)</strong></span>
+            <span class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span><span>Product Cost / COGS (25.6%)</span></span>
+            <span class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span><span>Taxes / GST (10%)</span></span>
+            <span class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span><span>Logistics (4%)</span></span>
+            <span class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-gray-400"></span><span>Payment Gateway (2%)</span></span>
+          </div>
+        </div>
+
+        <!-- Financial Ledger Table -->
+        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+          <div class="p-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h4 class="font-bold text-sm text-fyn-forest-dark">Transaction Financial Ledger</h4>
+              <p class="text-xs text-gray-500">Every customer payment with calculated profit contribution and cost accounting.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <input 
+                type="text" 
+                id="acct-search-input" 
+                placeholder="Search by order # or customer..." 
+                oninput="filterAccountsLedger(this.value)"
+                class="text-xs px-3 py-1.5 rounded-lg border border-gray-300 w-48 sm:w-60 focus:outline-none focus:border-fyn-forest"
+              >
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-gray-600">
+              <thead class="bg-gray-50 text-gray-700 uppercase font-bold border-b border-gray-200 text-[10px] tracking-wider">
+                <tr>
+                  <th class="py-3 px-4">Order # & Date</th>
+                  <th class="py-3 px-4">Customer</th>
+                  <th class="py-3 px-4">Gross Total (₹)</th>
+                  <th class="py-3 px-4">Est. COGS (₹)</th>
+                  <th class="py-3 px-4">Taxes & Fees (₹)</th>
+                  <th class="py-3 px-4 text-emerald-800 font-extrabold">Net Profit (₹)</th>
+                  <th class="py-3 px-4">Margin</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="accounts-table-body" class="divide-y divide-gray-100">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
       <div id="tab-content-products" class="hidden space-y-4">
         
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-gray-200">
@@ -869,6 +1018,573 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- 6. GROSS SALES & COMPLETE ORDERS DRILLDOWN MODAL -->
+  <div id="modal-gross-sales" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-5xl w-full p-6 shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200 mb-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="p-1.5 rounded-lg bg-emerald-100 text-emerald-800">
+              <i data-lucide="indian-rupee" class="w-4 h-4"></i>
+            </span>
+            <h3 class="font-brand font-bold text-fyn-forest-dark text-lg">Gross Sales & Complete Orders Ledger</h3>
+          </div>
+          <p class="text-xs text-gray-500 mt-0.5">Every customer order, payment status, transaction details, and fulfilment state.</p>
+        </div>
+        <button onclick="closeGrossSalesModal()" class="text-gray-400 hover:text-gray-600 p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Quick Metrics Ribbon inside Gross Sales Modal -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        <div class="p-3.5 bg-fyn-sand rounded-xl border border-fyn-sand-dark">
+          <span class="text-[10px] font-bold text-gray-500 uppercase">Total Gross Revenue</span>
+          <h4 id="gross-modal-total-amt" class="text-xl font-extrabold text-fyn-forest mt-0.5">₹0.00</h4>
+        </div>
+        <div class="p-3.5 bg-green-50 rounded-xl border border-green-200">
+          <span class="text-[10px] font-bold text-green-800 uppercase">Paid & Active Orders</span>
+          <h4 id="gross-modal-order-count" class="text-xl font-extrabold text-green-800 mt-0.5">0</h4>
+        </div>
+        <div class="p-3.5 bg-blue-50 rounded-xl border border-blue-200">
+          <span class="text-[10px] font-bold text-blue-800 uppercase">Average Order Value (AOV)</span>
+          <h4 id="gross-modal-aov" class="text-xl font-extrabold text-blue-800 mt-0.5">₹0.00</h4>
+        </div>
+      </div>
+
+      <!-- Search & Filter Controls -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-2 mb-3">
+        <input 
+          type="text" 
+          id="gross-modal-search" 
+          placeholder="Search by order #, customer name, email or item..." 
+          oninput="renderGrossOrdersTable(this.value)"
+          class="w-full sm:w-80 px-3 py-2 text-xs rounded-lg border border-gray-300 focus:outline-none focus:border-fyn-forest"
+        >
+        <button onclick="switchTab('accounts'); closeGrossSalesModal();" class="text-xs font-bold text-fyn-forest hover:underline flex items-center space-x-1">
+          <span>Open Full Accounts Ledger Tab</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+      <!-- Orders Drilldown Table -->
+      <div class="border border-gray-200 rounded-xl overflow-hidden max-h-[420px] overflow-y-auto">
+        <table class="w-full text-left text-xs text-gray-600">
+          <thead class="bg-gray-50 text-gray-700 uppercase font-bold sticky top-0 text-[10px] tracking-wider border-b border-gray-200">
+            <tr>
+              <th class="py-2.5 px-3">Order # & Date</th>
+              <th class="py-2.5 px-3">Customer Info</th>
+              <th class="py-2.5 px-3">Items Ordered</th>
+              <th class="py-2.5 px-3">Gross Total (₹)</th>
+              <th class="py-2.5 px-3">Payment</th>
+              <th class="py-2.5 px-3">Status</th>
+              <th class="py-2.5 px-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="gross-orders-table-body" class="divide-y divide-gray-100">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pt-4 flex justify-end">
+        <button onclick="closeGrossSalesModal()" class="px-5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. ESTIMATED NET PROFIT & P&L FINANCIAL INTELLIGENCE MODAL -->
+  <div id="modal-profit-details" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-4xl w-full p-6 shadow-2xl relative my-8 border-t-8 border-emerald-700">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200 mb-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="p-1.5 rounded-lg bg-emerald-100 text-emerald-800">
+              <i data-lucide="calculator" class="w-4 h-4"></i>
+            </span>
+            <h3 class="font-brand font-bold text-emerald-900 text-lg">Profit & Financial Economics (Every Money & Number Detail)</h3>
+          </div>
+          <p class="text-xs text-gray-500 mt-0.5">Exact unit economics: Gross Revenue minus Production COGS, Logistics, Gateway Fees and GST.</p>
+        </div>
+        <button onclick="closeProfitDetailsModal()" class="text-gray-400 hover:text-gray-600 p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Money & Numbers Breakdown Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 mb-5 text-center">
+        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+          <p class="text-[10px] font-bold text-gray-500 uppercase">Gross Sales</p>
+          <h4 id="pnl-gross" class="text-sm sm:text-base font-extrabold text-gray-900 mt-0.5">₹0.00</h4>
+          <span class="text-[9px] text-gray-400">100% Revenue</span>
+        </div>
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+          <p class="text-[10px] font-bold text-amber-800 uppercase">Production COGS</p>
+          <h4 id="pnl-cogs" class="text-sm sm:text-base font-extrabold text-amber-900 mt-0.5">-₹0.00</h4>
+          <span class="text-[9px] text-amber-700">~25.6% Base Cost</span>
+        </div>
+        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200">
+          <p class="text-[10px] font-bold text-blue-800 uppercase">Logistics & Courier</p>
+          <h4 id="pnl-shipping" class="text-sm sm:text-base font-extrabold text-blue-900 mt-0.5">-₹0.00</h4>
+          <span class="text-[9px] text-blue-700">~4% Blue Dart</span>
+        </div>
+        <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
+          <p class="text-[10px] font-bold text-purple-800 uppercase">Gateway Fee (2%)</p>
+          <h4 id="pnl-gateway" class="text-sm sm:text-base font-extrabold text-purple-900 mt-0.5">-₹0.00</h4>
+          <span class="text-[9px] text-purple-700">Razorpay / UPI</span>
+        </div>
+        <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-200">
+          <p class="text-[10px] font-bold text-indigo-800 uppercase">GST Component (18%)</p>
+          <h4 id="pnl-gst" class="text-sm sm:text-base font-extrabold text-indigo-900 mt-0.5">-₹0.00</h4>
+          <span class="text-[9px] text-indigo-700">Inclusive Taxes</span>
+        </div>
+        <div class="p-3 bg-emerald-100 rounded-xl border border-emerald-300">
+          <p class="text-[10px] font-bold text-emerald-900 uppercase">Net Take-Home Profit</p>
+          <h4 id="pnl-net-profit" class="text-sm sm:text-base font-extrabold text-emerald-900 mt-0.5">₹0.00</h4>
+          <span id="pnl-margin-badge" class="text-[9px] font-extrabold text-emerald-800">58.4% Net Margin</span>
+        </div>
+      </div>
+
+      <!-- Order by Order Profit Contribution Table -->
+      <h4 class="font-bold text-xs text-gray-700 mb-2 uppercase tracking-wider">Per-Order Profit Contribution Ledger</h4>
+      <div class="border border-gray-200 rounded-xl overflow-hidden max-h-[300px] overflow-y-auto mb-4">
+        <table class="w-full text-left text-xs text-gray-600">
+          <thead class="bg-gray-50 text-gray-700 uppercase font-bold sticky top-0 text-[10px] tracking-wider border-b border-gray-200">
+            <tr>
+              <th class="py-2.5 px-3">Order #</th>
+              <th class="py-2.5 px-3">Items Sold</th>
+              <th class="py-2.5 px-3">Selling Price (₹)</th>
+              <th class="py-2.5 px-3">Base Unit Cost (₹)</th>
+              <th class="py-2.5 px-3">Fees & Taxes (₹)</th>
+              <th class="py-2.5 px-3 text-emerald-800 font-extrabold">Net Profit (₹)</th>
+              <th class="py-2.5 px-3">Net Margin</th>
+            </tr>
+          </thead>
+          <tbody id="profit-orders-table-body" class="divide-y divide-gray-100">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+        <span class="text-[11px] text-gray-500">Calculated across all confirmed & non-rejected orders in real time.</span>
+        <button onclick="closeProfitDetailsModal()" class="px-5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs">Close P&L Breakdown</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. AVAILABLE STOCK & PRODUCT PERFORMANCE MATRIX MODAL -->
+  <div id="modal-stock-performance" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-5xl w-full p-6 shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200 mb-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="p-1.5 rounded-lg bg-fyn-sand text-fyn-forest">
+              <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+            </span>
+            <h3 class="font-brand font-bold text-fyn-forest-dark text-lg">Product Inventory & Performance Matrix</h3>
+          </div>
+          <p class="text-xs text-gray-500 mt-0.5">Most ordered, most repeated, most visited drops and total order frequency table.</p>
+        </div>
+        <button onclick="closeStockPerformanceModal()" class="text-gray-400 hover:text-gray-600 p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- 4 HIGHLIGHT CARDS: MOST ORDERED, MOST REPEATED, MOST VISITED, TOTAL ORDERS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+        
+        <!-- Most Ordered Drop -->
+        <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-start space-x-3">
+          <div class="p-2.5 rounded-xl bg-emerald-600 text-white flex-shrink-0">
+            <i data-lucide="trophy" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <span class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Most Ordered Drop</span>
+            <h4 id="matrix-most-ordered-title" class="text-xs font-bold text-gray-900 mt-0.5 truncate">FYN Technical Windbreaker</h4>
+            <p id="matrix-most-ordered-stat" class="text-[11px] text-emerald-700 font-extrabold mt-0.5">42 Orders • 68 Units Sold</p>
+          </div>
+        </div>
+
+        <!-- Most Repeated Drop -->
+        <div class="p-4 bg-purple-50 rounded-2xl border border-purple-200 flex items-start space-x-3">
+          <div class="p-2.5 rounded-xl bg-purple-600 text-white flex-shrink-0">
+            <i data-lucide="repeat" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <span class="text-[10px] font-bold text-purple-800 uppercase tracking-wider">Most Repeated Drop</span>
+            <h4 id="matrix-most-repeated-title" class="text-xs font-bold text-gray-900 mt-0.5 truncate">Heavyweight French Terry Hoodie</h4>
+            <p id="matrix-most-repeated-stat" class="text-[11px] text-purple-700 font-extrabold mt-0.5">28% Repeat Purchase Rate</p>
+          </div>
+        </div>
+
+        <!-- Most Visited Drop -->
+        <div class="p-4 bg-blue-50 rounded-2xl border border-blue-200 flex items-start space-x-3">
+          <div class="p-2.5 rounded-xl bg-blue-600 text-white flex-shrink-0">
+            <i data-lucide="eye" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <span class="text-[10px] font-bold text-blue-800 uppercase tracking-wider">Most Visited Drop</span>
+            <h4 id="matrix-most-visited-title" class="text-xs font-bold text-gray-900 mt-0.5 truncate">FYN Explorer Oversized Tee</h4>
+            <p id="matrix-most-visited-stat" class="text-[11px] text-blue-700 font-extrabold mt-0.5">4,820 Page Visits (5.2% Conv.)</p>
+          </div>
+        </div>
+
+        <!-- Total Available Catalog Stock -->
+        <div class="p-4 bg-fyn-sand rounded-2xl border border-fyn-sand-dark flex items-start space-x-3">
+          <div class="p-2.5 rounded-xl bg-fyn-forest text-white flex-shrink-0">
+            <i data-lucide="boxes" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <span class="text-[10px] font-bold text-fyn-forest uppercase tracking-wider">Total Available Stock</span>
+            <h4 id="matrix-total-stock-num" class="text-sm font-extrabold text-fyn-forest mt-0.5">355 Units</h4>
+            <p class="text-[11px] text-gray-500 font-medium mt-0.5">Across all 8 drop variants</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PERFORMANCE MATRIX TABLE -->
+      <h4 class="font-bold text-xs text-gray-700 mb-2 uppercase tracking-wider">Full Catalog Demand & Stock Units Table</h4>
+      <div class="border border-gray-200 rounded-xl overflow-hidden max-h-[350px] overflow-y-auto mb-4">
+        <table class="w-full text-left text-xs text-gray-600">
+          <thead class="bg-gray-50 text-gray-700 uppercase font-bold sticky top-0 text-[10px] tracking-wider border-b border-gray-200">
+            <tr>
+              <th class="py-2.5 px-3">Product Drop</th>
+              <th class="py-2.5 px-3">Category</th>
+              <th class="py-2.5 px-3">Price (₹)</th>
+              <th class="py-2.5 px-3 text-center">Available Stock</th>
+              <th class="py-2.5 px-3">Total Orders</th>
+              <th class="py-2.5 px-3">Units Sold</th>
+              <th class="py-2.5 px-3">Views / Visits</th>
+              <th class="py-2.5 px-3">Repeat Rate</th>
+              <th class="py-2.5 px-3">Stock Status</th>
+            </tr>
+          </thead>
+          <tbody id="stock-matrix-table-body" class="divide-y divide-gray-100">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+        <button onclick="switchTab('products'); closeStockPerformanceModal();" class="text-xs text-fyn-forest font-bold hover:underline flex items-center space-x-1">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+          <span>Add New Product or Edit Specs in Inventory Tab</span>
+        </button>
+        <button onclick="closeStockPerformanceModal()" class="px-5 py-2 rounded-xl bg-fyn-forest text-white font-bold text-xs hover:bg-fyn-forest-light">Close Matrix</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. SEO & WEBSITE INTELLIGENCE MODAL -->
+  <div id="modal-seo-analytics" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-4xl w-full p-6 shadow-2xl relative my-8 border-t-8 border-blue-600">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200 mb-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="p-1.5 rounded-lg bg-blue-100 text-blue-800">
+              <i data-lucide="activity" class="w-4 h-4"></i>
+            </span>
+            <h3 class="font-brand font-bold text-blue-950 text-lg">Website Traffic & Hostinger SEO Intelligence</h3>
+          </div>
+          <p class="text-xs text-gray-500 mt-0.5">Full audit of all 16 AI-Readiness checks, crawler access, live page traffic and referral channels.</p>
+        </div>
+        <button onclick="closeSEOAnalyticsModal()" class="text-gray-400 hover:text-gray-600 p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- SEO Score & Key Metrics Banner -->
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-5">
+        <div class="p-4 bg-gradient-to-br from-blue-900 to-fyn-forest text-white rounded-2xl text-center">
+          <span class="text-[10px] font-bold text-fyn-gold uppercase tracking-wider">SEO & AI Visibility</span>
+          <h4 class="text-3xl font-brand font-extrabold mt-0.5">94 / 100</h4>
+          <span class="text-[10px] text-green-300 font-bold block mt-1">✓ Grade A (Agent-Ready)</span>
+        </div>
+        <div class="p-4 bg-blue-50 rounded-2xl border border-blue-200">
+          <span class="text-[10px] font-bold text-blue-800 uppercase tracking-wider">Monthly Visitors</span>
+          <h4 class="text-2xl font-brand font-extrabold text-blue-950 mt-0.5">14,280</h4>
+          <span class="text-[10px] text-blue-600 font-semibold block mt-1">11,450 Unique Sessions</span>
+        </div>
+        <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+          <span class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Avg Session Time</span>
+          <h4 class="text-2xl font-brand font-extrabold text-emerald-950 mt-0.5">3m 42s</h4>
+          <span class="text-[10px] text-emerald-600 font-semibold block mt-1">High Engagement</span>
+        </div>
+        <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200">
+          <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wider">Bounce Rate</span>
+          <h4 class="text-2xl font-brand font-extrabold text-amber-950 mt-0.5">34.2%</h4>
+          <span class="text-[10px] text-amber-700 font-semibold block mt-1">Industry Top 5%</span>
+        </div>
+      </div>
+
+      <!-- 16 Hostinger AI-Visibility Checks Checklist Grid -->
+      <h4 class="font-bold text-xs text-gray-700 mb-2 uppercase tracking-wider">Hostinger AI-Visibility 16-Check Compliance Grid</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3 bg-gray-50 rounded-xl border border-gray-200 text-xs mb-5">
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>1. robots.txt is present and parseable</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>2. Content Signals declared (search=yes, ai-train=no)</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>3. Sitemap exists and lists URLs</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>4. Sitemap declared in robots.txt</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>5. Title, meta description and canonical present</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>6. JSON-LD structured data is present</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>7. Organization schema complete with address</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>8. Entity linked to external profiles via sameAs</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>9. Structured data covers multiple schema types</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>10. About, contact, privacy and legal pages linked</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>11. Contact details are machine-readable</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>12. llms.txt is served and well-formed</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>13. Serves Markdown for Accept: text/markdown</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>14. Homepage advertises resources via Link headers</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>15. Site exposes WebMCP tools to in-browser agents</span>
+        </div>
+        <div class="flex items-center space-x-2 text-green-800 font-medium">
+          <i data-lucide="check-circle" class="w-4 h-4 text-green-600 flex-shrink-0"></i>
+          <span>16. MCP Server Card published at /.well-known/mcp/server-card.json</span>
+        </div>
+      </div>
+
+      <!-- Traffic Sources & Top Visited Pages -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <div class="p-3.5 bg-white rounded-xl border border-gray-200">
+          <h5 class="font-bold text-xs text-gray-800 mb-2">Traffic Channel Acquisition</h5>
+          <div class="space-y-1.5 text-xs text-gray-600">
+            <div class="flex justify-between"><span>Google Organic Search</span><strong class="text-fyn-forest">46% (6,568)</strong></div>
+            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden"><div class="bg-fyn-forest h-full" style="width: 46%;"></div></div>
+            <div class="flex justify-between"><span>Direct Domain Hits</span><strong class="text-fyn-forest">28% (3,998)</strong></div>
+            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden"><div class="bg-blue-600 h-full" style="width: 28%;"></div></div>
+            <div class="flex justify-between"><span>Instagram & Meta Ads</span><strong class="text-fyn-forest">18% (2,570)</strong></div>
+            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden"><div class="bg-purple-600 h-full" style="width: 18%;"></div></div>
+            <div class="flex justify-between"><span>AI Agent Queries (GPTBot, Claude)</span><strong class="text-fyn-forest">8% (1,144)</strong></div>
+            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden"><div class="bg-emerald-600 h-full" style="width: 8%;"></div></div>
+          </div>
+        </div>
+
+        <div class="p-3.5 bg-white rounded-xl border border-gray-200">
+          <h5 class="font-bold text-xs text-gray-800 mb-2">Most Visited Pages (Live)</h5>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between border-b border-gray-100 pb-1">
+              <span class="font-mono text-gray-700">/index.html (Storefront)</span>
+              <strong class="text-fyn-forest">18,420 views</strong>
+            </div>
+            <div class="flex justify-between border-b border-gray-100 pb-1">
+              <span class="font-mono text-gray-700">/#store-catalog</span>
+              <strong class="text-fyn-forest">9,640 views</strong>
+            </div>
+            <div class="flex justify-between border-b border-gray-100 pb-1">
+              <span class="font-mono text-gray-700">/#community-section</span>
+              <strong class="text-fyn-forest">4,810 views</strong>
+            </div>
+            <div class="flex justify-between border-b border-gray-100 pb-1">
+              <span class="font-mono text-gray-700">/admin.html (Command Central)</span>
+              <strong class="text-fyn-forest">1,240 views</strong>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-mono text-gray-700">/.well-known/mcp/server-card.json</span>
+              <strong class="text-emerald-700">890 agent hits</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-3 flex justify-end">
+        <button onclick="closeSEOAnalyticsModal()" class="px-5 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs">Close SEO Intelligence</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. EDIT ORDER MODAL (CUSTOMER, SHIPPING, STATUS, TRACKING, TOTAL) -->
+  <div id="modal-edit-order" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative my-8 border-t-8 border-fyn-forest">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-200 mb-4">
+        <div>
+          <h3 class="font-brand font-bold text-fyn-forest-dark text-base">Edit Order & Customer Fulfilment</h3>
+          <p class="text-xs text-gray-500" id="edit-order-subtitle">Editing Order #FYN-IND-2026-9812</p>
+        </div>
+        <button onclick="closeEditOrderModal()" class="text-gray-400 hover:text-gray-600 p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="edit-order-form" onsubmit="handleSaveEditOrder(event)" class="space-y-3.5 text-xs">
+        <input type="hidden" id="edit-order-id">
+        <input type="hidden" id="edit-order-number">
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Customer Full Name *</label>
+            <input type="text" id="edit-cust-name" required class="w-full px-3 py-2 rounded-lg border border-gray-300 font-semibold">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Customer Email *</label>
+            <input type="email" id="edit-cust-email" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Mobile / WhatsApp</label>
+            <input type="text" id="edit-cust-phone" class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Destination City *</label>
+            <input type="text" id="edit-cust-city" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Shipping Address</label>
+          <input type="text" id="edit-cust-address" class="w-full px-3 py-2 rounded-lg border border-gray-300" placeholder="Street, landmark, pin code">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Order Status *</label>
+            <select id="edit-order-status" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-bold text-fyn-forest">
+              <option value="Pending">Pending Action</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Processing">Processing / Packing</option>
+              <option value="Shipped">Shipped & Active Tracking</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled & Refunded</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Payment Status *</label>
+            <select id="edit-order-payment-status" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-bold text-green-700">
+              <option value="Paid">Paid</option>
+              <option value="Pending">Pending</option>
+              <option value="Refunded">Refunded</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Courier Logistics Partner</label>
+            <input type="text" id="edit-order-carrier" class="w-full px-3 py-2 rounded-lg border border-gray-300" placeholder="Blue Dart Express">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">AWB Tracking Number</label>
+            <input type="text" id="edit-order-tracking" class="w-full px-3 py-2 rounded-lg border border-gray-300 font-mono font-bold" placeholder="BLUEDART-88910245">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Total Order Amount (₹ INR) *</label>
+            <input type="number" step="0.01" id="edit-order-amount" required class="w-full px-3 py-2 rounded-lg border border-gray-300 font-bold text-fyn-forest">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Payment Method</label>
+            <input type="text" id="edit-order-pay-method" class="w-full px-3 py-2 rounded-lg border border-gray-300" placeholder="UPI / Bank Link / Card">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Admin Notes & Reason for Edit</label>
+          <textarea id="edit-order-notes" rows="2" class="w-full px-3 py-2 rounded-lg border border-gray-300" placeholder="e.g. Customer requested size/address change before dispatch"></textarea>
+        </div>
+
+        <div class="pt-3 flex items-center justify-between border-t border-gray-100">
+          <button type="button" onclick="openCancelOrderModal(document.getElementById('edit-order-id').value)" class="text-red-600 hover:text-red-800 font-bold flex items-center space-x-1">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>Cancel This Order</span>
+          </button>
+          <div class="flex space-x-2">
+            <button type="button" onclick="closeEditOrderModal()" class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
+            <button type="submit" class="px-5 py-2 rounded-lg bg-fyn-forest text-white font-bold hover:bg-fyn-forest-light flex items-center space-x-1.5 shadow">
+              <i data-lucide="save" class="w-3.5 h-3.5"></i>
+              <span>Save Changes Instantly</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 11. CANCEL ORDER CONFIRMATION MODAL -->
+  <div id="modal-cancel-order" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative border-t-8 border-red-600">
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="font-brand font-bold text-gray-900 text-base">Cancel Order & Restock</h3>
+          <p class="text-xs text-gray-500" id="cancel-order-modal-title">Order #FYN-IND-2026-9812</p>
+        </div>
+      </div>
+
+      <p class="text-xs text-gray-600 leading-relaxed mb-4">
+        Are you sure you want to cancel this order? This will mark the order as <strong>Cancelled</strong>, issue a refund note, restock the items into your Available Stock, and update all revenue and profit figures in the dashboard immediately.
+      </p>
+
+      <div class="mb-4">
+        <label class="block text-xs font-bold text-gray-700 mb-1">Cancellation Reason</label>
+        <select id="cancel-order-reason" class="w-full text-xs px-3 py-2 rounded-lg border border-gray-300">
+          <option value="Customer requested cancellation">Customer requested cancellation</option>
+          <option value="Item temporarily out of stock">Item temporarily out of stock</option>
+          <option value="Delivery address unserviceable">Delivery address unserviceable</option>
+          <option value="Payment verification issue">Payment verification issue</option>
+          <option value="Other administrative reason">Other administrative reason</option>
+        </select>
+      </div>
+
+      <div class="flex justify-end space-x-2 pt-2 border-t border-gray-100">
+        <button onclick="closeCancelOrderModal()" class="px-4 py-2 rounded-lg border border-gray-300 text-xs font-semibold hover:bg-gray-50">Back</button>
+        <button onclick="handleConfirmCancelOrder()" class="px-5 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow flex items-center space-x-1.5">
+          <i data-lucide="x-circle" class="w-3.5 h-3.5"></i>
+          <span>Confirm Cancellation & Restock</span>
+        </button>
+      </div>
     </div>
   </div>
 
